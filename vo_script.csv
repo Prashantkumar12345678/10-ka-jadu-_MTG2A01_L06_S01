@@ -1,0 +1,74 @@
+﻿id,text,file,seconds
+vo_gate_tutorial,"चलिए, शुरू करें!",assets/VO/vo_gate_tutorial.m4a,1.66
+vo_gate_guided,"चलिए, साथ में करें!",assets/VO/vo_gate_guided.m4a,1.88
+vo_gate_practice,वाह! अब आपकी बारी।,assets/VO/vo_gate_practice.m4a,1.95
+vo_gate_game,"चलिए, एक गेम खेलते हैं!",assets/VO/vo_gate_game.m4a,2.15
+vo_landing,नमस्ते दोस्त! आज हम जोड़ और घटाव जल्दी हल करना सीखेंगे। जोड़ते समय पहले 10 बनाएँगे और फिर बाकी जोड़ेंगे। घटाते समय पहले 10 तक आएँगे और फिर बाकी घटाएँगे।,assets/VO/vo_landing.m4a,13.21
+vo_retry,फिर से करिए।,assets/VO/vo_retry.m4a,1.06
+vo_t1_1,"8 और 5 को जोड़ना है। आइए, इसे एक आसान तरीके से समझते हैं।",assets/VO/vo_t1_1.m4a,5.54
+vo_t1_2,यहाँ 8 हैं और यहाँ 5 हैं।,assets/VO/vo_t1_2.m4a,2.35
+vo_t1_3,"पहले हम 10 बनाएँगे। 8 को 10 बनाने के लिए, 5 को 2 और 3 में बाँटते हैं।",assets/VO/vo_t1_3.m4a,5.87
+vo_t1_4,"अब ये 2 ब्लॉक, 8 के साथ जोड़ते हैं।",assets/VO/vo_t1_4.m4a,3.0
+vo_t1_5,अब 10 बन गया। 3 ब्लॉक अभी बाकी हैं।,assets/VO/vo_t1_5.m4a,2.96
+vo_t1_6,अब इन 3 ब्लॉकों को 10 में जोड़ते हैं।,assets/VO/vo_t1_6.m4a,2.87
+vo_t1_7,"तो यहाँ 8 जोड़ 5 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।",assets/VO/vo_t1_7.m4a,5.94
+vo_t2_1,"13 में से 5 घटाना है। आइए, इसे एक आसान तरीके से समझते हैं।",assets/VO/vo_t2_1.m4a,5.6
+vo_t2_2,यह 10 है और यह 3 है।,assets/VO/vo_t2_2.m4a,2.06
+vo_t2_3,"अब घटाव में पहले 10 तक आएँगे, फिर बाकी घटाएँगे।",assets/VO/vo_t2_3.m4a,4.14
+vo_t2_4,13 से 10 तक आने के लिए पहले 3 घटाते हैं।,assets/VO/vo_t2_4.m4a,3.59
+vo_t2_5,"5 में से 3 घटा दिए हैं। अब 2 बाकी हैं। तो बचे हुए 2, 10 में से और घटाएँगे।",assets/VO/vo_t2_5.m4a,6.71
+vo_t2_6,अब बचे 8।,assets/VO/vo_t2_6.m4a,1.11
+vo_t2_7,तो 13 में से 5 घटाने पर 8 बचता है।,assets/VO/vo_t2_7.m4a,3.29
+vo_g1_1,"9 और 4 को जोड़ना है। आइए, इसे एक आसान तरीके से करते हैं।",assets/VO/vo_g1_1.m4a,5.14
+vo_g1_2,यहाँ 9 हैं और यहाँ 4 हैं।,assets/VO/vo_g1_2.m4a,2.14
+vo_g1_3,"पहले 10 बनाएँगे। 9 को 10 बनाने के लिए, 4 को 1 और 3 में बाँटते हैं।",assets/VO/vo_g1_3.m4a,5.56
+vo_g1_4,"अब ये 1 ब्लॉक, 9 के साथ जोड़िए।",assets/VO/vo_g1_4.m4a,2.79
+vo_g1_5,शाबाश! यहाँ 10 बन गया। 3 ब्लॉक अभी बाकी हैं।,assets/VO/vo_g1_5.m4a,4.12
+vo_g1_6,अब इन 3 ब्लॉकों को 10 में जोड़ते हैं।,assets/VO/vo_g1_6.m4a,2.87
+vo_g1_7,"तो यहाँ 9 जोड़ 4 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।",assets/VO/vo_g1_7.m4a,5.7
+vo_g2_1,"15 में से 7 घटाना है। आइए, इसे एक आसान तरीके से करते हैं।",assets/VO/vo_g2_1.m4a,5.41
+vo_g2_2,यह 10 है और यह 5 है।,assets/VO/vo_g2_2.m4a,2.08
+vo_g2_3,"अब घटाव में पहले 10 तक आएँगे, फिर बाकी घटाएँगे।",assets/VO/vo_g2_3.m4a,4.14
+vo_g2_4,15 से 10 तक आने के लिए पहले 5 घटाइए।,assets/VO/vo_g2_4.m4a,3.53
+vo_g2_5,"7 में से 5 घटा दिए हैं। अब 2 बाकी हैं। तो बचे हुए 2, 10 में से और घटाइए।",assets/VO/vo_g2_5.m4a,6.77
+vo_g2_6,अब बचे 8।,assets/VO/vo_g2_6.m4a,1.11
+vo_g2_7,तो 15 में से 7 घटाने पर 8 बचता है।,assets/VO/vo_g2_7.m4a,3.32
+vo_p1_q,अब आप 8 और 6 को जोड़िए। पहले 10 बनाइए। फिर सही संख्या इस डिब्बे पर टैप करके लिखिए।,assets/VO/vo_p1_q.m4a,7.21
+vo_p1_ok,शाबाश! 8 और 6 मिलकर 14 होते हैं।,assets/VO/vo_p1_ok.m4a,3.25
+vo_p1_h2,8 में 2 जोड़कर 10 बना। 4 बाकी। 10 और 4 मिलकर 14 होते हैं।,assets/VO/vo_p1_h2.m4a,5.06
+vo_p1_h3,सही संख्या 14 है।,assets/VO/vo_p1_h3.m4a,1.92
+vo_p2_q,16 में से 8 घटाइए।,assets/VO/vo_p2_q.m4a,1.98
+vo_p2_ok,सही! 16 में से 8 घटाने पर 8 बचता है।,assets/VO/vo_p2_ok.m4a,3.52
+vo_p2_h2,"पहले 10 तक आए, फिर बाकी 2 घटाया। कितना बचा?",assets/VO/vo_p2_h2.m4a,4.2
+vo_p2_h3,सही संख्या 8 है।,assets/VO/vo_p2_h3.m4a,1.75
+vo_p3_q,9 और 7 को जोड़िए और फिर सही जोड़ वाली संख्या चुनिए।,assets/VO/vo_p3_q.m4a,4.23
+vo_p3_ok,बहुत बढ़िया! 9 और 7 मिलकर 16 होते हैं।,assets/VO/vo_p3_ok.m4a,3.29
+vo_p3_h2,9 को 10 बनाने के लिए 1 जोड़ा। फिर बाकी 6 जोड़ें।,assets/VO/vo_p3_h2.m4a,4.14
+vo_p3_h3,सही उत्तर 16 है। इसे चुनिए।,assets/VO/vo_p3_h3.m4a,2.7
+vo_p4_q,18 में से 9 घटाइए और फिर इस डिब्बे में आने वाली सही संख्या चुनिए।,assets/VO/vo_p4_q.m4a,5.17
+vo_p4_ok,बहुत बढ़िया! 18 में से 9 घटाने पर 9 बचता है।,assets/VO/vo_p4_ok.m4a,3.86
+vo_p4_h2,पहले 10 तक आइए। फिर बाकी 1 घटाइए।,assets/VO/vo_p4_h2.m4a,3.33
+vo_p4_h3,सही उत्तर 9 है। इसे चुनिए।,assets/VO/vo_p4_h3.m4a,2.5
+vo_race_intro,"चलिए, एक गेम खेलते हैं, गणित की तेज़ दौड़। अपनी नाव चुनिए, और दौड़ शुरू करिए।",assets/VO/vo_race_intro.m4a,6.42
+vo_race_go,तैयार? दौड़ शुरू!,assets/VO/vo_race_go.m4a,1.75
+vo_race_win,वाह! आपकी नाव सबसे पहले पहुँची!,assets/VO/vo_race_win.m4a,3.13
+vo_end,बहुत बढ़िया! आपने सीख लिया। जोड़ते समय पहले 10 बनाइए और बाकी जोड़िए। घटाते समय पहले 10 तक आइए और बाकी घटाइए।,assets/VO/vo_end.m4a,9.73
+vo_race_hint_add,"पहले 10 बनाइए, फिर बाकी जोड़िए।",assets/VO/vo_race_hint_add.m4a,2.73
+vo_race_hint_sub,"पहले 10 तक आइए, फिर बाकी घटाइए।",assets/VO/vo_race_hint_sub.m4a,3.0
+vo_race_ok1,सही!,assets/VO/vo_race_ok1.m4a,0.68
+vo_race_ok2,बहुत बढ़िया!,assets/VO/vo_race_ok2.m4a,1.04
+vo_race_ok3,टर्बो! शानदार!,assets/VO/vo_race_ok3.m4a,1.55
+vo_race_q1,7 और 5 को जोड़िए।,assets/VO/vo_race_q1.m4a,1.93
+vo_race_a1,सही उत्तर 12 है।,assets/VO/vo_race_a1.m4a,1.69
+vo_race_q2,9 और 3 को जोड़िए।,assets/VO/vo_race_q2.m4a,1.75
+vo_race_a2,सही उत्तर 12 है।,assets/VO/vo_race_a2.m4a,1.69
+vo_race_q3,7 और 6 को जोड़िए।,assets/VO/vo_race_q3.m4a,1.84
+vo_race_a3,सही उत्तर 13 है।,assets/VO/vo_race_a3.m4a,1.71
+vo_race_q4,15 में से 8 घटाइए।,assets/VO/vo_race_q4.m4a,1.93
+vo_race_a4,सही उत्तर 7 है।,assets/VO/vo_race_a4.m4a,1.65
+vo_race_q5,14 में से 6 घटाइए।,assets/VO/vo_race_q5.m4a,1.89
+vo_race_a5,सही उत्तर 8 है।,assets/VO/vo_race_a5.m4a,1.56
+vo_race_q6,17 में से 9 घटाइए।,assets/VO/vo_race_q6.m4a,1.94
+vo_race_a6,सही उत्तर 8 है।,assets/VO/vo_race_a6.m4a,1.56
+vo_race_q7,16 में से 7 घटाइए।,assets/VO/vo_race_q7.m4a,2.05
+vo_race_a7,सही उत्तर 9 है।,assets/VO/vo_race_a7.m4a,1.54
