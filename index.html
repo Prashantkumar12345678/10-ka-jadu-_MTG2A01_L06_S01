@@ -508,6 +508,9 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .opt-cell.correct::after{content:none !important;display:none !important;}
 .opt-cell .num-glyph{text-shadow:none !important;}
 @keyframes revealPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+/* ten frame: no thick 3D edge underneath — just the even border */
+.tf-frame{box-shadow:0 8px 18px rgba(10,40,120,.16),inset 0 3px 0 rgba(255,255,255,.9) !important;}
+.tf-frame.full{box-shadow:0 0 0 8px rgba(60,220,110,.30),0 0 30px rgba(60,220,110,.5) !important;}
 /* ---------- keyframes (reference set + lesson) ---------- */
 @keyframes hintPop{from{transform:scale(.4);opacity:0;}to{transform:scale(1);opacity:1;}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -1621,15 +1624,15 @@ const T = {
   tap: 900          // hand flying to a counter before it taps
 };
 
-const C = 58, GAP = 12, PAD = 14, STEP = C + GAP;
-const FW = PAD * 2 + 5 * C + 4 * GAP + 6, FH = PAD * 2 + 2 * C + GAP + 6;   // +6 = 3px border each side
+const C = 58, GAP = 12, PAD = 14, STEP = C + GAP, BW = 6;   // BW = frame border width (must match .tf-frame border)
+const FW = PAD * 2 + 5 * C + 4 * GAP + BW * 2, FH = PAD * 2 + 2 * C + GAP + BW * 2;
 const GROUP_GAP = 56;
 class Board{
   /* opts: frame = counters already in the frame, loose = array of loose group sizes */
   constructor(host, opts){
     this.el = el("div", "tf-board");
     this.frameEl = el("div", "tf-frame"); this.frameEl.style.width = FW + "px"; this.frameEl.style.height = FH + "px";
-    for(let i = 0; i < 10; i++){ const c = el("div", "tf-cell"); const p = this.cellPos(i); c.style.left = (p.x - 3) + "px"; c.style.top = (p.y - 3) + "px"; this.frameEl.appendChild(c); }
+    for(let i = 0; i < 10; i++){ const c = el("div", "tf-cell"); const p = this.cellPos(i); c.style.left = (p.x - BW) + "px"; c.style.top = (p.y - BW) + "px"; this.frameEl.appendChild(c); }
     this.el.appendChild(this.frameEl);
     this.frame = []; this.groups = []; this.near = false;
     for(let i = 0; i < (opts.frame || 0); i++) this.frame.push(this.mk());
@@ -1644,7 +1647,7 @@ class Board{
   }
   mk(){ const e = el("div", "tf-ctr"); this.el.appendChild(e); const c = { el:e, dim:false }; e._ctr = c; return c; }
   all(){ return this.frame.concat(...this.groups); }
-  cellPos(i){ return { x:3 + PAD + (i % 5) * STEP, y:3 + PAD + Math.floor(i / 5) * STEP }; }
+  cellPos(i){ return { x:BW + PAD + (i % 5) * STEP, y:BW + PAD + Math.floor(i / 5) * STEP }; }
   groupW(n){ return n ? Math.min(n, 5) * STEP - GAP : 0; }
   looseWidth(){ let w = 0, k = 0; this.groups.forEach(g => { if(g.length){ w += (k ? GROUP_GAP : 0) + this.groupW(g.length); k++; } }); return w; }
   looseX0(){ return this.near ? FW + 24 : FW + 80; }
@@ -1653,7 +1656,7 @@ class Board{
     this.frame.forEach((c, i) => { const p = this.cellPos(i); this.put(c, p.x, p.y); });
     let x = this.looseX0();
     this.groups.forEach((g, gi) => {
-      g.forEach((c, i) => this.put(c, x + (i % 5) * STEP, 3 + PAD + Math.floor(i / 5) * STEP));
+      g.forEach((c, i) => this.put(c, x + (i % 5) * STEP, BW + PAD + Math.floor(i / 5) * STEP));
       const w = this.groupW(g.length);
       const L = this.lblGroups[gi]; if(L) L.style.left = (x + w / 2) + "px";
       if(g.length) x += w + GROUP_GAP;
