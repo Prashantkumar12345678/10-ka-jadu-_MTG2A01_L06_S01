@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="google" content="notranslate">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>10 का जादू · MTG2A01_L06_S01</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%9F%3C/text%3E%3C/svg%3E">
@@ -333,13 +336,13 @@ body.race-page{background:#2FA8EC !important;}
 .jr-jet.slow img{animation:boatWobble .6s ease-in-out 2;}
 .jr-tag{position:absolute;left:50%;top:-40px;transform:translateX(-50%);white-space:nowrap;font-weight:800;font-size:24px;color:#fff;background:rgba(18,58,82,.85);border-radius:999px;padding:0 18px;line-height:36px;z-index:3;}
 .jt-jet.me .jr-tag,.jr-jet.me .jr-tag{background:#FFC21A;color:#0B2A5A;box-shadow:0 0 0 3px #fff;}
-.jr-top{position:absolute;left:60px;right:90px;top:20px;height:40px;z-index:35;}
-.jr-bar{position:absolute;left:0;right:0;top:8px;height:26px;border-radius:999px;background:#0B5E85;box-shadow:0 0 0 4px #EAF7FF,0 4px 8px rgba(0,0,0,.25);}
-.jr-bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#00A1F9,#4FD0FF);transition:width 1.6s ease;}
-.jr-bar i{position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#9AA7B2;border:3px solid #EAF7FF;transition:background .4s;}
+.jr-top{position:absolute;left:64px;top:116px;width:26px;height:374px;z-index:35;}
+.jr-bar{position:absolute;inset:0;border-radius:999px;background:#0B5E85;box-shadow:0 0 0 4px #EAF7FF,0 4px 8px rgba(0,0,0,.25);}
+.jr-bar-fill{position:absolute;left:0;bottom:0;width:100%;height:0;border-radius:999px;background:linear-gradient(0deg,#00A1F9,#4FD0FF);transition:height 1.6s ease;}
+.jr-bar i{position:absolute;left:50%;width:22px;height:22px;margin:0 0 -11px -11px;border-radius:50%;background:#9AA7B2;border:3px solid #EAF7FF;transition:background .4s;}
 .jr-bar i.done{background:#FFD21E;border-color:#FFF4BC;}
-.jr-bar .flag{position:absolute;right:-56px;top:-24px;font-size:46px;}
-.jr-bar .me{position:absolute;top:50%;width:84px;height:auto;margin:-46px 0 0 -42px;transition:left 1.6s ease;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3));}
+.jr-bar .flag{position:absolute;left:50%;top:-66px;transform:translateX(-50%);font-size:46px;line-height:1;}
+.jr-bar .me{position:absolute;left:50%;bottom:0;width:38px;height:66px;object-fit:contain;margin:0 0 -33px -19px;transition:bottom 1.6s ease;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3));}
 .jr-turbo{position:absolute;left:0;right:0;top:110px;text-align:center;transform:scale(.4);opacity:0;font-weight:800;font-size:76px;color:#FF6A00;-webkit-text-stroke:10px #fff;paint-order:stroke fill;pointer-events:none;transition:transform .4s cubic-bezier(.34,1.5,.6,1),opacity .4s;z-index:36;}
 .jr-turbo.show{transform:scale(1);opacity:1;}
 .jr-panel{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:820px;height:196px;border-radius:32px;background:#FDF8E5;border:8px solid #1A62E8;box-shadow:0 0 0 4px #fff,0 12px 26px rgba(0,40,100,.35);z-index:35;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
@@ -378,6 +381,12 @@ body.vo-lock .jr-btn{pointer-events:none;}
 @keyframes jtSway{0%,100%{transform:rotate(-1.5deg);}50%{transform:rotate(1.5deg);}}
 /* race realism: spray, speed lines, shake, countdown, finish line */
 .jt-sea{animation:none !important;}
+.jt-sea{overflow:hidden;isolation:isolate;}
+.jt-water-surface{position:absolute;inset:-24px;background:url("assets/Images/race_water_tile.jpg") center 24px/1333px 512px repeat-y;filter:url("#race-water-ripple");pointer-events:none;z-index:0;}
+.jt-water-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;}
+.jt-sea::before{z-index:1;pointer-events:none;}
+.jt-sea::after{z-index:2;pointer-events:none;}
+@media(prefers-reduced-motion:reduce){.jt-water-surface{filter:none;}}
 .jt-sea::before{animation:none !important;background-position:444px var(--flow,0px),663px var(--flow,0px),886px var(--flow,0px) !important;}
 .jt-jet{transition:none !important;left:0;margin-left:-52px;will-change:transform;}
 .jt-jet img{animation:none !important;transition:transform .1s linear;}
@@ -404,6 +413,34 @@ body.vo-lock .jr-btn{pointer-events:none;}
 @keyframes jtShake{0%,100%{translate:0 0;}20%{translate:-6px 3px;}40%{translate:6px -3px;}60%{translate:-4px 2px;}80%{translate:4px -1px;}}
 @keyframes jtCount{0%{opacity:0;transform:scale(2.2);}25%{opacity:1;transform:scale(1);}80%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(.7);}}
 @keyframes jtPop{0%{opacity:0;transform:translateY(20px) scale(.6);}25%{opacity:1;transform:translateY(0) scale(1.1);}70%{opacity:1;transform:translateY(-10px) scale(1);}100%{opacity:0;transform:translateY(-40px) scale(.95);}}
+/* Personal boost streaks make it clear which jet ski accelerated. */
+.jt-jet.me.boost::before,.jt-jet.me.turbo::before{content:"";position:absolute;inset:-20px -20px -32px;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(255,255,255,.9),transparent) left center/3px 65% no-repeat,linear-gradient(180deg,transparent,rgba(255,255,255,.9),transparent) right center/3px 65% no-repeat;animation:playerRush .3s linear infinite;}
+.jt-jet.me.turbo .jt-craft{filter:drop-shadow(0 0 8px rgba(255,211,74,.7));}
+@keyframes playerRush{from{translate:0 -18px;opacity:.3;}to{translate:0 24px;opacity:.9;}}
+/* Full-play-area water celebration after crossing the finish line. */
+.jt-wake{height:calc(45px + var(--boat-speed,4) * 14px);}
+/* Finish camera stays on the race water and tracks the winning craft. */
+.jr-world.victory-mode > :not(.race-victory){visibility:hidden;}
+.race-victory{position:absolute;inset:0;z-index:80;overflow:hidden;perspective:1100px;isolation:isolate;}
+.victory-camera{position:absolute;inset:0;z-index:0;will-change:transform;transform-style:preserve-3d;}
+.victory-camera::before{content:"";position:absolute;inset:-1500px;background:url("assets/Images/race_water_tile.jpg") center 0/2666px 1024px repeat-y;transform:translateY(var(--victory-flow,0px));will-change:transform;}
+.victory-camera .jt-sea{animation:none;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 72%);}
+.victory-camera .jt-sea::before,.victory-camera .jt-sea::after{opacity:0;}
+.victory-camera .jr-tag{opacity:0;transition:opacity .35s;}
+.victory-camera .jt-jet:not(.me){filter:blur(.6px);}
+.victory-camera .jt-jet.me{z-index:30;}
+.race-victory::before,.race-victory::after{content:"";position:absolute;left:0;right:0;height:38px;background:#072338;z-index:5;pointer-events:none;transform:scaleY(0);transition:transform .65s;}
+.race-victory::before{top:0;transform-origin:top;}
+.race-victory::after{bottom:0;transform-origin:bottom;}
+.race-victory.cinematic::before,.race-victory.cinematic::after{transform:scaleY(1);}
+.victory-title{position:absolute;left:0;right:0;top:55px;text-align:center;font-size:65px;font-weight:800;line-height:1.15;color:#FFD44C;-webkit-text-stroke:6px #fff;paint-order:stroke fill;filter:drop-shadow(0 5px 0 #1765A6);z-index:6;opacity:0;transform:translateY(-15px);transition:opacity .5s,transform .5s;}
+.race-victory.portrait .victory-title{opacity:1;transform:translateY(0);}
+.victory-hero{position:absolute;width:470px;height:470px;margin:-235px 0 0 -235px;opacity:0;background:url("assets/jet/swifty_mounted_v3.png") 0 0/200% 200% no-repeat;filter:drop-shadow(0 20px 12px rgba(0,63,118,.25));z-index:4;pointer-events:none;will-change:transform,opacity;}
+.victory-angles{width:500px;height:460px;margin:-230px 0 0 -250px;background:none;}
+.victory-trails{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.race-victory > .jt-jet.me{z-index:3;}
+.stage.race-mode .nav-btn.active{z-index:90;bottom:38px;}
+
 /* boat picker: empty boats on the water, Swifty standing on the dock */
 .jr-world.picking{background-size:cover;background-position:center;}
 .jp-pick{position:absolute;inset:0;z-index:6;}
@@ -420,8 +457,8 @@ body.vo-lock .jr-btn{pointer-events:none;}
 .jp-mounted{display:none;position:absolute;left:-19px;bottom:-10px;width:270px;height:270px;z-index:3;pointer-events:none;background:url("assets/jet/swifty_mounted_v3.png") 0 0/200% 200% no-repeat;filter:drop-shadow(0 8px 6px rgba(0,50,100,.2));}
 .jp-boat.mine .jp-mounted{display:block;}
 .jp-boat.mine .jp-jet,.jp-boat.mine .jp-wave{display:none;}
-.jp-go{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);width:112px;height:104px;padding:0;border:0;border-radius:26px;cursor:pointer;z-index:7;
-  background:transparent url("assets/swiftpal_buttons/btn-race-start.svg") center/contain no-repeat;filter:drop-shadow(0 7px 8px rgba(31,68,34,.18));transition:filter .15s,transform .15s;}
+.jp-go{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);width:164px;height:112px;padding:0;border:0;border-radius:30px;cursor:pointer;z-index:7;
+  background:transparent url("assets/swiftpal_buttons/btn-race-start-v2.svg") center/contain no-repeat;filter:drop-shadow(0 7px 8px rgba(31,68,34,.18));transition:filter .15s,transform .15s;}
 .jp-go:hover{filter:brightness(1.06) drop-shadow(0 7px 8px rgba(31,68,34,.18));}
 .jp-go:active{transform:translateX(-50%) translateY(4px);}
 .jp-go:disabled{opacity:.55;cursor:default;filter:saturate(.5);}
@@ -489,7 +526,7 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .sg-ttl .t1 .ten{color:#2F7BF5;font-size:78px;}
 .sg-ttl .t2{display:block;margin-top:2px;font-weight:800;font-size:38px;color:#1A3F99;-webkit-text-stroke:8px #fff;paint-order:stroke fill;filter:drop-shadow(0 3px 0 rgba(20,60,140,.25));}
 .sg-ttl .t2 .add{color:#E5326B;} .sg-ttl .t2 .sub{color:#16A34A;}
-.sg-title-art{background:#8FD3F5 url("assets/Images/title_10ka_jadu.jpg?v=2") center 64%/cover no-repeat !important;animation:fingerPop .6s cubic-bezier(.34,1.3,.6,1) both;}
+.sg-title-art{background:#8FD3F5 url("assets/Images/title_10ka_jadu.jpg?v=4") center 64%/cover no-repeat !important;animation:fingerPop .6s cubic-bezier(.34,1.3,.6,1) both;}
 .sg-hero3d{position:absolute;left:50%;top:152px;transform:translateX(-50%) scale(.5);transform-origin:50% 0;z-index:2;}
 .sg-hero3d .tf-board{margin:0;}
 /* tutorial equation: bigger and a little lower */
@@ -511,6 +548,161 @@ body.loaded .sg-ttl{animation-play-state:running;}
 /* ten frame: no thick 3D edge underneath — just the even border */
 .tf-frame{box-shadow:0 8px 18px rgba(10,40,120,.16),inset 0 3px 0 rgba(255,255,255,.9) !important;}
 .tf-frame.full{box-shadow:0 0 0 8px rgba(60,220,110,.30),0 0 30px rgba(60,220,110,.5) !important;}
+/* number tags flying into the sum box and up into the answer */
+.fly-num{position:absolute;z-index:70;pointer-events:none;font-weight:800;font-size:46px;line-height:1.1;color:#1A3F99;background:linear-gradient(180deg,#FFFFFF,#E7F0FF);border:3px solid #8FB8F5;border-radius:16px;padding:2px 18px 0;box-shadow:0 6px 14px rgba(10,40,120,.25);}
+.sum-box{min-width:104px;height:84px;border-radius:20px;border:4px dashed #8FB8F5;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:54px;color:#1A3F99;padding:0 16px;transition:opacity .3s,transform .3s;}
+.sum-box.filled{border-style:solid;background:linear-gradient(180deg,#FFFFFF,#E7F0FF);}
+.sum-box.grow{border-color:#1FB54A;background:linear-gradient(180deg,#EFFFF0,#BDF5C8);color:#0D7A2D;animation:sumGrow .9s cubic-bezier(.34,1.5,.6,1) both;}
+.sum-box.gone{opacity:0;transform:scale(.8);}
+@keyframes sumGrow{0%{transform:scale(1);}45%{transform:scale(1.45);}100%{transform:scale(1.2);}}
+/* Blue counters: a smooth disc face and narrow dark rim, at the original angle. */
+.tf-ctr{--disc-top:#8065EB;--disc-bottom:#6346CD;--disc-edge:#422798;background:linear-gradient(165deg,var(--disc-top),var(--disc-bottom)) !important;box-shadow:inset 0 -5px 0 var(--disc-edge),inset 0 2px 1px rgba(255,255,255,.35),0 3px 3px rgba(12,55,115,.18) !important;}
+.tf-ctr::before{content:"";position:absolute;inset:3px 3px 7px;border:1.5px solid rgba(255,255,255,.42);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;pointer-events:none;}
+.tf-ctr.good{--disc-top:#50DA73;--disc-bottom:#22B24C;--disc-edge:#128335;}
+.tf-ctr.hl{--disc-top:#FFC85B;--disc-bottom:#FF9F1A;--disc-edge:#D57B06;background:linear-gradient(165deg,var(--disc-top),var(--disc-bottom)) !important;}
+.tf-ctr.live{box-shadow:0 0 0 5px rgba(255,210,30,.85),inset 0 -5px 0 var(--disc-edge),inset 0 2px 1px rgba(255,255,255,.35),0 3px 3px rgba(12,55,115,.18) !important;}
+.tf-ctr.dragging{box-shadow:0 0 0 4px rgba(255,210,30,.75),inset 0 -5px 0 var(--disc-edge),0 9px 12px rgba(12,55,115,.28) !important;}
+.tf-ctr.dim{background:#EEF1F5 !important;box-shadow:none !important;}
+.tf-ctr.dim::before{display:none;}
+.tf-cell{background:#E3EBF6 !important;box-shadow:none !important;}
+
+/* practice layout (P1, P2) — same as the MTG2A01_L04_S01 reference: equation boxes across the top,
+   counters on the left, keypad on the right */
+.q-wrap.pv-layout{justify-content:flex-start;gap:40px;padding-top:4px;}
+.pv-layout > .eq{width:1000px;justify-content:space-between;gap:0;font-size:64px;text-shadow:none;color:#012F76;}
+.pv-layout > .eq .eq-part{color:#012F76 !important;font-weight:800;}
+.pv-layout > .eq .eq-part:nth-child(2),.pv-layout > .eq .eq-part:nth-child(4){font-size:72px;}
+.pv-layout > .eq .eq-part:nth-child(1),.pv-layout > .eq .eq-part:nth-child(3){width:170px;height:104px;border-radius:26px;background:#fff;border:3px solid #D5D8DF;box-shadow:0 5px 0 #D9D9D9;display:inline-flex;align-items:center;justify-content:center;font-size:72px;}
+.pv-layout > .eq .eq-box{width:170px;height:104px;border-radius:26px;background:#fff;border:3px solid #1E8BF0;box-shadow:none !important;color:#9DB2D3;font-size:72px;padding:0;animation:none !important;}
+.pv-layout > .eq .eq-box.typing{color:#012F76;}
+.pv-layout > .eq .eq-box.done{background:#E9FCEB;border-color:#1FB54A;color:#0D7A2D;}
+.pv-row{display:flex;align-items:flex-start;justify-content:space-between;width:1000px;}
+.pv-left{flex:1;display:flex;flex-direction:column;align-items:center;gap:22px;padding-top:28px;}
+/* Exact supplied keypad artwork, with real accessible keys over its twelve keys.
+   The reference card occupies x=46..682, y=38..754 in the 728x832 image.
+   At half size the card is 318x358 and each key is 84x74. */
+.pv-pad,.kp-grid{position:relative;display:grid;grid-template-columns:repeat(3,84px);grid-template-rows:repeat(4,74px);column-gap:12px;row-gap:8px;width:318px;height:358px;padding:21px 21px 17px;border:0;border-radius:36px;flex-shrink:0;background:#E7F4FF url("assets/UI/keypad_reference.png") -23px -19px/364px 416px no-repeat;box-shadow:0 12px 22px rgba(12,46,92,.14);overflow:hidden;}
+.pv-pad.off{opacity:1;filter:none;}
+.pv-pad.off .pv-key{pointer-events:none;}
+.pv-left .tf-board{zoom:.84;}
+.pv-layout > .eq{width:1000px;}
+.pv-layout > .eq .eq-part:nth-child(1),.pv-layout > .eq .eq-part:nth-child(3),.pv-layout > .eq .eq-box{width:160px;height:100px;border-radius:24px;font-size:68px;}
+.pv-row{width:1080px;transform:translateX(42px);gap:30px;}
+.pv-key,.kp-key{position:relative;display:block;width:84px !important;height:74px !important;min-width:0;padding:0;border:0 !important;border-radius:20px !important;background:transparent !important;box-shadow:none !important;font-size:0 !important;color:transparent !important;cursor:pointer;touch-action:manipulation;transition:none;}
+.pv-key::before,.pv-key::after,.kp-key::before,.kp-key::after{display:none !important;}
+.pv-key svg,.kp-key svg{display:none !important;}
+.pv-key:active,.kp-key:active{translate:none;transform:none;background:rgba(0,40,100,.12) !important;box-shadow:none !important;}
+.pv-key:focus-visible,.kp-key:focus-visible{outline:3px solid #083D85;outline-offset:-4px;}
+.pv-key:disabled,.kp-key:disabled{cursor:default;}
+
+/* ===== reference style everywhere: every equation uses number boxes + navy signs ===== */
+.eq:not(.small){gap:26px;text-shadow:none;color:#012F76;}
+.eq:not(.small) .eq-part{color:#012F76 !important;font-weight:800;}
+.eq:not(.small) .eq-part:nth-child(1),.eq:not(.small) .eq-part:nth-child(3){min-width:120px;height:92px;padding:0 16px;border-radius:22px;background:#fff;border:3px solid #D5D8DF;box-shadow:0 5px 0 #D9D9D9;display:inline-flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s,transform .3s;}
+.eq:not(.small) .eq-part.say{color:#012F76 !important;transform:scale(1.08);}
+.eq:not(.small) .eq-part:nth-child(1).say,.eq:not(.small) .eq-part:nth-child(3).say{border-color:#FF9F1A;background:#FFF6E6;}
+.eq:not(.small) .eq-part:nth-child(2).say,.eq:not(.small) .eq-part:nth-child(4).say{color:#FF8A00 !important;}
+.eq:not(.small) .eq-box{min-width:120px;width:auto;height:92px;padding:0 16px;border-radius:22px;background:#fff;border:3px solid #1E8BF0;box-shadow:none !important;color:#9DB2D3;animation:none;}
+.eq:not(.small) .eq-box.ready{border-color:#1E8BF0;color:#1E8BF0 !important;animation:boxCall 1.6s ease-in-out infinite;}
+.eq:not(.small) .eq-box.done{background:#E9FCEB !important;border-color:#1FB54A;color:#0D7A2D !important;}
+.eq:not(.small) .eq-box.wrong{border-color:#F93544;background:#FFEBEC;color:#F93544 !important;}
+.eq:not(.small) .eq-box.say{transform:scale(1.08);}
+/* tutorial card: same boxes, a little bigger */
+.tut-prompt .eq{gap:30px;}
+.tut-prompt .eq .eq-part:nth-child(1),.tut-prompt .eq .eq-part:nth-child(3),.tut-prompt .eq .eq-box{min-width:130px;height:100px;font-size:66px;}
+/* race panel keeps the PDF's plain question */
+.jr-band .eq .eq-part{min-width:0 !important;height:auto !important;padding:0 !important;border:0 !important;background:none !important;box-shadow:none !important;}
+/* The fallback dialog uses the same reference card and key positions. */
+.kp-box{padding:0;gap:14px;background:transparent;border:0;box-shadow:none;}
+.kp-box > .eq{padding:10px 18px;background:#fff;border-radius:18px;}
+.kp-close{top:-18px;right:-34px;z-index:2;}
+/* tappable "?" box: thick 3D edge underneath (it is a button) */
+.eq .eq-box,.pv-layout > .eq .eq-box{box-shadow:0 7px 0 #1569C9 !important;}
+.eq .eq-box.ready{cursor:pointer;}
+.eq .eq-box.done{box-shadow:0 7px 0 #14903A !important;}
+.eq .eq-box.wrong{box-shadow:0 7px 0 #C21F2D !important;}
+.eq .eq-box.ready:active{translate:0 4px;box-shadow:0 3px 0 #1569C9 !important;}
+/* keypad stays hidden until the "?" is tapped, then pops in */
+.pv-pad.closed{visibility:hidden;opacity:0 !important;transform:scale(.6);}
+.pv-pad.opening{animation:padOpen .45s cubic-bezier(.34,1.5,.6,1) both;}
+@keyframes padOpen{from{opacity:0;transform:scale(.6) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+/* FINAL: only the tappable "?" box has the thick edge; number boxes are flat (high specificity so nothing overrides it) */
+body .stage .eq .eq-part:nth-child(1),body .stage .eq .eq-part:nth-child(3){box-shadow:none !important;}
+body .stage .eq .eq-box{box-shadow:0 7px 0 #1569C9 !important;}
+body .stage .eq .eq-box.done{box-shadow:0 7px 0 #14903A !important;}
+body .stage .eq .eq-box.wrong{box-shadow:0 7px 0 #C21F2D !important;}
+body .stage .eq .eq-box.ready:active{translate:0 4px;box-shadow:0 3px 0 #1569C9 !important;}
+body .stage .jr-band .eq .eq-box{box-shadow:none !important;}
+/* wrong answer: no red anywhere — the item only wiggles */
+body .stage .eq .eq-box.wrong{border-color:#1E8BF0 !important;background:#fff !important;color:#012F76 !important;box-shadow:0 7px 0 #1569C9 !important;animation:wgNo .5s ease-in-out !important;}
+body .stage .opt-cell.wrong-flash{border-color:#9DBDF2 !important;background:linear-gradient(180deg,#FFFFFF,#F1F6FF) !important;animation:wgNo .5s ease-in-out !important;}
+body .stage .jr-btn.wrong-flash{background:linear-gradient(180deg,#1795FF 0%,#027AFE 50%,#0659FB 100%) !important;border-color:#62CBFF !important;animation:wgNo .5s ease-in-out !important;}
+body .stage .rc-btn.wrong-flash{animation:wgNo .5s ease-in-out !important;}
+/* MCQ option cards are tappable: thick edge underneath, like a button */
+body .stage .opt-cell{box-shadow:0 8px 0 #7FA6E8 !important;}
+body .stage .opt-cell:active{translate:0 4px;box-shadow:0 4px 0 #7FA6E8 !important;}
+body .stage .opt-cell.correct{box-shadow:0 8px 0 #2E9E4D !important;}
+body .stage .opt-cell.faded,body .stage .opt-cell.crossed{box-shadow:0 8px 0 #D3DCEB !important;}
+/* MCQ screens: the "?" is not tappable there, so it stays flat */
+body .stage .q-wrap:has(.mcq-stage) .eq .eq-box,body .stage .q-wrap:has(.mcq-stage) .eq .eq-box.done{box-shadow:none !important;}
+.stage.no-next .nav-btn{display:none !important;}
+/* number tags under the counters and the sum box: same colours, no thick edge underneath */
+body .stage .tf-lbl,body .stage .fly-num,body .stage .sum-box,body .stage .sum-box.filled,body .stage .sum-box.grow{box-shadow:none !important;}
+/* Jet-ski cockpit: instrument screen, physical answer keys and live speed dial. */
+.stage.race-mode .jr-panel{width:980px;height:216px;bottom:16px;padding:15px 126px 22px;gap:12px;border:4px solid #AFCBD2;border-radius:54px 54px 34px 34px;background:linear-gradient(165deg,#405A6C 0%,#243C50 30%,#142636 72%,#0E1C29 100%);box-shadow:0 0 0 3px #122A3B,inset 0 3px 0 #688895,inset 0 -7px 0 #091620,0 10px 0 #0B1D2B,0 17px 24px rgba(0,36,57,.35);}
+.stage.race-mode .jr-panel::before{content:"";position:absolute;left:54px;right:54px;top:7px;height:4px;border-radius:50%;background:linear-gradient(90deg,transparent,#8FB9C8,transparent);pointer-events:none;}
+.stage.race-mode .jr-panel::after{content:"";position:absolute;inset:14px;pointer-events:none;background:radial-gradient(circle at 22px 15px,#97ADB6 0 3px,#0C1C2A 3.5px 5px,transparent 5.5px),radial-gradient(circle at calc(100% - 22px) 15px,#97ADB6 0 3px,#0C1C2A 3.5px 5px,transparent 5.5px),radial-gradient(circle at 15px calc(100% - 10px),#97ADB6 0 3px,#0C1C2A 3.5px 5px,transparent 5.5px),radial-gradient(circle at calc(100% - 15px) calc(100% - 10px),#97ADB6 0 3px,#0C1C2A 3.5px 5px,transparent 5.5px);}
+.stage.race-mode .jr-band{width:100%;height:78px;flex-shrink:0;border:4px solid #0B1E2C;border-radius:18px;background:linear-gradient(155deg,#E3FFF3,#A6E9DF);box-shadow:0 1px 0 #678899,inset 0 2px 8px rgba(12,77,72,.2);position:relative;overflow:hidden;}
+.stage.race-mode .jr-band::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.35) 0 22%,transparent 22% 70%,rgba(255,255,255,.15) 70%);pointer-events:none;}
+.stage.race-mode .jr-band .eq{position:relative;font-size:56px;gap:22px;color:#113F49;text-shadow:none;}
+.stage.race-mode .jr-band .eq .eq-part{color:#113F49 !important;}
+.stage.race-mode .jr-band .eq .eq-part:nth-child(2),.stage.race-mode .jr-band .eq .eq-part:nth-child(4){color:#36837C !important;}
+.stage.race-mode .jr-band .eq .eq-box{width:72px;min-width:72px;height:56px;padding:0;border:2px solid rgba(25,105,97,.28) !important;border-radius:11px;background:rgba(255,255,255,.45) !important;font-size:50px;color:#113F49 !important;box-shadow:none !important;line-height:1;}
+.stage.race-mode .jr-band .eq .eq-box.done{background:#B7F7BB !important;border-color:#4CBA71 !important;color:#087331 !important;}
+.stage.race-mode .jr-btns{width:100%;gap:17px;}
+.stage.race-mode .jr-btn{flex:1;min-width:0;width:auto;height:76px;border:3px solid #FFE2A0;border-radius:17px;background:linear-gradient(180deg,#FFE287 0%,#FFC247 48%,#F5A523 100%);color:#25354A;font-size:50px;text-shadow:0 1px 0 #FFEDB6;box-shadow:0 6px 0 #995217,0 8px 0 #081721,inset 0 2px 0 #FFF1BA,inset 0 -3px 0 rgba(198,109,15,.2);transition:transform .12s,filter .15s;}
+.stage.race-mode .jr-btn:hover:not(.correct):not(.crossed):not(.faded){filter:brightness(1.09);transform:translateY(-2px);}
+.stage.race-mode .jr-btn:active{transform:translateY(5px);box-shadow:0 1px 0 #995217,0 3px 0 #081721;}
+.stage.race-mode .jr-btn:focus-visible{outline:3px solid #66F3E9;outline-offset:4px;}
+.stage.race-mode .jr-btn.correct{background:linear-gradient(180deg,#B2FFC1,#4DD382);color:#084D30;border-color:#DCFFE7;box-shadow:0 6px 0 #137247,0 8px 0 #081721,inset 0 2px 0 #E8FFED;}
+body .stage.race-mode .jr-btn.wrong-flash{background:linear-gradient(180deg,#FFE287,#FFC247 48%,#F5A523) !important;border-color:#FFE2A0 !important;}
+.stage.race-mode .jr-btn.crossed,.stage.race-mode .jr-btn.faded{background:linear-gradient(180deg,#6C7E8A,#475C6B);color:#AEBCC2;border-color:#8296A2;box-shadow:0 6px 0 #1E3442,0 8px 0 #081721;text-shadow:none;}
+.stage.race-mode .jr-btn.reveal-pulse{border-color:#77FFB4;}
+.jr-dial{position:absolute;left:19px;top:59px;width:94px;height:94px;background:url("assets/UI/race_speed_dial.svg") center/contain no-repeat;pointer-events:none;}
+.jr-needle{position:absolute;left:17px;top:45px;width:31px;height:4px;border-radius:3px;background:#FFBE43;transform-origin:30px 2px;transform:rotate(var(--dash-needle,-45deg));transition:transform .65s ease;box-shadow:0 0 5px rgba(255,190,67,.35);}
+.jr-dial::after{content:"";position:absolute;left:42px;top:42px;width:10px;height:10px;border-radius:50%;background:#D4E6E9;border:2px solid #253A4B;}
+.jr-power{position:absolute;right:21px;top:57px;width:90px;height:100px;border:2px solid #587787;border-radius:24px;background:linear-gradient(150deg,#213B4C,#0D1C29);box-shadow:inset 0 2px 8px #081620;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;pointer-events:none;}
+.jr-power svg{width:23px;height:29px;fill:#FFD05C;filter:drop-shadow(0 0 4px rgba(255,185,64,.25));}
+.jr-leds{height:30px;display:flex;align-items:flex-end;gap:4px;}
+.jr-leds i{display:block;width:8px;border-radius:3px;background:#63F3D0;box-shadow:0 0 5px rgba(99,243,208,.3);opacity:clamp(.2,calc(var(--dash-power,.2)*5 - var(--segment)),1);transition:opacity .5s;}
+.stage.race-mode .nudge-hand{width:54px;height:68px;transform:translate(30px,14px);}
+/* Larger matching progress instrument on the left. */
+.jr-top{left:58px;top:84px;width:54px;height:550px;}
+.jr-bar{border:4px solid #2580CE;background:linear-gradient(90deg,#C0EEFF,#E1F7FF);box-shadow:0 0 0 3px #F3FCFF,inset 0 0 0 2px #9DDDFC,0 7px 12px rgba(0,79,139,.2);}
+.jr-bar-fill{background:linear-gradient(0deg,#F4A124,#FFDE73);border-radius:24px;box-shadow:0 0 12px rgba(255,198,63,.3);}
+.jr-bar i{width:30px;height:30px;margin:0 0 -15px -15px;border:3px solid #FFFFFF;background:#74BDEB;box-shadow:inset 0 2px 3px rgba(12,91,163,.2);}
+.jr-bar i.done{background:#FFE9A4;border-color:#FFF6D3;box-shadow:0 0 8px rgba(255,219,99,.6);}
+.jr-bar .flag{top:-67px;width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:#3B9DEB;border:3px solid #E4F8FF;font-size:33px;box-shadow:0 4px 0 #1B66AE;}
+.jr-bar .me{width:52px;height:90px;margin:0 0 -45px -26px;}
+
+/* race start: green chequered-flag GO button (different from the yellow round title Play) */
+body .stage .jp-go{width:178px !important;height:178px !important;border-radius:50% !important;bottom:30px !important;
+  background:transparent url("assets/swiftpal_buttons/btn-race-go.svg") center/contain no-repeat !important;filter:drop-shadow(0 8px 10px rgba(10,60,20,.25)) !important;}
+body .stage .jp-go:disabled{opacity:1 !important;filter:drop-shadow(0 8px 10px rgba(10,60,20,.25)) !important;transform:translateX(-50%) scale(.94) !important;cursor:default;}
+body .stage .jp-go:not(:disabled){animation:goReady .5s cubic-bezier(.34,1.6,.6,1) both,goPulse 1.3s ease-in-out .5s infinite !important;}
+body .stage .jp-go:not(:disabled):active{animation:none !important;transform:translateX(-50%) translateY(5px) !important;}
+@keyframes goReady{from{transform:translateX(-50%) scale(.92);}to{transform:translateX(-50%) scale(1);}}
+@keyframes goPulse{0%,100%{transform:translateX(-50%) scale(1);}50%{transform:translateX(-50%) scale(1.07);}}
+/* race picker flow: title (still) → Swifty asks to choose (jets alive) → Swifty rides the chosen one */
+.jp-pick.jp-titlemode .jp-boat{animation:none !important;pointer-events:none;}
+.jp-pick.jp-titlemode .jp-swifty{opacity:0;transform:translateX(-340px);}
+.jp-pick .jp-swifty{transition:transform .7s cubic-bezier(.3,.8,.3,1.1),opacity .4s;}
+.jp-pick.jp-choosemode .jp-title{opacity:0;transform:translateX(-50%) translateY(-30px) scale(.9);transition:opacity .45s,transform .45s;pointer-events:none;}
+.jp-pick.jp-choosemode .jp-go{display:none !important;}
+.jp-pick.jp-choosemode .jp-boat:not(.mine){cursor:pointer;}
+.jp-pick .jp-swifty.jp-gone{opacity:0;transform:translateY(40px) scale(.9);transition:opacity .35s,transform .35s;}
+.sg-vo.sg-vo-call{animation:sgBtnPulse2 1.1s ease-in-out infinite !important;}
+@keyframes sgBtnPulse2{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
 /* ---------- keyframes (reference set + lesson) ---------- */
 @keyframes hintPop{from{transform:scale(.4);opacity:0;}to{transform:scale(1);opacity:1;}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -691,7 +883,7 @@ html.no-anim *,html.no-anim *::before,html.no-anim *::after{animation:none !impo
 
   <div class="end-screen" id="endScreen">
     <div class="end-title" id="endTitle"></div>
-    <img class="end-mascot" src="assets/Images/last_swifty_still.webp" alt="Swiftee">
+    <img class="end-mascot" src="assets/Images/last_swifty_happy.webp" alt="Swiftee">
     <div class="end-subtitle" id="endSubtitle"></div>
     <button class="end-btn" id="endBtn" aria-label="आगे बढ़ें"></button>
   </div>
@@ -1294,6 +1486,7 @@ try{ document.addEventListener("pointerdown", function(e){
 })();
 
 </script>
+<script src="assets/js/victory-sprite-renderer.js"></script>
 <script>window.FLN_OWN_SCALE = true;</script>
 <script>
 /* FLN confetti - standalone, exact copy of the game build (MTG2A04_L02_S01 app.js). No sound.
@@ -1494,7 +1687,7 @@ function engineDown(){
    spoken by the device's Hindi text-to-speech, so the game is fully voiced before recording. */
 const VO_EXT = "m4a";
 /* measured length (s) of every VO file — visual cues are timed against it */
-const VO_DUR = {"vo_gate_tutorial":1.66,"vo_gate_guided":1.88,"vo_gate_practice":1.95,"vo_gate_game":2.15,"vo_landing":13.21,"vo_retry":1.06,"vo_t1_1":5.54,"vo_t1_2":2.35,"vo_t1_3":5.87,"vo_t1_4":3.0,"vo_t1_5":2.96,"vo_t1_6":2.87,"vo_t1_7":5.94,"vo_t2_1":5.6,"vo_t2_2":2.06,"vo_t2_3":4.14,"vo_t2_4":3.59,"vo_t2_5":6.71,"vo_t2_6":1.11,"vo_t2_7":3.29,"vo_g1_1":5.14,"vo_g1_2":2.14,"vo_g1_3":5.56,"vo_g1_4":2.79,"vo_g1_5":4.12,"vo_g1_6":2.87,"vo_g1_7":5.7,"vo_g2_1":5.41,"vo_g2_2":2.08,"vo_g2_3":4.14,"vo_g2_4":3.53,"vo_g2_5":6.77,"vo_g2_6":1.11,"vo_g2_7":3.32,"vo_p1_q":7.21,"vo_p1_ok":3.25,"vo_p1_h2":5.06,"vo_p1_h3":1.92,"vo_p2_q":1.98,"vo_p2_ok":3.52,"vo_p2_h2":4.2,"vo_p2_h3":1.75,"vo_p3_q":4.23,"vo_p3_ok":3.29,"vo_p3_h2":4.14,"vo_p3_h3":2.7,"vo_p4_q":5.17,"vo_p4_ok":3.86,"vo_p4_h2":3.33,"vo_p4_h3":2.5,"vo_race_intro":6.42,"vo_race_go":1.75,"vo_race_win":3.13,"vo_end":9.73,"vo_race_hint_add":2.73,"vo_race_hint_sub":3.0,"vo_race_ok1":0.68,"vo_race_ok2":1.04,"vo_race_ok3":1.55,"vo_race_q1":1.93,"vo_race_a1":1.69,"vo_race_q2":1.75,"vo_race_a2":1.69,"vo_race_q3":1.84,"vo_race_a3":1.71,"vo_race_q4":1.93,"vo_race_a4":1.65,"vo_race_q5":1.89,"vo_race_a5":1.56,"vo_race_q6":1.94,"vo_race_a6":1.56,"vo_race_q7":2.05,"vo_race_a7":1.54};
+const VO_DUR = {"vo_race_pick":1.6,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":13.6,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.52,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.16,"vo_race_intro":6.92,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":10.36,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_ok3":2.88,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
 const VO_SCRIPT = {};             // id -> text, filled as lines are declared (exported to vo_script.csv)
 function V(id, text){ VO_SCRIPT[id] = text; return { id, text }; }
 let hiVoice = null;
@@ -1543,6 +1736,7 @@ function say(line){
     if(line.id){
       const a = new Audio("assets/VO/" + line.id + "." + VO_EXT); curAudio = a;
       a.onended = fin; a.onerror = () => { if(curAudio === a) tts(); };
+      a.addEventListener("playing", () => { line.heard = true; }, { once:true });
       a.play().catch(() => { if(curAudio === a) tts(); });
     } else tts();
   });
@@ -1600,6 +1794,78 @@ function handAt(target, opts){
   h.style.left = (p.x - 34) + "px"; h.style.top = (p.y - 6) + "px";
   if(opts && opts.instant){ void h.offsetWidth; h.style.transition = ""; }
   h.classList.add("show"); h.classList.toggle("still", !!(opts && opts.still));
+}
+/* a number tag flies from one element to another (stage coordinates), as a copy */
+function flyNum(f, fromEl, toEl, text, ms){
+  return f.gate(new Promise(res => {
+    const a = stagePoint(fromEl), b = stagePoint(toEl);
+    const t = el("div", "fly-num", String(text)); $("stage").appendChild(t);
+    const w = t.offsetWidth, hh = t.offsetHeight;
+    t.style.left = (a.x - w / 2) + "px"; t.style.top = (a.y - hh / 2) + "px";
+    const an = t.animate([
+      { transform:"translate(0,0) scale(1)" },
+      { transform:`translate(${(b.x - a.x) * .5}px,${(b.y - a.y) * .5 - 40}px) scale(1.15)`, offset:.5 },
+      { transform:`translate(${b.x - a.x}px,${b.y - a.y}px) scale(.9)` }
+    ], { duration:ms || 1100, easing:"cubic-bezier(.45,0,.3,1)", fill:"forwards" });
+    an.onfinish = () => { t.remove(); res(); };
+    setTimeout(() => { t.remove(); res(); }, (ms || 1100) + 800);
+  }));
+}
+/* "10" + "3" → a box that grows into 13 → 13 flies up into the equation's answer box */
+async function sumUp(f, host, tagA, tagB, firstVal, total, answerBox, srcA, srcB){
+  host.innerHTML = "";
+  const box = el("div", "sum-box"); host.appendChild(box);
+  await f.wait(300);
+  // "10": the tray lights up, its label slides down out from under the tray into the box
+  if(srcA && srcA.lit) srcA.lit();
+  tagA.style.visibility = "hidden";
+  await flyNum(f, tagA, box, tagA.textContent, 1200);
+  box.textContent = firstVal; box.classList.add("filled"); sfx("sfx_seat", .6);
+  await f.wait(800);
+  // "3": the 3 balls light up and the 3 travels from them into the box
+  if(srcB && srcB.lit) srcB.lit();
+  tagB.style.visibility = "hidden";
+  await flyNum(f, (srcB && srcB.el) || tagB, box, tagB.textContent, 1200);
+  box.textContent = total; box.classList.remove("grow"); void box.offsetWidth; box.classList.add("grow"); sfx("sfx_correct", .5);
+  await f.wait(1500);
+  await flyNum(f, box, answerBox, total, 1100);
+  box.classList.add("gone");
+  await f.wait(300);
+}
+/* the number under the tray (what is left) flies up into the equation's "?" */
+async function answerUp(f, tag, answerBox, value, host){
+  // like the addition screens: the number first drops into a box below, grows, then flies up into the "?"
+  if(!host){ await f.wait(300); tag.style.visibility = "hidden"; await flyNum(f, tag, answerBox, value, 1200); return; }
+  host.innerHTML = "";
+  const box = el("div", "sum-box"); host.appendChild(box);
+  await f.wait(300);
+  tag.style.visibility = "hidden";
+  await flyNum(f, tag, box, value, 1200);
+  box.textContent = value; box.classList.add("filled"); void box.offsetWidth; box.classList.add("grow"); sfx("sfx_correct", .5);
+  await f.wait(1500);
+  await flyNum(f, box, answerBox, value, 1100);
+  box.classList.add("gone");
+  await f.wait(300);
+}
+/* the hand presses a ball, then travels WITH it to where it ends up (tutorial demos).
+   `move()` starts the ball's own move; `to()` returns the element / stage point the ball lands on. */
+async function handCarry(f, ball, move, to){
+  const h = $("nudgeHand");
+  handAt(ball.el, { still:true });
+  await f.wait(750);                                   // the hand flies to the ball
+  tapHand(); await f.wait(350);                         // presses it
+  h.style.transition = "left 1.5s cubic-bezier(.33,0,.2,1),top 1.5s cubic-bezier(.33,0,.2,1)";   // same curve as the ball
+  move();
+  const t = to();
+  if(t && t.nodeType) handAt(t, { still:true });
+  else if(t){ h.style.left = (t.x - 34) + "px"; h.style.top = (t.y - 6) + "px"; }
+  await f.wait(1600);
+  h.style.transition = "";
+}
+/* stage point of a spot inside a board (board-local x, y) */
+function boardPoint(board, x, y){
+  const st = $("stage").getBoundingClientRect(), s = st.width / STAGE_W, r = board.el.getBoundingClientRect(), k = r.width / board.el.offsetWidth;
+  return { x:(r.left - st.left + x * k) / s, y:(r.top - st.top + y * k) / s };
 }
 function hideHand(){ $("nudgeHand").classList.remove("show","still","tap"); }
 function tapHand(){ const h = $("nudgeHand"); h.classList.remove("tap"); void h.offsetWidth; h.classList.add("tap"); }
@@ -1795,17 +2061,18 @@ function openKeypad(label){
     const close = el("button", "kp-close", "×"); close.setAttribute("aria-label", "बंद करें");
     const eqRow = el("div", "eq small"); eqRow.innerHTML = label.map(t => `<span class="eq-part">${t}</span>`).join("");
     const disp = el("div", "eq-box ready", ""); disp.style.animation = "none"; eqRow.appendChild(disp);
-    const grid = el("div", "kp-grid"); let val = "";
+    const grid = el("div", "kp-grid"); grid.setAttribute("role", "group"); grid.setAttribute("aria-label", "संख्या कीपैड"); let val = "";
     const ok = el("button", "kp-key ok", "✓"); ok.disabled = true;
     const render = () => { disp.textContent = val; ok.disabled = !val; };
     ["1","2","3","4","5","6","7","8","9","0"].forEach(d => {
-      const k = el("button", "kp-key", d);
+      const k = el("button", "kp-key", d); k.type = "button"; k.setAttribute("aria-label", d);
       k.onclick = () => { sfx("sfx_tap", .5); if(val.length < 2) val += d; render(); };
       grid.appendChild(k);
     });
     const del = el("button", "kp-key del", "⌫"); del.onclick = () => { val = val.slice(0, -1); render(); };
-    del.style.gridColumn = "span 2"; ok.style.gridColumn = "span 3";
-    grid.appendChild(del); grid.appendChild(ok);
+    del.type = ok.type = "button";
+    del.setAttribute("aria-label", "मिटाएँ"); ok.setAttribute("aria-label", "उत्तर जमा करें");
+    grid.insertBefore(del, grid.lastElementChild); grid.appendChild(ok);
     ok.onclick = () => { if(!val) return; ov.classList.remove("show"); resolve(parseInt(val, 10)); };
     close.onclick = () => { ov.classList.remove("show"); resolve(null); };
     box.append(close, eqRow, grid); ov.appendChild(box); ov.classList.add("show");
@@ -1829,11 +2096,11 @@ async function animAdd(flow, host, a, b, line){
   board.split([need, rest]); board.labels(a, [need, rest]);
   await flow.wait(T.split);
   for(const c of board.groups[0].slice()){ board.toFrame(c); sfx("sfx_seat", .5); await flow.wait(T.move); }
-  board.labels(10, ["", rest]); sub.show(`${a} + ${need} = 10`, "ten");
+  board.labels(10, ["", rest]);
   await flow.wait(T.beat * 2);
   board.setNear(true);
   await flow.wait(T.near);
-  sub.add(`10 + ${rest} = ${a + b}`, "ans");
+
   if(line) await flow.say(line); else await flow.wait(1500);
   return board;
 }
@@ -1844,11 +2111,11 @@ async function animSub(flow, host, n, m, line){
   const sub = SubEq(host);
   await flow.wait(T.beat * 2);
   for(const c of board.groups[0]){ board.dim(c); sfx("sfx_tap", .5); await flow.wait(T.move * .7); }
-  board.labels(10, [""]); sub.show(`${n} ${MINUS} ${loose} = 10`, "ten");
+  board.labels(10, [""]);
   await flow.wait(T.beat * 2);
   for(let i = 9; i > 9 - rest; i--){ board.dim(board.frame[i]); sfx("sfx_tap", .5); await flow.wait(T.move * .7); }
   board.labels(10 - rest, [""]); board.frame.slice(0, 10 - rest).forEach(c => c.el.classList.add("good"));
-  sub.add(`10 ${MINUS} ${rest} = ${n - m}`, "ans");
+
   if(line) await flow.say(line); else await flow.wait(1500);
   return board;
 }
@@ -1928,7 +2195,8 @@ const SLIDES = [
       h3:V("vo_p4_h3","सही उत्तर 9 है। इसे चुनिए।") } },
   /* PDF page 12 — गणित की तेज़ दौड़ */
   { id:"GAME", phase:"game", type:"race", prompt:"गणित की तेज़ दौड़", vo:{
-      intro:V("vo_race_intro","चलिए, एक गेम खेलते हैं, गणित की तेज़ दौड़। अपनी नाव चुनिए, और दौड़ शुरू करिए।"),
+      intro:V("vo_race_intro","चलिए, एक गेम खेलते हैं — गणित की तेज़ दौड़!"),
+      pick:V("vo_race_pick","अपनी जेट स्की चुनिए।"),
       go:V("vo_race_go","तैयार? दौड़ शुरू!"),
       win:V("vo_race_win","वाह! आपकी नाव सबसे पहले पहुँची!") } }
 ];
@@ -1968,16 +2236,26 @@ R.demoAdd = async (ctx, s, f) => {
   await f.say(vo.s3, [[.66, () => board.hlList(board.groups[0])], [.78, () => { board.split([need, rest]); board.labels(a, [need, rest]); }]]);
   await f.wait(T.beat);
   // "अब ये 2 ब्लॉक, 8 के साथ जोड़ते हैं" — the 2 move into the frame by themselves, the frame glows green
-  await f.say(vo.s4, [[.15, () => board.hlList(board.groups[0])],
-                      [.45, () => { board.toFrame(board.groups[0][0]); sfx("sfx_seat", .6); board.labels(a + 1, [need - 1 || "", rest]); }],
-                      [.80, () => { if(board.groups[0][0]){ board.toFrame(board.groups[0][0]); sfx("sfx_seat", .6); } board.labels(10, ["", rest]); }]]);
+  await f.say(vo.s4, [[.1, () => board.hlList(board.groups[0])]]);
+  for(let k = 0; k < need; k++){
+    const c = board.groups[0][0], slot = board.frame.length;
+    await handCarry(f, c, () => { board.toFrame(c); sfx("sfx_seat", .6); board.labels(a + k + 1, [need - k - 1 || "", rest]); }, () => board.cellEl(slot));
+  }
+  hideHand();
   sfx("sfx_correct", .45);
   await f.wait(T.beat * 2);
   // "अब 10 बन गया। 3 ब्लॉक अभी बाकी हैं।" — the 10 and then the remaining 3 light up
   await f.say(vo.s5, [[0, () => board.hlFrame()], [.45, () => board.hlList(board.groups[1])]]);
   // "अब इन 3 ब्लॉकों को 10 में जोड़ते हैं" — the 3 slide up to the 10, then 10 + 3 = 13
-  await f.say(vo.s6, [[.25, () => board.setNear(true)], [.85, () => sub.show(`10 + ${rest} = ${a + b}`, "ans")]]);
-  await f.wait(T.beat);
+  await f.say(vo.s6);
+  { const c = board.groups[1][0];
+    await handCarry(f, c, () => board.setNear(true), () => boardPoint(board, c.x + C / 2, c.y + C / 2)); }
+  hideHand();
+  // the "10" drops into a box below, then the "3" — the box grows into 13 — and 13 flies up into the "?"
+  { const three = board.groups[1], mid = three[Math.floor(three.length / 2)];
+    await sumUp(f, sub.el, board.lblFrame, board.lblGroups[1], 10, a + b, eq.box,
+      { lit:() => board.hlList(board.undimmed(board.frame)) },
+      { el:mid.el, lit:() => board.hlList(three) }); }
   eq.set(a + b, "done"); sfx("sfx_correct", .6);
   await f.wait(T.beat * 2);
   // "तो यहाँ 8 जोड़ 5 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।" — each part of the equation lights with the voice
@@ -2001,14 +2279,12 @@ R.demoSub = async (ctx, s, f) => {
   await f.say(vo.s4);
   for(const c of board.groups[0]){ handAt(c.el, { still:true }); await f.wait(T.tap); tapHand(); board.dim(c); sfx("sfx_tap", .6); await f.wait(T.beat); }
   hideHand(); board.labels(10, [""]);
-  sub.show(`${n} ${MINUS} ${loose} = 10`, "ten");
   await f.wait(T.beat * 2);
   await f.say(vo.s5);
   for(let i = 9; i > 9 - rest; i--){ const c = board.frame[i]; handAt(c.el, { still:true }); await f.wait(T.tap); tapHand(); board.dim(c); sfx("sfx_tap", .6); await f.wait(T.beat); }
   hideHand(); board.labels(10 - rest, [""]);
-  sub.show(`10 ${MINUS} ${rest} = ${n - m}`, "ans");
   await f.say(vo.s6, [[0, () => board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120))]]);
-  await f.wait(T.beat);
+  await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); sfx("sfx_correct", .6);
   eq.sayParts(f, (VO_DUR[vo.s7.id] || 4) * 1000 * .8);
   await f.say(vo.s7);
@@ -2060,8 +2336,10 @@ R.guidedAdd = async (ctx, s, f) => {
   disarmNudge(); sfx("sfx_whoosh", .5);
   board.setNear(true);
   await f.wait(T.near);
-  sub.show(`10 + ${rest} = ${a + b}`, "ans");
-  await f.wait(T.beat * 2);
+  voLock(true);
+  { const three = board.groups[1], mid = three[Math.floor(three.length / 2)];
+    await sumUp(f, sub.el, board.lblFrame, board.lblGroups[1], 10, a + b, eq.box,
+      { lit:() => board.hlList(board.undimmed(board.frame)) }, { el:mid.el, lit:() => board.hlList(three) }); }
   eq.set(a + b, "done"); sfx("sfx_correct", .6); confettiCannon(); setMood("happy");
   voLock(true);
   await f.wait(T.beat);
@@ -2095,7 +2373,7 @@ R.guidedSub = async (ctx, s, f) => {
   });
   disarmNudge();
   await f.wait(T.beat);
-  sub.show(`${n} ${MINUS} ${loose} = 10`, "ten"); sfx("sfx_correct", .5);
+  sfx("sfx_correct", .5);
   await f.wait(T.beat * 2);
   voLock(true);
   f.replay = vo.s5;
@@ -2109,10 +2387,9 @@ R.guidedSub = async (ctx, s, f) => {
   });
   disarmNudge();
   await f.wait(T.beat);
-  sub.show(`10 ${MINUS} ${rest} = ${n - m}`, "ans");
   voLock(true);
   await f.say(vo.s6, [[0, () => { board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120)); sfx("sfx_correct", .6); }]]);
-  await f.wait(T.beat);
+  await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); confettiCannon(); setMood("happy");
   eq.sayParts(f, (VO_DUR[vo.s7.id] || 4) * 1000 * .8);
   await f.say(vo.s7);
@@ -2120,15 +2397,56 @@ R.guidedSub = async (ctx, s, f) => {
   complete();
 };
 
+/* always-visible keypad on the right (reference MTG2A01_L04_S01 layout): digits fill the answer box, ✓ submits */
+function Pad(host){
+  const wrap = el("div", "pv-pad off closed"); wrap.setAttribute("role", "group"); wrap.setAttribute("aria-label", "संख्या कीपैड"); host.appendChild(wrap);
+  const BACK = '<svg viewBox="0 0 60 40" fill="none"><path d="M20 6h32a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H20L5 21z" fill="#9E1B22" transform="translate(-2 3)"/><path d="M20 4h32a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H20L5 19z" fill="#fff"/><path d="M28 12l13 13M41 12L28 25" stroke="#E12A33" stroke-width="5.5" stroke-linecap="round"/></svg>';
+  const OK = '<svg viewBox="0 0 48 40" fill="none"><path d="M8 23l11 11L41 10" stroke="#0D7A2E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 3)"/><path d="M8 21l11 11L41 8" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const keys = ["1","2","3","4","5","6","7","8","9","back","0","ok"].map(k => {
+    const b = el("button", "pv-key" + (k === "back" ? " pv-back" : k === "ok" ? " pv-ok" : ""), k === "back" ? BACK : k === "ok" ? OK : k);
+    b.dataset.k = k; b.type = "button";
+    b.setAttribute("aria-label", k === "back" ? "मिटाएँ" : k === "ok" ? "उत्तर जमा करें" : k);
+    wrap.appendChild(b); return b;
+  });
+  let val = "", target = null, resolve = null;
+  const show = () => { if(target){ target.textContent = val || "?"; target.classList.toggle("typing", !!val); } };
+  keys.forEach(b => b.onclick = () => {
+    if(wrap.classList.contains("off") || !resolve) return;
+    const k = b.dataset.k;
+    if(k === "back") val = val.slice(0, -1);
+    else if(k === "ok"){ if(!val) return; const r = resolve; resolve = null; const n = parseInt(val, 10); val = ""; r(n); return; }
+    else if(val.length < 2) val += k;
+    sfx("sfx_tap", .5); show();
+  });
+  return {
+    el:wrap,
+    on(v){ wrap.classList.toggle("off", !v); },
+    open(){ if(!wrap.classList.contains("closed")) return; wrap.classList.remove("closed"); wrap.classList.add("opening"); sfx("sfx_tap", .5); },
+    read(box){ target = box; val = ""; show(); return new Promise(r => { resolve = r; }); }
+  };
+}
 /* answer box + keypad + hint ladder (PDF p8, p9) */
 async function answerLadder(f, eq, label, ans, vo, hint2){
   eq.box.classList.add("ready");
   let wrong = 0;
-  armNudge(eq.box, NUDGE_MS.practice);
+  if(!f.pad) armNudge(eq.box, NUDGE_MS.practice);
   while(true){
-    await f.until(done => { eq.box.onclick = () => { if(!document.body.classList.contains("vo-lock")) done(); }; });
-    disarmNudge();
-    const v = await f.gate(openKeypad(label));
+    let v;
+    if(f.pad){
+      if(f.pad.el.classList.contains("closed")){            // tap the "?" first — then the keypad opens
+        armNudge(eq.box, NUDGE_MS.practice);
+        await f.until(done => { eq.box.onclick = () => { if(!document.body.classList.contains("vo-lock")){ eq.box.onclick = null; done(); } }; });
+        disarmNudge(); f.pad.open();
+        await f.wait(450);
+      }
+      f.pad.on(true); armNudge(f.pad.el, NUDGE_MS.practice);
+      v = await f.gate(f.pad.read(eq.box));
+      f.pad.on(false); disarmNudge();
+    } else {
+      await f.until(done => { eq.box.onclick = () => { if(!document.body.classList.contains("vo-lock")) done(); }; });
+      disarmNudge();
+      v = await f.gate(openKeypad(label));
+    }
     if(v == null){ armNudge(eq.box, NUDGE_MS.practice); continue; }
     if(v === ans){
       eq.box.onclick = null; eq.set(ans, "done"); sfx("sfx_correct"); confettiCannon(); setMood("happy");
@@ -2149,17 +2467,19 @@ async function answerLadder(f, eq, label, ans, vo, hint2){
     }
     voLock(false);
     eq.set("?", "ready");
-    armNudge(eq.box, NUDGE_MS.practice);
+    if(!f.pad) armNudge(eq.box, NUDGE_MS.practice);
   }
 }
 
 /* PDF p8 — P1 8 + 6: child moves 2 in, the 4 slide up, then types 14 */
 R.practiceAdd = async (ctx, s, f) => {
   const { a, b, vo } = s, need = 10 - a, rest = b - need;
-  const top = el("div", "q-wrap"); ctx.content.appendChild(top);
+  const top = el("div", "q-wrap pv-layout"); ctx.content.appendChild(top);
   const eq = Equation(top, a, "+", b);
-  const board = new Board(top, { frame:a, loose:[b], maxLoose: 5 * STEP });
-  const sub = SubEq(top);
+  const pvRow = el("div", "pv-row"); top.appendChild(pvRow); const pvLeft = el("div", "pv-left"); pvRow.appendChild(pvLeft);
+  f.pad = Pad(pvRow);
+  const board = new Board(pvLeft, { frame:a, loose:[b], maxLoose: 5 * STEP });
+  const sub = SubEq(pvLeft);
   f.replay = vo.q;
   board.labels(a, [b]);
   voLock(true); await f.wait(900);
@@ -2178,27 +2498,26 @@ R.practiceAdd = async (ctx, s, f) => {
   await f.wait(T.beat * 2);
   board.setNear(true); board.labels(10, [rest]);                      // 8 + 6  →  10 + 4
   await f.wait(T.near);
-  sub.show(`10 + ${rest}`);
   await f.wait(T.beat);
   await answerLadder(f, eq, [a, "+", b, "="], a + b, vo, async () => {
-    sub.clear();
-    sub.add(`${a} + ${need} = 10`, "ten"); board.hlFrame();
-    await f.wait(1400); sub.add(`${rest} बाकी`); board.hlList(board.groups[0]);
-    await f.wait(1400); sub.add(`10 + ${rest} = ${a + b}`, "ans");
+    board.hlFrame();
+    await f.wait(1400); board.hlList(board.groups[0]);
+    await f.wait(1400);
     await f.say(vo.h2);
     await f.wait(T.beat);
   });
-  sub.show(`10 + ${rest} = ${a + b}`, "ans");
   complete();
 };
 
 /* PDF p9 — P2 16 − 8: 6 loose first (frame locked), then any 2 from the frame, then type 8 */
 R.practiceSub = async (ctx, s, f) => {
   const { n, m, vo } = s, loose = n - 10, rest = m - loose;
-  const top = el("div", "q-wrap"); ctx.content.appendChild(top);
+  const top = el("div", "q-wrap pv-layout"); ctx.content.appendChild(top);
   const eq = Equation(top, n, "-", m);
-  const board = new Board(top, { frame:10, loose:[loose], maxLoose: 5 * STEP });
-  const sub = SubEq(top);
+  const pvRow = el("div", "pv-row"); top.appendChild(pvRow); const pvLeft = el("div", "pv-left"); pvRow.appendChild(pvLeft);
+  f.pad = Pad(pvRow);
+  const board = new Board(pvLeft, { frame:10, loose:[loose], maxLoose: 5 * STEP });
+  const sub = SubEq(pvLeft);
   f.replay = vo.q;
   board.labels(10, [loose]);
   voLock(true); await f.wait(900);
@@ -2211,7 +2530,7 @@ R.practiceSub = async (ctx, s, f) => {
   });
   disarmNudge();
   await f.wait(T.beat);
-  sub.show(`${n} ${MINUS} ${loose} = 10`, "ten"); sfx("sfx_correct", .45);
+  sfx("sfx_correct", .45);
   await f.until(done => {                                        // the frame unlocks only now
     let k = 0;
     board.enableTap(board.frame.slice(), () => { k++; board.labels(10 - k, [""]); if(k === rest){ board.freeze(); done(); } });
@@ -2219,16 +2538,13 @@ R.practiceSub = async (ctx, s, f) => {
   });
   disarmNudge();
   await f.wait(T.beat);
-  sub.show(`10 ${MINUS} ${rest}`);
   await answerLadder(f, eq, [n, MINUS, m, "="], n - m, vo, async () => {
-    sub.clear();
-    sub.add(`${n} ${MINUS} ${loose} = 10`, "ten"); board.hlList(board.groups[0]);
-    await f.wait(1400); sub.add(`${rest} बाकी`);
-    await f.wait(1400); sub.add(`10 ${MINUS} ${rest} = ?`); board.hlList(board.undimmed(board.frame));
+    board.hlList(board.groups[0]);
+    await f.wait(1400); board.hlList(board.frame.filter(c => c.dim && !board.groups[0].includes(c)));
+    await f.wait(1400); board.hlList(board.undimmed(board.frame));
     await f.say(vo.h2);
     await f.wait(T.beat);
   });
-  sub.show(`10 ${MINUS} ${rest} = ${n - m}`, "ans");
   board.undimmed(board.frame).forEach(c => c.el.classList.add("good"));
   complete();
 };
@@ -2236,6 +2552,7 @@ R.practiceSub = async (ctx, s, f) => {
 /* PDF p10, p11 — choose the answer. Wrong 1: retry. Wrong 2: counters appear on this screen and
    animate, then the question comes back. Wrong 3: correct one glows, the others go inactive. */
 R.mcq = async (ctx, s, f) => {
+  $("stage").classList.add("no-next");                  // MCQ: no Next button — it moves on by itself after the right answer
   const { a, b, op, vo } = s, ans = op === "+" ? a + b : a - b;
   const wrap = el("div", "q-wrap"); ctx.content.appendChild(wrap);
   const eq = Equation(wrap, a, op, b);
@@ -2282,7 +2599,7 @@ R.mcq = async (ctx, s, f) => {
     voLock(false);
     cell.classList.remove("wrong-flash");
   }
-  complete();
+  await f.wait(1200); go(cur + 1);
 };
 
 /* ---------- PDF p12 — गणित की तेज़ दौड़ (designer art: dock + ocean backgrounds, jet ski cut-outs) ---------- */
@@ -2313,6 +2630,11 @@ function jrWater(layer, getSpeed){
   return () => { alive = false; };
 }
 
+/* Original illustrated sprites, interpolated continuously in the turn direction. */
+function victoryTurnSprite(colorIndex){
+  return window.createVictoryTurnSprite(JR[colorIndex].c);
+}
+
 R.race = async (ctx, s, f) => {
   const { vo } = s;
   $("stage").classList.add("race-mode"); document.body.classList.add("race-page");
@@ -2337,49 +2659,89 @@ R.race = async (ctx, s, f) => {
   });
   const swifty = el("img", "jp-swifty"); swifty.src = "assets/UI/sw_explain_still.webp"; swifty.alt = "Swifty"; pick.appendChild(swifty);
   const go = el("button", "jp-go");
-  go.type = "button"; go.disabled = true; go.setAttribute("aria-label", "दौड़ शुरू करें"); pick.appendChild(go);
+  go.type = "button"; go.setAttribute("aria-label", "दौड़ शुरू करें"); pick.appendChild(go);
   let me = -1;
-  const selectBoat = i => {
-    me = i;
-    boats.forEach((b, k) => { b.classList.toggle("mine", k === i); b.setAttribute("aria-pressed", String(k === i)); });
-    swifty.hidden = true;
-    go.disabled = false;
-  };
   boats.forEach(b => b.setAttribute("aria-pressed", "false"));
-  boats.forEach((b, i) => {
-    b.onclick = () => { if(i === me) return; sfx("sfx_whoosh", .5); selectBoat(i); armNudge(go, 4000); };
-    b.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); b.click(); } };
-  });
+
+  /* step 1 — race title: title + jet skis standing still, no Swifty, only the Play button */
+  pick.classList.add("jp-titlemode");
   f.replay = vo.intro;
-  voLock(true); await f.wait(600); await f.say(vo.intro); voLock(false);
-  armNudge(me >= 0 ? go : boats[0], NUDGE_MS.game);
-  await f.until(done => { go.onclick = () => { if(me >= 0) done(); }; if(QS.has("pick")){ selectBoat(0); done(); } });    // QA: ?pick starts at once
-  disarmNudge(); sfx("sfx_play", .7); vroom(2);
+  voLock(true); await f.wait(500); await f.say(vo.intro); voLock(false);
+  armNudge(go, NUDGE_MS.game);
+  await f.until(done => { go.onclick = () => done(); if(QS.has("pick")) done(); });
+  disarmNudge(); sfx("sfx_play", .7);
+
+  /* step 2 — title and Play leave, Swifty walks in and asks the child to choose; the jet skis come alive */
+  pick.classList.remove("jp-titlemode"); pick.classList.add("jp-choosemode");
+  await f.wait(700);
+  f.replay = vo.pick;
+  voLock(true); await f.say(vo.pick); voLock(false);
+  const picked = await f.until(done => {
+    boats.forEach((b, i) => {
+      b.onclick = () => { if(me >= 0) return; done(i); };
+      b.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); b.click(); } };
+    });
+    armNudge(boats[0], NUDGE_MS.game);
+    if(QS.has("pick")) done(0);
+  });
+  disarmNudge();
+
+  /* step 3 — Swifty is shown riding the chosen jet ski, a short pause, then the race begins */
+  me = picked;
+  sfx("sfx_whoosh", .5); vroom(1);
+  boats.forEach((b, k) => { b.classList.toggle("mine", k === me); b.setAttribute("aria-pressed", String(k === me)); });
+  swifty.classList.add("jp-gone");
+  await f.wait(1500);
+  vroom(2);
   pick.remove();
   world.classList.remove("picking");
+  const finishSprites = victoryTurnSprite(me); // Prepare while the questions are played.
+  const killSprites=f.kill.bind(f);
+  f.kill=()=>{finishSprites.dispose();killSprites();};
 
   /* 2. race — seen from above. A live loop moves everything every frame:
         the water streams by at the current speed, each jet ski chases its target position with a little
         inertia, weaves and leans, throws spray, and the rivals keep racing while the child thinks. */
   world.style.backgroundImage = "none";
   const sea = el("div", "jt-sea"); world.appendChild(sea);
+  // Distort only the water texture. Lane markers, boats and controls stay crisp.
+  const waterDefs = el("div", "jt-water-defs", `<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <filter id="race-water-ripple" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".009 .017" numOctaves="2" seed="12" result="noise"/>
+      <feOffset in="noise" result="movingNoise" dx="0" dy="0"/>
+      <feDisplacementMap in="SourceGraphic" in2="movingNoise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs></svg>`);
+  sea.appendChild(waterDefs);
+  const waterSurface = el("div", "jt-water-surface"); sea.appendChild(waterSurface);
+  const waterMotion = !(window.FLNMotion && FLNMotion.still()) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!waterMotion) waterSurface.style.filter = "none";
+  const waterShift = waterDefs.querySelector("feOffset"), waterWarp = waterDefs.querySelector("feDisplacementMap");
+  let lastWaterWave = -1;
+  const animateWater = time => {
+    if(!waterMotion || time - lastWaterWave < 1/30) return;
+    lastWaterWave = time;
+    waterShift.setAttribute("dx", (Math.sin(time*.77)*18).toFixed(2));
+    waterShift.setAttribute("dy", (Math.cos(time*.95)*12).toFixed(2));
+    waterWarp.setAttribute("scale", (13+Math.sin(time*1.1)*4).toFixed(2));
+  };
   const fx = el("div", "jt-fx"); world.appendChild(fx);              // spray drops live here
   const lines = el("div", "jt-speedlines"); world.appendChild(lines);
   const top = el("div", "jr-top"); world.appendChild(top);
   const bar = el("div", "jr-bar"); top.appendChild(bar);
-  const fill = el("div", "jr-bar-fill"); fill.style.width = "0%"; bar.appendChild(fill);
+  const fill = el("div", "jr-bar-fill"); fill.style.height = "0%"; bar.appendChild(fill);
   const questionCount = RACE_QS.length;
-  bar.setAttribute("role", "progressbar"); bar.setAttribute("aria-label", "पूरे हुए प्रश्न");
+  bar.setAttribute("role", "progressbar"); bar.setAttribute("aria-orientation", "vertical"); bar.setAttribute("aria-label", "पूरे हुए प्रश्न");
   bar.setAttribute("aria-valuemin", "0"); bar.setAttribute("aria-valuemax", String(questionCount));
   const dots = Array.from({ length:questionCount }, (_, i) => {
-    const d = el("i"); d.style.left = ((i + 1) / (questionCount + 1) * 100) + "%";
+    const d = el("i"); d.style.bottom = ((i + 1) / (questionCount + 1) * 100) + "%";
     d.setAttribute("aria-hidden", "true"); bar.appendChild(d); return d;
   });
   bar.appendChild(el("span", "flag", "🏁"));
-  const icon = el("img", "me"); icon.src = `assets/jet/side_${JR[me].c}.png`; icon.style.left = "0%"; bar.appendChild(icon);
+  const icon = el("img", "me"); icon.src = `assets/jet/top_${JR[me].c}.png`; icon.style.bottom = "0%"; bar.appendChild(icon);
   const turbo = el("div", "jr-turbo", "टर्बो!"); world.appendChild(turbo);
   const pop = el("div", "jt-pop"); world.appendChild(pop);
-  const LANES = [333, 555, 777, 999], Y0 = 316, Y1 = 118;
+  const LANES = [333, 555, 777, 999], Y0 = 286, Y1 = 112;
   const riderTypes = ["swifty", "cat", "panda", "rabbit"];
   const rivalNames = ["बिल्ली", "पांडा", "खरगोश"];
   let rivalIndex = 0;
@@ -2390,10 +2752,12 @@ R.race = async (ctx, s, f) => {
     const e = el("div", "jt-jet" + (i === me ? " me" : ""), `<div class="jt-wake"></div><div class="jt-craft" role="img" aria-label="${i === me ? "Swifty" : name} की नाव"><img src="assets/jet/top_${j.c}.png" alt=""><span class="jt-rider" data-rider="${rider}" aria-hidden="true"></span></div><span class="jr-tag">${name}</span>`);
     e.querySelector(".jt-rider").style.backgroundPosition = `${riderIndex % 2 * 100}% ${Math.floor(riderIndex / 2) * 100}%`;
     world.appendChild(e);
-    return { el:e, img:e.querySelector(".jt-craft"), i, p:0, target:0, v:0, x:LANES[i], ph:Math.random() * 6, lean:0 };
+    return { el:e, img:e.querySelector(".jt-craft"), i, p:0, target:0, v:0, x:LANES[i], ph:Math.random() * 6, lean:0,
+      cruise:4.2, raceOffset:0, kick:0, cruiseBase:3.9 + Math.random() * .4, racePhase:Math.random() * 6 };
   });
   const meJ = jets[me], rivals = jets.filter(j => j.i !== me);
-  rivals.forEach(r => { r.pace = .72 + Math.random() * .16; });       // how close each rival keeps to the child
+  // Rivals cruise steadily; only the player receives answer-driven acceleration.
+  rivals.forEach((r, i) => { r.courseOffset = [-.035, -.08, -.12][i]; r.followGap = .21 + i * .035; });
 
   /* engine hum: a low drone whose pitch follows the speed */
   let hum = null;
@@ -2404,33 +2768,65 @@ R.race = async (ctx, s, f) => {
   const humTo = s => { if(!hum) return; const t = hum.c.currentTime; hum.o.frequency.setTargetAtTime(48 + s * 14, t, .25); hum.o2.frequency.setTargetAtTime(72 + s * 20, t, .25); hum.g.gain.setTargetAtTime(.025 + Math.min(s, 8) * .006, t, .3); };
   const humOff = () => { if(!hum) return; try{ hum.g.gain.setTargetAtTime(0, hum.c.currentTime, .15); const h0 = hum; setTimeout(() => { try{ h0.o.stop(); h0.o2.stop(); }catch(e){} }, 600); }catch(e){} hum = null; };
 
-  let speed = 0, speedTarget = 0, flow = 0, alive = true, last = performance.now(), thinking = false, finish = null;
-  const setSpeed = v => { speedTarget = v; humTo(v); };
+  let speed = 4.2, speedTarget = 4.2, flow = 0, alive = true, last = performance.now(), thinking = false, finish = null, finishing = false, raceTime = 0;
+  let throttleFor = 0;
+  const setSpeed = v => {
+    speedTarget = Math.max(2.2, v); humTo(speedTarget);
+    throttleFor = v > 5 ? 1.8 + Math.min(1, (v - 5) * .2) : v < 3 ? 1.05 : 0;
+    const power = Math.max(0, Math.min(1, v / 8.5));
+    world.style.setProperty("--dash-needle", (-45 + power * 270) + "deg");
+    world.style.setProperty("--dash-power", power);
+  };
   const step = now => {
     if(!alive) return;
     const dt = Math.min(.05, (now - last) / 1000); last = now;
-    speed += (speedTarget - speed) * Math.min(1, dt * 2.2);
-    flow = (flow + speed * 80 * dt) % 512;
+    raceTime += dt;
+    if(!finishing && throttleFor > 0){ throttleFor -= dt; if(throttleFor <= 0) setSpeed(4.2); }
+    // The camera keeps cruising even when Swifty briefly loses momentum.
+    const cameraPace = finishing ? 7.5 : 4.2;
+    speed += (cameraPace - speed) * Math.min(1, dt * 2.2);
+    flow = (flow + speed * 95 * dt) % 512;
     sea.style.backgroundPositionY = flow + "px"; sea.style.setProperty("--flow", (flow % 64) + "px");
-    lines.style.opacity = Math.max(0, (speed - 3.5) / 5).toFixed(2);
+    waterSurface.style.backgroundPositionY = (flow + 24) + "px";
+    animateWater(raceTime);
+    lines.style.opacity = "0"; // Boost streaks belong to Swifty, not the shared water view.
     lines.style.backgroundPositionY = (flow * 3) + "px";
-    if(finish){ finish.y += speed * 80 * dt; finish.el.style.transform = `translateY(${finish.y}px)`; }
-    // rivals creep forward while the child is thinking — but never more than a little ahead
-    if(thinking) rivals.forEach(r => { r.target = Math.min(r.target + dt * .006, meJ.target + .05, .97); });
+    if(finish){ finish.y += speed * 85 * dt; finish.el.style.transform = `translateY(${finish.y}px)`; }
+    rivals.forEach(r => {
+      if(!finishing && meJ.target > 0){
+        const desired = r.courseOffset + Math.sin(raceTime * (.55 + r.i * .11) + r.racePhase) * .018;
+        r.target += (desired - r.target) * Math.min(1, dt * 1.2);
+      }
+    });
     jets.forEach(j => {
-      const k = 3.2;                                     // spring toward the target with damping = smooth surge
-      j.v += ((j.target - j.p) * k - j.v * 2.4) * dt;
+      const pace = j === meJ ? speedTarget : j.cruiseBase;
+      j.cruise += (pace - j.cruise) * Math.min(1, dt * 3);
+      j.el.style.setProperty("--boat-speed", j.cruise.toFixed(2));
+      j.raceOffset += ((j.cruise - 4.35) * .036 - j.raceOffset * .65) * dt;
+      j.raceOffset = Math.max(-.12, Math.min(.15, j.raceOffset));
+      j.kick *= Math.exp(-dt * 1.35);
+      const chop = finishing ? 0 : Math.sin(raceTime * (1.15 + j.i * .08) + j.racePhase) * .025;
+      // Hold the shared starting line until the first correct answer earns a lead.
+      const destination = !finishing && meJ.target === 0 ? 0 : j.target + (finishing ? 0 : (j === meJ ? .24 : 0) + j.raceOffset + j.kick + chop);
+      j.v += ((destination - j.p) * 7 - j.v * 4.6) * dt;
       j.p += j.v * dt;
-      j.ph += dt * (1.6 + speed * .25);
-      const weave = Math.sin(j.ph) * (4 + speed * .8);
+      j.p = Math.max(-.11, Math.min(finishing ? 1.35 : 1.08, j.p));
+    });
+    // Keep rivals behind Swifty without pulling them forward with her progress.
+    jets.forEach(j => {
+      if(!finishing && meJ.target > 0 && j !== meJ){
+        const ceiling = meJ.p - j.followGap;
+        if(j.p > ceiling){ j.p = ceiling; j.v = Math.min(j.v, 0); }
+      }
+      j.ph += dt * (1.8 + j.cruise * .3);
+      const weave = Math.sin(j.ph) * (3 + j.cruise * .8);
       const dx = weave - (j._w || 0); j._w = weave;
-      j.lean += ((dx / Math.max(dt, .001)) * .35 - j.lean) * Math.min(1, dt * 6);
+      j.lean += ((dx / Math.max(dt, .001)) * .3 - j.lean) * Math.min(1, dt * 6);
       const y = Y0 - j.p * (Y0 - Y1);
       j.el.style.transform = `translate(${j.x + weave}px,${y}px)`;
-      j.img.style.transform = `rotate(${Math.max(-9, Math.min(9, j.lean))}deg)`;
-      // spray: more drops the faster the boat goes
-      const rate = (speed + Math.max(0, j.v) * 20) * (j === meJ ? 1.4 : .8);
-      j._acc = (j._acc || 0) + rate * dt * 6;
+      j.img.style.transform = `rotate(${Math.max(-11, Math.min(11, j.lean))}deg)`;
+      const rate = (j.cruise + Math.max(0, j.v) * 14) * (j === meJ ? 1.4 : .9);
+      j._acc = (j._acc || 0) + rate * dt * 5;
       while(j._acc >= 1){ j._acc -= 1; spray(j.x + weave, y + 170, j === meJ && meJ.el.classList.contains("turbo")); }
     });
     requestAnimationFrame(step);
@@ -2448,12 +2844,15 @@ R.race = async (ctx, s, f) => {
   const popText = t => { pop.textContent = t; pop.classList.remove("show"); void pop.offsetWidth; pop.classList.add("show"); };
 
   const panel = el("div", "jr-panel"); world.appendChild(panel);
+  const dial = el("div", "jr-dial", '<i class="jr-needle"></i>'); dial.setAttribute("aria-hidden", "true"); panel.appendChild(dial);
+  const powerMeter = el("div", "jr-power", '<svg viewBox="0 0 24 32" aria-hidden="true"><path d="M14 1 3 18h8l-1 13L22 12h-9Z"/></svg><div class="jr-leds">' + [0,1,2,3,4].map(i => `<i style="--segment:${i};height:${12+i*4}px"></i>`).join("") + '</div>');
+  powerMeter.setAttribute("aria-hidden", "true"); panel.appendChild(powerMeter);
   const band = el("div", "jr-band"); panel.appendChild(band);
   const btnRow = el("div", "jr-btns"); panel.appendChild(btnRow);
   const btns = [0, 1, 2].map(() => { const b = el("button", "jr-btn"); btnRow.appendChild(b); return b; });
   const setProg = p => {
     const completed = Math.round(p * questionCount);
-    fill.style.width = (p * 100) + "%"; icon.style.left = (p * 100) + "%";
+    fill.style.height = (p * 100) + "%"; icon.style.bottom = (p * 100) + "%";
     dots.forEach((d, i) => d.classList.toggle("done", completed >= i + 1));
     bar.setAttribute("aria-valuenow", String(completed));
   };
@@ -2467,10 +2866,11 @@ R.race = async (ctx, s, f) => {
     beep(520); await f.wait(800);
   }
   cd.textContent = "चलो!"; cd.classList.remove("show"); void cd.offsetWidth; cd.classList.add("show", "go");
-  beep(880, .35); vroom(2); setSpeed(2.2);
-  jets.forEach(j => { j.target = .03 + Math.random() * .02; });
+  beep(880, .35); vroom(2); setSpeed(4.5);
+  jets.forEach(j => { j.p = 0; j.target = 0; j.v = 0; });
   await f.wait(700); cd.remove();
   panel.style.visibility = "";
+  world.dataset.raceState = "racing";
 
   const qs = RACE_QS.slice().sort(() => Math.random() - .5), total = qs.length;
   voLock(true); await f.say(vo.go); voLock(false);
@@ -2481,7 +2881,7 @@ R.race = async (ctx, s, f) => {
     const eq = Equation(band, q.a, q.op, q.b);
     const vals = q.opts.slice().sort(() => Math.random() - .5);
     btns.forEach((b, i) => { b.textContent = vals[i]; b.dataset.v = vals[i]; b.className = "jr-btn"; b.onclick = null; });
-    setSpeed(1.6);
+    setSpeed(4.2);
     voLock(true); await f.say(q.vo); voLock(false);
     let wrong = 0;
     thinking = true;
@@ -2496,15 +2896,15 @@ R.race = async (ctx, s, f) => {
         if(wrong === 0) streak++; else streak = 0;
         const lvl = Math.max(1, Math.min(3, streak));                     // 1 small boost · 2 faster · 3 turbo
         sfx("sfx_correct", .6); vroom(lvl);
-        setSpeed([0, 4, 5.5, 8.5][lvl]);
+        setSpeed([0, 5.8, 7.2, 9.2][lvl]);
         meJ.el.classList.remove("boost", "turbo", "slow"); void meJ.el.offsetWidth;
         meJ.el.classList.add(lvl >= 3 ? "turbo" : "boost");
-        meJ.v += .25 + lvl * .12;                                       // a kick forward
+        meJ.kick = .13 + lvl * .045;                                  // a short personal boost
         meJ.target = (qi + 1) / total;
-        rivals.forEach(r => { r.target = Math.min(r.target, meJ.target * r.pace + Math.random() * .03); });
+        // Rivals keep their own pace; a right answer boosts Swifty rather than braking everyone else.
         setProg(meJ.target);
         turbo.classList.toggle("show", lvl >= 3);
-        if(lvl >= 3) shake();
+        // All boost effects stay on the player's jet ski.
         popText(["", "शाबाश!", "तेज़!", "सुपर तेज़!"][lvl]);
         voLock(true); await f.say(VO_RACE_OK[lvl - 1]); voLock(false);
         await f.wait(900);
@@ -2512,12 +2912,12 @@ R.race = async (ctx, s, f) => {
         break;
       }
       // wrong: the streak breaks, the engine sputters, our jet ski drops back and the others edge past
-      wrong++; streak = 0; setSpeed(.7);
+      wrong++; streak = 0; setSpeed(2.3);
       btn.classList.remove("wrong-flash"); void btn.offsetWidth; btn.classList.add("wrong-flash");
       sfx("sfx_wrong", .45); engineDown();
       meJ.el.classList.remove("boost", "turbo", "slow"); void meJ.el.offsetWidth; meJ.el.classList.add("slow");
-      meJ.target = Math.max(0, meJ.target - .025); meJ.v -= .15;
-      rivals.forEach(r => { r.target = Math.min(r.target + .025, .97); });
+      meJ.kick = -.12; // Swifty loses a little ground, while the water and opponents keep moving.
+      // Opponents keep their normal cruising speed on a wrong answer as well.
       voLock(true);
       await f.wait(700);
       if(wrong === 1){
@@ -2533,25 +2933,134 @@ R.race = async (ctx, s, f) => {
         btns.forEach(o => { if(+o.dataset.v === q.ans) o.classList.add("reveal-pulse"); else o.classList.add("faded"); });
         await f.say(q.voAns);
       }
-      setSpeed(1.6);
+      setSpeed(4.2);
       voLock(false);
     }
   }
-  /* 4. finish: the chequered line sweeps in, our jet ski bursts across it first */
-  thinking = false;
-  panel.remove();
-  const line = el("div", "jt-finish"); world.appendChild(line);
-  finish = { el:line, y:-90 };
-  setSpeed(8.5); vroom(3); shake();
-  meJ.target = 1.08; meJ.v += .6; meJ.el.classList.add("turbo");
-  rivals.forEach(r => { r.target = .9 + Math.random() * .06; });
+  /* 4. Cross the line, then track the winner in the same race scene. */
+  thinking = false; finishing = true; world.dataset.raceState = "finishing";
+  disarmNudge(); hideHint(); panel.remove();
+  setSpeed(9.2); vroom(3); shake();
+  meJ.target = 1.25; meJ.v += .4; meJ.el.classList.add("turbo");
+  rivals.forEach(r => { r.kick = 0; });
   setProg(1);
-  await f.wait(1700);
-  setSpeed(1.2); meJ.el.classList.remove("turbo");
-  world.appendChild(el("div", "jr-win", "आप जीत गए! 🏆"));
-  sfx("sfx_celebrate", .7); confettiCannon();
-  voLock(true); await f.say(vo.win); voLock(false);
-  humOff();
+  await f.wait(850);
+  const line = el("div", "jt-finish"); world.appendChild(line);
+  finish = { el:line, y:-110 };
+  await f.wait(1200);
+  alive = false; humOff();
+  await finishSprites.ready;
+  if(f.dead) return;
+  const calm = !!(window.FLNMotion && FLNMotion.still());
+  const victory = el("div", "race-victory");
+  const camera = el("div", "victory-camera"); victory.appendChild(camera);
+  // Move the live water, finish line and racers together: no scene replacement.
+  camera.appendChild(sea); camera.appendChild(line);
+  jets.forEach(j => { camera.appendChild(j.el); j.el.classList.remove("turbo", "boost"); });
+  const anchor = { x:meJ.x, y:Y0 - meJ.p * (Y0 - Y1) + 91 };
+  const rivalDepartures = rivals.map(j => ({
+    jet:j, x:j.x + (j._w || 0), y:Y0 - j.p * (Y0 - Y1)
+  }));
+  camera.style.transformOrigin = `${anchor.x}px ${anchor.y}px`;
+  victory.appendChild(el("div", "victory-title", 'आप जीत गए!'));
+  world.appendChild(victory); world.classList.add("victory-mode");
+  world.dataset.raceState = "victory-camera";
+  // Matched directional artwork shows the side and back as the boat itself turns.
+  world.dataset.finishRenderer = "directional-artwork";
+  victory.appendChild(meJ.el);
+  meJ.el.querySelector(".jr-tag").remove();
+  meJ.img.style.transform = "";
+  const hero = finishSprites.canvas;
+  victory.appendChild(hero);
+  const trail = el("canvas", "victory-trails"); trail.width = STAGE_W; trail.height = STAGE_H;
+  victory.appendChild(trail);
+  const trailCtx = trail.getContext("2d");
+  let previousTail = null, victoryAlive = true;
+  const victoryStart = performance.now();
+  const killRace = f.kill.bind(f);
+  f.kill = () => { victoryAlive = false; killRace(); };
+  const smooth = v => { v = Math.max(0, Math.min(1, v)); return v * v * (3 - 2 * v); };
+  const lowerDuration=1.5,turnDuration=3.2,turnEnd=lowerDuration+turnDuration;
+  // Short, smooth acceleration/deceleration with a steady speed through the turn.
+  const turnProgress = elapsed => {
+    const duration=turnDuration, ramp=.32, speed=1/(duration-ramp);
+    const easeIn = t => speed*(t/2-ramp/(2*Math.PI)*Math.sin(Math.PI*t/ramp));
+    if(elapsed<=0) return 0;
+    if(elapsed>=duration) return 1;
+    if(elapsed<ramp) return easeIn(elapsed);
+    if(elapsed>duration-ramp) return 1-easeIn(duration-elapsed);
+    return speed*(elapsed-ramp/2);
+  };
+  function victoryFrame(now){
+    if(!victoryAlive || f.dead) return;
+    const t = calm ? turnEnd+1 : (now - victoryStart) / 1000;
+    const lower = smooth(t / lowerDuration);
+    const circle = turnProgress(t - lowerDuration);
+    const front = smooth((t - turnEnd) / .7);
+    // First lower the camera. Its angle stays fixed throughout the single boat turn.
+    camera.style.transform = `translate(${(666-anchor.x)*lower}px,${(360-anchor.y)*lower}px) rotateX(${lower*34}deg) scale(${1+lower*.55})`;
+    camera.style.setProperty("--victory-flow", ((flow+t*24)%1024)+"px");
+    if(lower<1){
+      sea.style.backgroundPositionY = (flow + t*24) + "px";
+      waterSurface.style.backgroundPositionY = (flow + t*24 + 24) + "px";
+      animateWater(raceTime + t);
+    }
+    sea.style.opacity = String(1-lower);
+    line.style.opacity = String(1 - lower);
+    // Rivals keep travelling forward and leave through the top during the zoom.
+    // Keep the complete craft and wake opaque throughout this camera movement.
+    const departure = smooth(t / 2.4);
+    rivalDepartures.forEach(({jet,x,y}) => {
+      jet.el.style.opacity = "1";
+      jet.el.style.transform = `translate(${x}px,${y - (STAGE_H+240)*departure}px)`;
+    });
+    const angle = circle*Math.PI*2;
+    // Gentle camera tracking brings the last point of the loop to the front/centre.
+    const x = 666 - circle*180 + Math.cos(angle)*180;
+    const y = 360 + circle*100 + Math.sin(angle)*100;
+    const boatX = anchor.x + (x-anchor.x)*lower;
+    const boatY = anchor.y + (y-anchor.y)*lower;
+    const tangent = Math.atan2(-180*Math.sin(angle), -100*Math.cos(angle))*180/Math.PI;
+    const facing = 180 + Math.atan2(180*Math.sin(angle),100*Math.cos(angle))*180/Math.PI + (circle>.5?360:0);
+    const reveal = smooth((t-.55)/1);
+    const spriteScale = .65 + (Math.sin(angle)+1)*.125 + circle*.125;
+    meJ.el.style.transform = `translate(${boatX}px,${boatY-91}px) scale(${1+lower*.5})`;
+    meJ.el.style.opacity = String(1-reveal);
+    finishSprites.draw(facing);
+    hero.style.left = boatX + "px"; hero.style.top = (boatY-90*spriteScale) + "px";
+    hero.style.opacity = String(reveal);
+    hero.style.transform = `rotate(${Math.sin(angle)*4*circle*(1-circle)*(1-front)}deg) scale(${spriteScale})`;
+    victory.dataset.circleDegrees = (circle*360).toFixed(2);
+    victory.dataset.cameraLowered = lower.toFixed(3);
+    if(trailCtx && !calm && t<9){
+      trailCtx.globalCompositeOperation = "destination-out";
+      trailCtx.fillStyle = "rgba(0,0,0,.018)"; trailCtx.fillRect(0,0,STAGE_W,STAGE_H);
+      trailCtx.globalCompositeOperation = "source-over";
+      if(t>lowerDuration && t<turnEnd){
+        const r=tangent*Math.PI/180;
+        const tail={x:boatX-Math.sin(r)*100,y:boatY+Math.cos(r)*100};
+        if(previousTail && Math.hypot(tail.x-previousTail.x,tail.y-previousTail.y)<60){
+          trailCtx.beginPath();trailCtx.moveTo(previousTail.x,previousTail.y);trailCtx.lineTo(tail.x,tail.y);
+          trailCtx.strokeStyle="rgba(235,253,255,.55)";trailCtx.lineWidth=16;trailCtx.lineCap="round";trailCtx.stroke();
+        }
+        previousTail=tail;
+      }
+    }
+    if(t>=turnEnd+.55 && world.dataset.raceState!=="complete"){
+      victory.classList.add("portrait"); world.dataset.raceState="victory-portrait";
+    }
+    // The turn ends exactly once; only the water remains animated afterwards.
+    if(!calm) requestAnimationFrame(victoryFrame);
+  }
+  requestAnimationFrame(victoryFrame);
+  sfx("sfx_celebrate", .7);
+  voLock(true); f.replay = vo.win;
+  const winVoice = f.say(vo.win);
+  await f.wait(calm ? 100 : Math.round(turnEnd*1000)+650);
+  sfx("sfx_burst", .5); confettiCannon();
+  await Promise.all([winVoice, f.wait(calm ? 700 : 650)]);
+  if(calm) victoryAlive = false;
+  voLock(false); world.dataset.raceState = "complete";
   complete();
 };
 
@@ -2573,7 +3082,6 @@ function complete(){
   const nb = $("navBtn"); nb.disabled = false; nb.classList.add("active");
   disarmNudge();
   FLOW && FLOW.later(1500, () => nb.classList.add("nav-call"));
-  FLOW && FLOW.later(6000, () => handAt(nb));
 }
 $("navBtn").addEventListener("click", () => {
   const nb = $("navBtn"); if(nb.disabled) return;
@@ -2598,7 +3106,7 @@ async function phaseGate(phase){
 async function go(i){
   if(FLOW) FLOW.kill();
   stopVO(); disarmNudge(); closeKeypad(); hideHint(); voLock(false);
-  $("stage").classList.remove("race-mode"); document.body.classList.remove("race-page");
+  $("stage").classList.remove("race-mode", "no-next"); document.body.classList.remove("race-page");
   $("slideHost").innerHTML = "";
   const nb = $("navBtn"); nb.disabled = true; nb.classList.remove("active", "nav-call");
   if(i >= SLIDES.length){ return showEnd(); }
@@ -2634,12 +3142,20 @@ function showEnd(){
   document.body.classList.remove("tut-page"); $("stage").classList.remove("tut");
   document.body.classList.add("is-end");
   $("navBtn").classList.add("hide");
-  $("endTitle").textContent = "शाबाश! अब आप 10 बनाकर जोड़-घटा सकते हैं!";
-  $("endSubtitle").innerHTML = "पहले 10 बनाइए, फिर बाकी जोड़िए।<br>पहले 10 तक आइए, फिर बाकी घटाइए।";
+  $("endTitle").textContent = ""; $("endSubtitle").innerHTML = "";      // no text — Swifty says it
   $("endScreen").classList.add("show");
-  sfx("sfx_celebrate", .7); confettiCannon();
-  say(VO_END).then(() => { if(!f.dead) $("endBtn").classList.add("show"); });
-  f.later(9000, () => $("endBtn").classList.add("show"));
+  const m = $("endScreen").querySelector(".end-mascot");
+  const sw = name => { if(f.dead || !m) return; m.removeAttribute("src"); void m.offsetWidth; m.src = "assets/Images/last_swifty_" + name + ".webp?n=" + Date.now(); };
+  sw("happy"); confettiCannon();
+  let spoke = false;
+  const speak = () => {
+    if(spoke || f.dead) return; spoke = true;
+    sw("shabaash"); f.later(1450, () => sw("talk"));
+    say(VO_END).then(() => { if(f.dead) return; sw("happy"); $("endBtn").classList.add("show"); });
+  };
+  try{ const j = new Audio("assets/SFX/sfx_celebrate.wav"); j.volume = .7; j.onended = speak; j.onerror = speak; j.play().catch(speak); }catch(e){ speak(); }
+  f.later(1800, speak);
+  f.later(14000, () => $("endBtn").classList.add("show"));
 }
 $("endBtn").onclick = () => { sfx("sfx_next", .7); location.href = location.pathname; };
 
@@ -2665,16 +3181,29 @@ function buildLanding(){
   const scene = el("div", "sg-scene sg-title-art"); scene.setAttribute("role", "img"); scene.setAttribute("aria-label", "10 का जादू");
   hero.parentElement.prepend(scene);
 }
-let landingSpoken = false, landingSpeaking = false;
+let landingSpoken = false, landingSpeaking = false, landGestured = false, landGen = 0;
+const showPlay = () => { const b = $("sgBtn"); if(!b.classList.contains("sg-waiting")) return; b.classList.remove("sg-waiting"); b.classList.add("sg-appear"); };
 function speakLanding(){
-  if(landingSpeaking) return Promise.resolve();
-  landingSpeaking = true;
-  return say(VO_LANDING).then(() => { landingSpeaking = false; landingSpoken = true; });
+  if(landingSpeaking || $("startGate").classList.contains("hidden")) return Promise.resolve();
+  landingSpeaking = true; VO_LANDING.heard = false;
+  const gen = ++landGen;
+  return say(VO_LANDING).then(() => {
+    if(gen !== landGen) return;                       // a superseded (restarted) attempt does not count
+    landingSpeaking = false;
+    // heard to the end (or nothing can play even after a tap) → Play appears; autoplay refused → wait for the first tap
+    if(VO_LANDING.heard || landGestured){ landingSpoken = true; $("sgVo").classList.remove("sg-vo-call"); showPlay(); }
+    else $("sgVo").classList.add("sg-vo-call");            // autoplay was blocked: the speaker pulses — any tap starts Swifty
+  });
 }
-$("sgVo").onclick = () => { if(!landingSpeaking) speakLanding(); };
+$("sgVo").onclick = e => { e.stopPropagation(); landGestured = true; if(!landingSpeaking) speakLanding(); };
+window.addEventListener("pointerdown", function once(){
+  window.removeEventListener("pointerdown", once);
+  landGestured = true; actx();
+  if(!landingSpoken && !VO_LANDING.heard){ landGen++; stopVO(); landingSpeaking = false; speakLanding(); }
+});
 $("sgBtn").onclick = async () => {
-  const b = $("sgBtn"); b.classList.add("sg-pressed"); sfx("sfx_play", .7); actx();
-  if(!landingSpoken){ await speakLanding(); }          // the welcome line plays once, on the landing
+  const b = $("sgBtn"); if(b.classList.contains("sg-waiting")) return;
+  b.classList.add("sg-pressed"); sfx("sfx_play", .7); actx(); stopVO();
   $("startGate").classList.add("hidden");
   document.body.classList.remove("is-start");
   go(0);
@@ -2694,10 +3223,11 @@ window.exportScript = exportScript;
   buildLanding();
   await preload(["assets/UI/start_card.webp","assets/UI/startnew_bg_plain.webp","assets/UI/new_landing_swiftee_anim.webp",
                  "assets/swiftpal_buttons/btn-play-round.svg","assets/peeking_talk_up.webp","assets/Images/title_10ka_jadu.jpg","assets/UI/start_mascot.webp",
-                 "assets/UI/sw_head_talking.webp","assets/UI/sw_head_celebrate_anim.webp","assets/UI/sw_head_tryagain_anim.webp","assets/UI/nudge_hand_new.svg"]);
+                 "assets/UI/sw_head_talking.webp","assets/UI/sw_head_celebrate_anim.webp","assets/UI/sw_head_tryagain_anim.webp","assets/UI/nudge_hand_new.svg","assets/Images/last_swifty_happy.webp","assets/Images/last_swifty_shabaash.webp","assets/Images/last_swifty_talk.webp"]);
   const bl = $("bootLoader"); bl.classList.add("done"); setTimeout(() => bl.remove(), 450);
   document.body.classList.add("loaded");
-  const b = $("sgBtn"); b.classList.remove("sg-waiting"); b.classList.add("sg-appear");
+  if(QS.get("slide") == null) setTimeout(speakLanding, 500);      // Swifty greets; Play appears when she has finished
+  if(QS.has("tap")) setTimeout(() => window.dispatchEvent(new Event("pointerdown")), 1500);   // QA only: simulate the first tap
   // QA jump
   const j = QS.get("slide");
   if(j != null){
