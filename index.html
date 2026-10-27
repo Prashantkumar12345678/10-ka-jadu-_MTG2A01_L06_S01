@@ -90,6 +90,7 @@ body.vo-spk .audio-chip,body.vo-spk .tut-audio{pointer-events:none;opacity:.5;fi
 .nav-btn.active.nav-call{animation:navCall 1.15s ease-in-out infinite;}
 .stage.tut .nav-btn{bottom:64px;}
 .nav-btn.hide{display:none;}
+body .stage .nav-btn{display:none !important;}
 
 /* ---------- nudge hand ---------- */
 .nudge-hand{position:absolute;width:96px;height:120px;z-index:75;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));display:none;transition:left .55s cubic-bezier(.4,0,.2,1),top .55s cubic-bezier(.4,0,.2,1);}
@@ -116,6 +117,12 @@ body.vo-spk .audio-chip,body.vo-spk .tut-audio{pointer-events:none;opacity:.5;fi
 .stage.race-mode .hint-visual{gap:8px;}
 .stage.race-mode .hint-visual .sub-eq{font-size:30px;min-height:48px;gap:10px;}
 .stage.race-mode .hint-visual .sub-eq .se{padding:0 12px;}
+/* Race hint matches the dashboard below: same width, same dark steel bezel, mint "screen" inside, bigger question. */
+body .stage.race-mode .hint-box{width:980px !important;height:390px !important;padding:7px !important;border:3px solid #AFCBD2 !important;border-radius:34px !important;
+  background:linear-gradient(165deg,#405A6C 0%,#243C50 30%,#142636 72%,#0E1C29 100%) !important;
+  box-shadow:0 0 0 2px #122A3B,inset 0 2px 0 #688895,inset 0 -4px 0 #091620,0 6px 0 #0B1D2B,0 12px 20px rgba(0,36,57,.3) !important;}
+body .stage.race-mode .hint-body{border:2px solid #0B1E2C;border-radius:27px;background:linear-gradient(155deg,#F1FFF9,#C4EFE6);box-shadow:inset 0 2px 10px rgba(12,77,72,.18);gap:4px !important;}
+body .stage.race-mode .hint-text{font-size:56px !important;line-height:1.05 !important;color:#0B2A5A;}
 
 
 /* ---------- landing (start gate) ---------- */
@@ -237,7 +244,6 @@ body.is-end .stage-inner{visibility:hidden;}
 /* ten frame — flat counters, plain blue frame, numbers underneath (PDF storyboard style) */
 .tf-board{position:relative;flex-shrink:0;}
 .tf-frame{position:absolute;left:0;top:0;background:#fff;border:3px solid #4A7EBB;border-radius:6px;transition:border-color .5s,box-shadow .5s;}
-.tf-frame.full{border-color:#22A447;box-shadow:0 0 0 5px rgba(34,164,71,.22),0 0 24px rgba(34,164,71,.45);}
 .tf-frame.hl{}
 .tf-frame.drop-ok{border-color:var(--selected);box-shadow:0 0 0 6px rgba(56,106,246,.22);}
 .tf-cell{position:absolute;width:var(--ctr);height:var(--ctr);border-radius:50%;background:#F5F8FC;}
@@ -251,12 +257,13 @@ body.is-end .stage-inner{visibility:hidden;}
 .tf-ctr.dim::after{content:"";position:absolute;inset:0;border-radius:50%;border:2.5px dashed #C9C9C9;}
 .tf-ctr.dim{box-shadow:none;}
 .tf-ctr.good{background:#5CC77A;}
-.tf-ctr{transition:transform 1.5s cubic-bezier(.33,0,.2,1),background .5s,opacity .5s,box-shadow .5s,filter .4s,scale .45s ease;}
-.tf-ctr.hl{background:radial-gradient(circle at 34% 28%,#FFFFFF 0 7%,#FFE58A 16%,#FFB21E 52%,#F08A00 82%,#C96F00 100%) !important;scale:1.12;}
+.tf-ctr{transition:transform 1.5s cubic-bezier(.33,0,.2,1),background .5s,opacity .5s,box-shadow .5s,filter .4s;}
+.tf-ctr.hl{background:radial-gradient(circle at 34% 28%,#FFFFFF 0 7%,#FFE58A 16%,#FFB21E 52%,#F08A00 82%,#C96F00 100%) !important;}
 .tf-ctr.nope{animation:buzzShake .5s;}
 .tf-ctr.ghost{opacity:.5;pointer-events:none;z-index:15;transition:transform 2.2s cubic-bezier(.33,0,.2,1),opacity .4s;}
 .tf-lbl{position:absolute;transform:translateX(-50%);font-weight:700;font-size:34px;line-height:1;color:#1F2D3D;white-space:nowrap;transition:opacity .4s,left 1.5s cubic-bezier(.33,0,.2,1);}
 .tf-lbl.pop{animation:lblPop .5s cubic-bezier(.34,1.5,.6,1);}
+body .stage .tf-lbl.ans{color:#0D7A2D;border-color:#1FB54A;background:linear-gradient(180deg,#EFFFF0,#BDF5C8);}   /* the answer, just before it flies up */
 .tf-lbl:empty{opacity:0;}
 
 /* the one sub-equation shown under the counters ("13 − 3 = 10", "10 + 3 = 13") */
@@ -268,6 +275,8 @@ body.is-end .stage-inner{visibility:hidden;}
 
 .q-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;min-height:0;}
 .tut-content .tf-board{margin-top:0;}
+.tut-card::after{height:40px;}       /* no Next button any more, so no room kept for it */
+.tut-content{padding-top:70px;}    /* tray + loose balls sit a little lower, away from the equation */
 
 /* option cards (reference toybox cards, big numbers like the PDF) */
 .opt-grid{display:grid;grid-template-columns:repeat(3,230px);gap:34px;justify-content:center;transition:opacity .4s;}
@@ -284,6 +293,10 @@ body.is-end .stage-inner{visibility:hidden;}
 .opt-cell.reveal-pulse{animation:revealPulse 1.4s ease-in-out infinite;border-color:var(--correct);}
 .mcq-hint{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:14px;animation:fadeIn .5s ease;}
 .mcq-stage{position:relative;display:flex;justify-content:center;min-height:240px;width:100%;}
+/* after the 2nd wrong try the hint board stays on screen, smaller, with the options below it */
+.mcq-stage.with-hint{flex-direction:column;align-items:center;gap:26px;}
+.mcq-hint.mini{position:relative;order:-1;zoom:.78;gap:0;animation:none;}
+.mcq-hint.mini .sub-eq{display:none;}
 body.vo-lock .opt-cell,body.vo-lock .tf-ctr.live,body.vo-lock .eq-box.ready,body.vo-lock .rc-opt{pointer-events:none;}
 
 .kp-overlay{position:absolute;inset:0;z-index:65;background:rgba(11,61,140,.28);display:none;align-items:center;justify-content:center;}
@@ -404,7 +417,7 @@ body.vo-lock .jr-btn{pointer-events:none;}
 .jr-world.shake{animation:jtShake .45s ease-in-out;}
 .jt-count{position:absolute;left:0;right:0;top:250px;text-align:center;z-index:45;font-weight:800;font-size:150px;line-height:1;color:#FFD21E;-webkit-text-stroke:14px #10307E;paint-order:stroke fill;text-shadow:0 10px 0 #10307E;opacity:0;pointer-events:none;}
 .jt-count.show{animation:jtCount .8s ease-out both;}
-.jt-count.go{color:#3FD06A;}
+.jt-count.go{color:#FF8A1F;}
 .jt-pop{position:absolute;left:0;right:0;top:200px;text-align:center;z-index:44;font-weight:800;font-size:64px;color:#fff;-webkit-text-stroke:9px #1A62E8;paint-order:stroke fill;opacity:0;pointer-events:none;}
 .jt-pop.show{animation:jtPop 1.1s ease-out both;}
 .jt-finish{position:absolute;left:220px;right:220px;top:0;height:46px;z-index:17;border:4px solid #fff;border-radius:6px;
@@ -439,6 +452,15 @@ body.vo-lock .jr-btn{pointer-events:none;}
 .victory-angles{width:500px;height:460px;margin:-230px 0 0 -250px;background:none;}
 .victory-trails{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;}
 .race-victory > .jt-jet.me{z-index:3;}
+/* Win title: plain big orange letters (no box) with a dark outline so they read on the light water. */
+body .stage .victory-title{left:50% !important;right:auto !important;top:44px !important;white-space:nowrap;font-size:84px !important;line-height:1.15 !important;
+  color:#FF8A1F !important;-webkit-text-stroke:10px #fff !important;paint-order:stroke fill;
+  filter:drop-shadow(0 0 0 #0B2F6B) drop-shadow(0 6px 0 #0B3A8C) drop-shadow(0 12px 16px rgba(0,30,80,.35)) !important;
+  opacity:0;transform:translateX(-50%) scale(.2) rotate(-6deg);transition:none;}
+body .stage .race-victory.portrait .victory-title{opacity:1;transform:translateX(-50%) scale(1);animation:winBanner .75s cubic-bezier(.3,1.6,.5,1) both,winBannerWobble 2.4s ease-in-out .9s infinite;}
+@keyframes winBanner{0%{opacity:0;transform:translateX(-50%) scale(.2) rotate(-8deg);}60%{opacity:1;transform:translateX(-50%) scale(1.12) rotate(3deg);}100%{opacity:1;transform:translateX(-50%) scale(1) rotate(0);}}
+@keyframes winBannerWobble{0%,100%{transform:translateX(-50%) scale(1) rotate(0);}50%{transform:translateX(-50%) scale(1.04) rotate(-1.5deg);}}
+@media (prefers-reduced-motion: reduce){body .stage .race-victory.portrait .victory-title{animation:none !important;}}
 .stage.race-mode .nav-btn.active{z-index:90;bottom:38px;}
 
 /* boat picker: empty boats on the water, Swifty standing on the dock */
@@ -483,7 +505,6 @@ body.vo-lock .jr-btn{pointer-events:none;}
 /* ten frame: a thick bright tray with sunken sockets */
 .tf-frame{background:linear-gradient(180deg,#FFFFFF,#E6F1FF);border:6px solid #2F7BF5;border-radius:18px;
   box-shadow:0 10px 0 #1A55C9,0 18px 24px rgba(10,40,120,.30),inset 0 3px 0 rgba(255,255,255,.9);}
-.tf-frame.full{border-color:#1FB54A;box-shadow:0 10px 0 #148A36,0 0 0 8px rgba(60,220,110,.35),0 0 34px rgba(60,220,110,.6);}
 .tf-cell{background:radial-gradient(circle at 50% 40%,#D7E6FA,#C3D7F2);box-shadow:inset 0 4px 6px rgba(20,60,140,.25),0 1px 0 #fff;}
 /* number labels: chunky bright stickers */
 .tf-lbl{font-weight:800;font-size:42px;color:#1A3F99;background:linear-gradient(180deg,#FFFFFF,#E7F0FF);border:3px solid #8FB8F5;border-radius:14px;padding:2px 16px 0;box-shadow:0 5px 0 #6E9BE6;line-height:1.1;}
@@ -535,6 +556,9 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .tut-prompt .eq .eq-box{width:110px;height:100px;font-size:58px;border-radius:22px;}
 /* choose-the-answer screens (P3, P4): question higher, smaller cards */
 .q-wrap:has(.mcq-stage){justify-content:flex-start;padding-top:36px;gap:44px;}
+.q-wrap:has(.mcq-stage.with-hint){padding-top:16px;gap:20px;}
+.mcq-stage.with-hint .opt-cell{height:130px;}
+.mcq-stage.with-hint .opt-cell .num-glyph{font-size:66px;}
 .q-wrap:has(.mcq-stage) > .eq{font-size:70px;}
 .q-wrap:has(.mcq-stage) > .eq .eq-box{width:100px;height:92px;font-size:52px;}
 .mcq-stage .opt-grid{grid-template-columns:repeat(3,190px);gap:38px;}
@@ -547,19 +571,24 @@ body.loaded .sg-ttl{animation-play-state:running;}
 @keyframes revealPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
 /* ten frame: no thick 3D edge underneath — just the even border */
 .tf-frame{box-shadow:0 8px 18px rgba(10,40,120,.16),inset 0 3px 0 rgba(255,255,255,.9) !important;}
-.tf-frame.full{box-shadow:0 0 0 8px rgba(60,220,110,.30),0 0 30px rgba(60,220,110,.5) !important;}
 /* number tags flying into the sum box and up into the answer */
 .fly-num{position:absolute;z-index:70;pointer-events:none;font-weight:800;font-size:46px;line-height:1.1;color:#1A3F99;background:linear-gradient(180deg,#FFFFFF,#E7F0FF);border:3px solid #8FB8F5;border-radius:16px;padding:2px 18px 0;box-shadow:0 6px 14px rgba(10,40,120,.25);}
 .sum-box{min-width:104px;height:84px;border-radius:20px;border:4px dashed #8FB8F5;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:54px;color:#1A3F99;padding:0 16px;transition:opacity .3s,transform .3s;}
 .sum-box.filled{border-style:solid;background:linear-gradient(180deg,#FFFFFF,#E7F0FF);}
 .sum-box.grow{border-color:#1FB54A;background:linear-gradient(180deg,#EFFFF0,#BDF5C8);color:#0D7A2D;animation:sumGrow .9s cubic-bezier(.34,1.5,.6,1) both;}
 .sum-box.gone{opacity:0;transform:scale(.8);}
+.fly-num.sum-mid{z-index:60;opacity:0;}
+.fly-num.sum-mid.show{opacity:1;color:#0D7A2D;border-color:#1FB54A;background:linear-gradient(180deg,#EFFFF0,#BDF5C8);animation:lblPop .5s cubic-bezier(.34,1.5,.6,1);}
 @keyframes sumGrow{0%{transform:scale(1);}45%{transform:scale(1.45);}100%{transform:scale(1.2);}}
 /* Blue counters: a smooth disc face and narrow dark rim, at the original angle. */
 .tf-ctr{--disc-top:#8065EB;--disc-bottom:#6346CD;--disc-edge:#422798;background:linear-gradient(165deg,var(--disc-top),var(--disc-bottom)) !important;box-shadow:inset 0 -5px 0 var(--disc-edge),inset 0 2px 1px rgba(255,255,255,.35),0 3px 3px rgba(12,55,115,.18) !important;}
 .tf-ctr::before{content:"";position:absolute;inset:3px 3px 7px;border:1.5px solid rgba(255,255,255,.42);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;pointer-events:none;}
 .tf-ctr.good{--disc-top:#50DA73;--disc-bottom:#22B24C;--disc-edge:#128335;}
+.tf-ctr.good.hl{--disc-top:#FFC85B;--disc-bottom:#FF9F1A;--disc-edge:#D57B06;}   /* a highlight still shows orange on green balls */
 .tf-ctr.hl{--disc-top:#FFC85B;--disc-bottom:#FF9F1A;--disc-edge:#D57B06;background:linear-gradient(165deg,var(--disc-top),var(--disc-bottom)) !important;}
+/* highlighted balls just grow a little in their own place (put() sets the origin to the ball's centre), no pulsing */
+.tf-ctr.hl{scale:1.06;}
+.tf-ctr.dragging{transform-origin:50% 50% !important;}   /* the drag sets its own translate + scale */
 .tf-ctr.live{box-shadow:0 0 0 5px rgba(255,210,30,.85),inset 0 -5px 0 var(--disc-edge),inset 0 2px 1px rgba(255,255,255,.35),0 3px 3px rgba(12,55,115,.18) !important;}
 .tf-ctr.dragging{box-shadow:0 0 0 4px rgba(255,210,30,.75),inset 0 -5px 0 var(--disc-edge),0 9px 12px rgba(12,55,115,.28) !important;}
 .tf-ctr.dim{background:#EEF1F5 !important;box-shadow:none !important;}
@@ -584,6 +613,8 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .pv-pad,.kp-grid{position:relative;display:grid;grid-template-columns:repeat(3,84px);grid-template-rows:repeat(4,74px);column-gap:12px;row-gap:8px;width:318px;height:358px;padding:21px 21px 17px;border:0;border-radius:36px;flex-shrink:0;background:#E7F4FF url("assets/UI/keypad_reference.png") -23px -19px/364px 416px no-repeat;box-shadow:0 12px 22px rgba(12,46,92,.14);overflow:hidden;}
 .pv-pad.off{opacity:1;filter:none;}
 .pv-pad.off .pv-key{pointer-events:none;}
+/* guided last hint: keys other than the one the hand points at are greyed out and do nothing */
+.pv-pad .pv-key.locked{pointer-events:none;background:rgba(231,244,255,.7) !important;}
 .pv-left .tf-board{zoom:.84;}
 .pv-layout > .eq{width:1000px;}
 .pv-layout > .eq .eq-part:nth-child(1),.pv-layout > .eq .eq-part:nth-child(3),.pv-layout > .eq .eq-box{width:160px;height:100px;border-radius:24px;font-size:68px;}
@@ -631,6 +662,8 @@ body .stage .eq .eq-part:nth-child(1),body .stage .eq .eq-part:nth-child(3){box-
 body .stage .eq .eq-box{box-shadow:0 7px 0 #1569C9 !important;}
 body .stage .eq .eq-box.done{box-shadow:0 7px 0 #14903A !important;}
 body .stage .eq .eq-box.wrong{box-shadow:0 7px 0 #C21F2D !important;}
+body .stage .idle-call,body .stage .eq .eq-box.idle-call{animation:idlePulse .8s ease-in-out 3 !important;}   /* idle: "touch me" */
+body .stage .eq .eq-box.call{animation:boxPulse .8s ease-in-out infinite !important;}   /* while the voice says "इस डिब्बे…" */
 body .stage .eq .eq-box.ready:active{translate:0 4px;box-shadow:0 3px 0 #1569C9 !important;}
 body .stage .jr-band .eq .eq-box{box-shadow:none !important;}
 /* wrong answer: no red anywhere — the item only wiggles */
@@ -699,10 +732,17 @@ body .stage .jp-go:not(:disabled):active{animation:none !important;transform:tra
 .jp-pick .jp-swifty{transition:transform .7s cubic-bezier(.3,.8,.3,1.1),opacity .4s;}
 .jp-pick.jp-choosemode .jp-title{opacity:0;transform:translateX(-50%) translateY(-30px) scale(.9);transition:opacity .45s,transform .45s;pointer-events:none;}
 .jp-pick.jp-choosemode .jp-go{display:none !important;}
+body .stage .jp-go.jp-wait{display:none !important;}
 .jp-pick.jp-choosemode .jp-boat:not(.mine){cursor:pointer;}
 .jp-pick .jp-swifty.jp-gone{opacity:0;transform:translateY(40px) scale(.9);transition:opacity .35s,transform .35s;}
 .sg-vo.sg-vo-call{animation:sgBtnPulse2 1.1s ease-in-out infinite !important;}
 @keyframes sgBtnPulse2{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
+/* Last screen: Swifty keeps one fixed box (reference size 330px, art is 400x564) and the finish button's
+   space is reserved from the start, so switching happy/shabaash/talk/still never moves her. */
+body .end-screen .end-mascot{width:330px;height:465px;flex:none;object-fit:contain;}
+body .end-screen .end-title:empty,body .end-screen .end-subtitle:empty{display:none;}
+body .end-screen .end-btn{display:inline-flex;visibility:hidden;flex:none;animation:none;}
+body .end-screen .end-btn.show{visibility:visible;animation:hintPop .4s cubic-bezier(.34,1.5,.6,1);}
 /* ---------- keyframes (reference set + lesson) ---------- */
 @keyframes hintPop{from{transform:scale(.4);opacity:0;}to{transform:scale(1);opacity:1;}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -733,6 +773,8 @@ body .stage .jp-go:not(:disabled):active{animation:none !important;transform:tra
 @keyframes navCall{0%,100%{transform:translateX(-50%) scale(1);}50%{transform:translateX(-50%) scale(1.07);}}
 @keyframes navCall2{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
 @keyframes mascotPop{0%{transform:scale(1);}40%{transform:scale(1.12);}100%{transform:scale(1);}}
+@keyframes idlePulse{0%,100%{scale:1;}50%{scale:1.1;}}
+@keyframes boxPulse{0%,100%{scale:1;}50%{scale:1.12;}}
 @keyframes boxCall{0%,100%{box-shadow:0 0 0 0 rgba(56,106,246,.0),0 6px 14px rgba(11,61,140,.10);}50%{box-shadow:0 0 0 8px rgba(56,106,246,.25),0 6px 14px rgba(11,61,140,.10);}}
 @keyframes hlPulse{0%,100%{box-shadow:0 6px 16px rgba(11,61,140,.12);}50%{box-shadow:0 0 0 10px rgba(255,181,71,.55),0 6px 16px rgba(11,61,140,.12);}}
 @keyframes ctrIn{from{opacity:0;scale:.2;}to{opacity:1;scale:1;}}
@@ -883,7 +925,7 @@ html.no-anim *,html.no-anim *::before,html.no-anim *::after{animation:none !impo
 
   <div class="end-screen" id="endScreen">
     <div class="end-title" id="endTitle"></div>
-    <img class="end-mascot" src="assets/Images/last_swifty_happy.webp" alt="Swiftee">
+    <img class="end-mascot" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Swiftee">
     <div class="end-subtitle" id="endSubtitle"></div>
     <button class="end-btn" id="endBtn" aria-label="आगे बढ़ें"></button>
   </div>
@@ -1687,7 +1729,7 @@ function engineDown(){
    spoken by the device's Hindi text-to-speech, so the game is fully voiced before recording. */
 const VO_EXT = "m4a";
 /* measured length (s) of every VO file — visual cues are timed against it */
-const VO_DUR = {"vo_race_pick":1.6,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":13.6,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.52,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.16,"vo_race_intro":6.92,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":10.36,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_ok3":2.88,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
+const VO_DUR = {"vo_race_pick":1.2,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":13.6,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.52,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.16,"vo_race_intro":3.75,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":2.7,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
 const VO_SCRIPT = {};             // id -> text, filled as lines are declared (exported to vo_script.csv)
 function V(id, text){ VO_SCRIPT[id] = text; return { id, text }; }
 let hiVoice = null;
@@ -1707,10 +1749,13 @@ function stopVO(){
   setSpeaking(false);
 }
 /* say(line) -> Promise that resolves when the line has finished (or was interrupted). */
-function say(line){
+/* onStart (optional) runs the moment the voice is actually heard, so visuals timed to the line
+   start with the sound and not with the (sometimes slow) file load */
+function say(line, onStart){
   if(!line) return Promise.resolve();
   stopVO();
   const tok = voToken, text = line.text || "";
+  let started = false; const heard = () => { if(!started){ started = true; if(onStart) onStart(); } };
   setSpeaking(true);
   return new Promise(resolve => {
     let done = false, safety = null;
@@ -1722,8 +1767,9 @@ function say(line){
     safety = setTimeout(fin, est + 3000);              // never let a lost "end" event stall the lesson
     /* no Hindi voice / speech failed: keep the line on screen for as long as it would have been
        spoken, so captions stay readable and the visuals timed to the line stay in step */
-    const holdOut = () => { if(done) return; clearTimeout(safety); safety = setTimeout(fin, Math.max(0, est - (Date.now() - t0))); };
+    const holdOut = () => { if(done) return; heard(); clearTimeout(safety); safety = setTimeout(fin, Math.max(0, est - (Date.now() - t0))); };
     const tts = () => {
+      heard();
       if(!("speechSynthesis" in window)){ holdOut(); return; }
       try{
         const u = new SpeechSynthesisUtterance(text);
@@ -1736,7 +1782,7 @@ function say(line){
     if(line.id){
       const a = new Audio("assets/VO/" + line.id + "." + VO_EXT); curAudio = a;
       a.onended = fin; a.onerror = () => { if(curAudio === a) tts(); };
-      a.addEventListener("playing", () => { line.heard = true; }, { once:true });
+      a.addEventListener("playing", () => { line.heard = true; heard(); }, { once:true });
       a.play().catch(() => { if(curAudio === a) tts(); });
     } else tts();
   });
@@ -1755,12 +1801,10 @@ class Flow{
   say(line, cues){
     /* a cue time of 0..1 is a FRACTION of the line's length (e.g. .5 = halfway through) */
     const len = ((line && VO_DUR[line.id]) || ((line && line.text || "").length * .088)) * 1000;
-    const pending = (cues || []).map(([t, fn]) => [t > 0 && t <= 1 ? t * len : t, fn]).sort((x, y) => x[0] - y[0]).map(([ms, fn]) => {
-      const c = { fn, ran:false };
-      c.t = setTimeout(() => { if(!this.dead && !c.ran){ c.ran = true; fn(); } }, ms);
-      this.timers.push(c.t); return c;
-    });
-    return this.gate(say(line).then(() => {
+    const pending = (cues || []).map(([t, fn]) => [t > 0 && t <= 1 ? t * len : t, fn]).sort((x, y) => x[0] - y[0]).map(([ms, fn]) => ({ ms, fn, ran:false }));
+    // the cue clock starts when the voice is actually heard (not when the file starts loading)
+    const startCues = () => pending.forEach(c => { c.t = setTimeout(() => { if(!this.dead && !c.ran){ c.ran = true; c.fn(); } }, c.ms); this.timers.push(c.t); });
+    return this.gate(say(line, startCues).then(() => {
       if(this.dead) return;
       pending.forEach(c => { clearTimeout(c.t); if(!c.ran){ c.ran = true; c.fn(); } });
     }).then(() => new Promise(r => setTimeout(r, 450))));      // a breath after every line
@@ -1796,7 +1840,7 @@ function handAt(target, opts){
   h.classList.add("show"); h.classList.toggle("still", !!(opts && opts.still));
 }
 /* a number tag flies from one element to another (stage coordinates), as a copy */
-function flyNum(f, fromEl, toEl, text, ms){
+function flyNum(f, fromEl, toEl, text, ms, flat){
   return f.gate(new Promise(res => {
     const a = stagePoint(fromEl), b = stagePoint(toEl);
     const t = el("div", "fly-num", String(text)); $("stage").appendChild(t);
@@ -1804,48 +1848,45 @@ function flyNum(f, fromEl, toEl, text, ms){
     t.style.left = (a.x - w / 2) + "px"; t.style.top = (a.y - hh / 2) + "px";
     const an = t.animate([
       { transform:"translate(0,0) scale(1)" },
-      { transform:`translate(${(b.x - a.x) * .5}px,${(b.y - a.y) * .5 - 40}px) scale(1.15)`, offset:.5 },
+      { transform:`translate(${(b.x - a.x) * .5}px,${(b.y - a.y) * .5 - (flat ? 0 : 40)}px) scale(1.15)`, offset:.5 },
       { transform:`translate(${b.x - a.x}px,${b.y - a.y}px) scale(.9)` }
     ], { duration:ms || 1100, easing:"cubic-bezier(.45,0,.3,1)", fill:"forwards" });
     an.onfinish = () => { t.remove(); res(); };
     setTimeout(() => { t.remove(); res(); }, (ms || 1100) + 800);
   }));
 }
-/* "10" + "3" → a box that grows into 13 → 13 flies up into the equation's answer box */
-async function sumUp(f, host, tagA, tagB, firstVal, total, answerBox, srcA, srcB){
+/* "10" slides in from the left and "3" from the right, on the labels' own row; they meet halfway
+   and join into 13 → 13 flies up into the "?" */
+async function sumUp(f, host, tagA, tagB, firstVal, total, answerBox, srcA, srcB, onJoin){
   host.innerHTML = "";
-  const box = el("div", "sum-box"); host.appendChild(box);
+  const a = stagePoint(tagA), b = stagePoint(tagB);
+  // no empty box waiting: the meeting point stays invisible and the joined number appears there, the same size as the labels
+  const box = el("div", "fly-num sum-mid", String(total)); $("stage").appendChild(box);
+  box.style.left = ((a.x + b.x) / 2 - box.offsetWidth / 2) + "px"; box.style.top = ((a.y + b.y) / 2 - box.offsetHeight / 2) + "px";
   await f.wait(300);
-  // "10": the tray lights up, its label slides down out from under the tray into the box
+  // the tray and the 3 balls light up, then both numbers slide straight in and meet in the middle
   if(srcA && srcA.lit) srcA.lit();
-  tagA.style.visibility = "hidden";
-  await flyNum(f, tagA, box, tagA.textContent, 1200);
-  box.textContent = firstVal; box.classList.add("filled"); sfx("sfx_seat", .6);
-  await f.wait(800);
-  // "3": the 3 balls light up and the 3 travels from them into the box
   if(srcB && srcB.lit) srcB.lit();
-  tagB.style.visibility = "hidden";
-  await flyNum(f, (srcB && srcB.el) || tagB, box, tagB.textContent, 1200);
-  box.textContent = total; box.classList.remove("grow"); void box.offsetWidth; box.classList.add("grow"); sfx("sfx_correct", .5);
-  await f.wait(1500);
-  await flyNum(f, box, answerBox, total, 1100);
-  box.classList.add("gone");
-  await f.wait(300);
+  await f.wait(500);
+  tagA.style.visibility = "hidden"; tagB.style.visibility = "hidden";
+  sfx("sfx_whoosh", .4);
+  await Promise.all([flyNum(f, tagA, box, tagA.textContent, 1300, true), flyNum(f, tagB, box, tagB.textContent, 1300, true)]);
+  box.classList.add("show"); sfx("sfx_correct", .5); if(onJoin) onJoin();
+  await f.wait(1300);
+  const up = flyNum(f, box, answerBox, total, 1100);     // the flying copy takes over from the joined number
+  box.style.visibility = "hidden";
+  await up;
+  box.remove();
 }
-/* the number under the tray (what is left) flies up into the equation's "?" */
+/* the number under the tray (what is left) turns green where it is, then flies straight up into the equation's "?" */
 async function answerUp(f, tag, answerBox, value, host){
-  // like the addition screens: the number first drops into a box below, grows, then flies up into the "?"
-  if(!host){ await f.wait(300); tag.style.visibility = "hidden"; await flyNum(f, tag, answerBox, value, 1200); return; }
-  host.innerHTML = "";
-  const box = el("div", "sum-box"); host.appendChild(box);
+  if(host) host.innerHTML = "";
   await f.wait(300);
+  tag.textContent = value; tag.classList.add("ans"); tag.classList.remove("pop"); void tag.offsetWidth; tag.classList.add("pop"); sfx("sfx_correct", .5);
+  await f.wait(1300);
+  const up = flyNum(f, tag, answerBox, value, 1200);
   tag.style.visibility = "hidden";
-  await flyNum(f, tag, box, value, 1200);
-  box.textContent = value; box.classList.add("filled"); void box.offsetWidth; box.classList.add("grow"); sfx("sfx_correct", .5);
-  await f.wait(1500);
-  await flyNum(f, box, answerBox, value, 1100);
-  box.classList.add("gone");
-  await f.wait(300);
+  await up;
 }
 /* the hand presses a ball, then travels WITH it to where it ends up (tutorial demos).
    `move()` starts the ball's own move; `to()` returns the element / stage point the ball lands on. */
@@ -1869,14 +1910,23 @@ function boardPoint(board, x, y){
 }
 function hideHand(){ $("nudgeHand").classList.remove("show","still","tap"); }
 function tapHand(){ const h = $("nudgeHand"); h.classList.remove("tap"); void h.offsetWidth; h.classList.add("tap"); }
-function armNudge(target, ms){ disarmNudge(); nudge.target = target; nudge.ms = ms; nudge.timer = setTimeout(() => handAt(target), ms); }
+/* idle nudge — NO hand. If the child does nothing for a while, the question is spoken again and the
+   thing to touch gently pulses (the box to tap, the balls to move, the keypad…). Any touch restarts the clock. */
+function armNudge(target, ms){ disarmNudge(); nudge.target = target; nudge.ms = ms; nudge.timer = setTimeout(idleCall, ms); }
 function disarmNudge(){ clearTimeout(nudge.timer); nudge.target = null; hideHand(); }
-document.addEventListener("pointerdown", () => {           // any touch hides the hand and restarts the idle clock
+function idleCall(){
+  const t = nudge.target; if(!t || !t.isConnected) return;
+  const live = t.classList.contains("tf-ctr") ? [...document.querySelectorAll(".tf-ctr.live")] : [];
+  (live.length ? live : [t]).forEach(e => { e.classList.remove("idle-call"); void e.offsetWidth; e.classList.add("idle-call"); setTimeout(() => e.classList.remove("idle-call"), 2500); });
+  replay();
+  const line = FLOW && FLOW.replay, len = line ? (VO_DUR[line.id] || 3) * 1000 : 0;
+  nudge.timer = setTimeout(idleCall, nudge.ms + len);          // still nothing? ask again after the line + another wait
+}
+document.addEventListener("pointerdown", () => {           // any touch restarts the idle clock
   if(!nudge.target) return;
-  hideHand(); clearTimeout(nudge.timer);
-  const t = nudge.target, ms = nudge.ms; nudge.timer = setTimeout(() => { if(nudge.target === t) handAt(t); }, ms);
+  clearTimeout(nudge.timer); nudge.timer = setTimeout(idleCall, nudge.ms);
 }, true);
-const NUDGE_MS = { tutorial:5000, guided:5000, practice:8000, game:8000 };
+const NUDGE_MS = { tutorial:7000, guided:7000, practice:7000, game:7000 };   // 7 s of nothing → repeat the question
 
 /* ============================================================================================
    TEN FRAME BOARD
@@ -1900,16 +1950,20 @@ class Board{
     this.frameEl = el("div", "tf-frame"); this.frameEl.style.width = FW + "px"; this.frameEl.style.height = FH + "px";
     for(let i = 0; i < 10; i++){ const c = el("div", "tf-cell"); const p = this.cellPos(i); c.style.left = (p.x - BW) + "px"; c.style.top = (p.y - BW) + "px"; this.frameEl.appendChild(c); }
     this.el.appendChild(this.frameEl);
-    this.frame = []; this.groups = []; this.near = false;
+    this.frame = []; this.groups = []; this.near = !!opts.near;   // near: loose balls start right next to the tray
     for(let i = 0; i < (opts.frame || 0); i++) this.frame.push(this.mk());
     (opts.loose || []).forEach(n => { const g = []; for(let i = 0; i < n; i++) g.push(this.mk()); this.groups.push(g); });
     this.lblFrame = el("div", "tf-lbl"); this.el.appendChild(this.lblFrame);
     this.lblGroups = [];
     const looseMax = opts.maxLoose != null ? opts.maxLoose : this.looseWidth();
-    this.width = FW + 80 + looseMax; this.el.style.width = this.width + "px"; this.el.style.height = (FH + 80) + "px";
+    this.width = FW + 80 + looseMax; this.el.style.width = this.width + "px"; this.lblGap = opts.lblGap || 36; this.el.style.height = (FH + 68 + this.lblGap) + "px";
     host.appendChild(this.el);
     this.layout(true);
-    this.all().forEach((c, i) => { c.el.style.animationDelay = (i * 60) + "ms"; c.el.classList.add("enter"); });
+    this.all().forEach((c, i) => {
+      c.el.style.animationDelay = (i * 60) + "ms"; c.el.classList.add("enter");
+      // drop the entry animation once it has played, so a later highlight ending can't replay it (balls popping in again)
+      c.el.addEventListener("animationend", ev => { if(ev.animationName === "ctrIn"){ c.el.classList.remove("enter"); c.el.style.animationDelay = ""; } });
+    });
   }
   mk(){ const e = el("div", "tf-ctr"); this.el.appendChild(e); const c = { el:e, dim:false }; e._ctr = c; return c; }
   all(){ return this.frame.concat(...this.groups); }
@@ -1931,11 +1985,11 @@ class Board{
       const used = Math.max(FW, this.groups.some(g => g.length) ? x - GROUP_GAP : FW);
       this._cx = Math.round((this.width - used) / 2); this.el.style.translate = this._cx + "px 0";
     }
-    this.lblFrame.style.left = (FW / 2) + "px"; this.lblFrame.style.top = (FH + 12) + "px";
-    this.lblGroups.forEach(L => L.style.top = (FH + 12) + "px");
+    this.lblFrame.style.left = (FW / 2) + "px"; this.lblFrame.style.top = (FH + this.lblGap) + "px";   // number tags sit a little below the tray
+    this.lblGroups.forEach(L => L.style.top = (FH + this.lblGap) + "px");
     if(instant){ void this.el.offsetWidth; this.el.classList.remove("no-tr"); }
   }
-  put(c, x, y){ c.x = x; c.y = y; if(!c.el.classList.contains("dragging")) c.el.style.transform = `translate(${x}px,${y}px)`; }
+  put(c, x, y){ c.x = x; c.y = y; c.el.style.transformOrigin = `${x + C / 2}px ${y + C / 2}px`; if(!c.el.classList.contains("dragging")) c.el.style.transform = `translate(${x}px,${y}px)`; }   // origin = the ball's own centre, so a highlight grows it in place
   labels(frameTxt, groupTxts){
     this.setLbl(this.lblFrame, frameTxt);
     (groupTxts || []).forEach((t, i) => {
@@ -1956,15 +2010,15 @@ class Board{
     const gi = this.groupOf(c); if(gi < 0 || this.frame.length >= 10) return false;
     this.groups[gi].splice(this.groups[gi].indexOf(c), 1);
     this.frame.push(c); this.layout();
-    if(this.frame.length === 10) setTimeout(() => this.frameEl.classList.add("full"), 700);
     return true;
   }
   setNear(on){ this.near = on; this.layout(); }
+  allGood(){ this.undimmed(this.all()).forEach((c, i) => setTimeout(() => { c.el.classList.remove("hl"); c.el.classList.add("good"); }, i * 50)); }   // the answer: every ball still counted turns green
   dim(c){ c.dim = true; c.el.classList.add("dim"); c.el.classList.remove("live","good"); }
   live(list, on){ list.forEach(c => c.el.classList.toggle("live", on)); }
-  hlFrame(){ this.frameEl.classList.remove("hl"); void this.frameEl.offsetWidth; this.frameEl.classList.add("hl"); this.hlList(this.undimmed(this.frame)); }
+  hlFrame(ms){ this.frameEl.classList.remove("hl"); void this.frameEl.offsetWidth; this.frameEl.classList.add("hl"); this.hlList(this.undimmed(this.frame), ms); }
   /* highlight = the balls brighten and pulse gently where they are; they never move */
-  hlList(list){ list.forEach(c => { c.el.classList.remove("hl"); void c.el.offsetWidth; c.el.classList.add("hl"); clearTimeout(c._hlT); c._hlT = setTimeout(() => c.el.classList.remove("hl"), 2400); }); }
+  hlList(list, ms){ list.forEach(c => { c.el.classList.remove("hl"); void c.el.offsetWidth; c.el.classList.add("hl"); clearTimeout(c._hlT); c._hlT = setTimeout(() => c.el.classList.remove("hl"), ms || 2400); }); }
   undimmed(list){ return list.filter(c => !c.dim); }
   cellEl(i){ return this.frameEl.children[i]; }
 
@@ -2033,10 +2087,13 @@ function Equation(host, a, op, b, small){
   return {
     el:e, box, parts,
     set(v, cls){ box.textContent = v; box.className = "eq-box" + (cls ? " " + cls : ""); },
-    /* light up "8 · + · 5 · = · 13" one after another across the length of a line */
-    sayParts(flow, totalMs){
-      const items = parts.concat([box]); const step = totalMs / items.length;
-      items.forEach((p, i) => { flow.later(i * step, () => p.classList.add("say")); flow.later(i * step + step * .85, () => p.classList.remove("say")); });
+    /* cues (for Flow.say) that light each part of "8 + 5 = 13" exactly when the voice says it.
+       spec = [[part, fromMs, toMs], ...], part 0..4 = first number, sign, second number, "=", answer box.
+       The times are measured from the recording, so they follow the spoken order (e.g. "13 में से 5 घटाने…"). */
+    partCues(spec){
+      const items = parts.concat([box]), out = [];
+      spec.forEach(([i, from, to]) => { const p = items[i]; out.push([from, () => p.classList.add("say")], [to, () => p.classList.remove("say")]); });
+      return out;
     }
   };
 }
@@ -2089,7 +2146,7 @@ function hideHint(){ $("hintOverlay").classList.remove("show"); $("stage").class
 /* reusable animations: "make 10 then add the rest" / "come down to 10 then take away the rest" */
 async function animAdd(flow, host, a, b, line){
   const need = 10 - a, rest = b - need;
-  const board = new Board(host, { frame:a, loose:[b], maxLoose: 5 * STEP + (need && rest >= 5 ? STEP + GROUP_GAP : 0) });
+  const board = new Board(host, { frame:a, loose:[b], maxLoose: 5 * STEP + (need && rest >= 5 ? STEP + GROUP_GAP : 0), lblGap:12 });
   board.labels(a, [b]);
   const sub = SubEq(host);
   await flow.wait(T.beat * 2);
@@ -2106,7 +2163,7 @@ async function animAdd(flow, host, a, b, line){
 }
 async function animSub(flow, host, n, m, line){
   const loose = n - 10, rest = m - loose;
-  const board = new Board(host, { frame:10, loose:[loose] });
+  const board = new Board(host, { frame:10, loose:[loose], lblGap:12 });
   board.labels(10, [loose]);
   const sub = SubEq(host);
   await flow.wait(T.beat * 2);
@@ -2196,11 +2253,11 @@ const SLIDES = [
   /* PDF page 12 — गणित की तेज़ दौड़ */
   { id:"GAME", phase:"game", type:"race", prompt:"गणित की तेज़ दौड़", vo:{
       intro:V("vo_race_intro","चलिए, एक गेम खेलते हैं — गणित की तेज़ दौड़!"),
-      pick:V("vo_race_pick","अपनी जेट स्की चुनिए।"),
+      pick:V("vo_race_pick","अपनी नाव चुनिए।"),
       go:V("vo_race_go","तैयार? दौड़ शुरू!"),
       win:V("vo_race_win","वाह! आपकी नाव सबसे पहले पहुँची!") } }
 ];
-const VO_END = V("vo_end", "बहुत बढ़िया! आपने सीख लिया। जोड़ते समय पहले 10 बनाइए और बाकी जोड़िए। घटाते समय पहले 10 तक आइए और बाकी घटाइए।");
+const VO_END = V("vo_end", "बहुत बढ़िया! आपने सीख लिया।");
 const RACE_QS = [
   { a:7,  op:"+", b:5, opts:[11,12,13] }, { a:9,  op:"+", b:3, opts:[12,13,11] }, { a:7, op:"+", b:6, opts:[11,12,13] },
   { a:15, op:"-", b:8, opts:[6,7,8] },    { a:14, op:"-", b:6, opts:[7,8,9] },    { a:17, op:"-", b:9, opts:[7,8,9] },
@@ -2213,9 +2270,14 @@ RACE_QS.forEach((q, i) => {
 });
 const VO_RACE_HINT_ADD = V("vo_race_hint_add", "पहले 10 बनाइए, फिर बाकी जोड़िए।");
 const VO_RACE_HINT_SUB = V("vo_race_hint_sub", "पहले 10 तक आइए, फिर बाकी घटाइए।");
-const VO_RACE_OK = [V("vo_race_ok1","सही!"), V("vo_race_ok2","बहुत बढ़िया!"), V("vo_race_ok3","टर्बो! शानदार!")];
+const VO_RACE_OK = [V("vo_race_ok1","सही!"), V("vo_race_ok2","बहुत बढ़िया!")];
 
 /* ---------- slide renderers ---------- */
+/* "यहाँ 8 हैं और यहाँ 5 हैं" — first only the tray's balls turn yellow and grow, then switch off; then only the loose ones */
+function hereCues(board, line){
+  const len = (VO_DUR[line.id] || 3) * 1000;      // the second "यहाँ/यह" starts at ~55% in all four recordings
+  return [[0, () => board.hlFrame(len * .5)], [.55, () => board.hlList(board.groups[0], len * .45)]];
+}
 const R = {};
 
 /* PDF p2 — T1 8 + 5 (auto-played) */
@@ -2228,15 +2290,15 @@ R.demoAdd = async (ctx, s, f) => {
   board.labels(a, [b]);
   await f.wait(900);
   // "8 और 5 को जोड़ना है…" — the equation's 8 and 5 light up as they are said
-  await f.say(vo.s1, [[.02, () => eq.parts[0].classList.add("say")], [.16, () => eq.parts[0].classList.remove("say")],
-                      [.14, () => eq.parts[2].classList.add("say")], [.30, () => eq.parts[2].classList.remove("say")]]);
+  await f.say(vo.s1, [[.05, () => eq.parts[0].classList.add("say")], [.15, () => eq.parts[0].classList.remove("say")],
+                      [.17, () => eq.parts[2].classList.add("say")], [.32, () => eq.parts[2].classList.remove("say")]]);
   // "यहाँ 8 हैं और यहाँ 5 हैं" — both groups highlighted in sync
-  await f.say(vo.s2, [[0, () => board.hlFrame()], [.5, () => board.hlList(board.groups[0])]]);
+  await f.say(vo.s2, hereCues(board, vo.s2));
   // "…5 को 2 और 3 में बाँटते हैं" — the 5 splits into 2 and 3 on those words
-  await f.say(vo.s3, [[.66, () => board.hlList(board.groups[0])], [.78, () => { board.split([need, rest]); board.labels(a, [need, rest]); }]]);
+  await f.say(vo.s3, [[.61, () => board.hlList(board.groups[0])], [.78, () => { board.split([need, rest]); board.labels(a, [need, rest]); }]]);
   await f.wait(T.beat);
   // "अब ये 2 ब्लॉक, 8 के साथ जोड़ते हैं" — the 2 move into the frame by themselves, the frame glows green
-  await f.say(vo.s4, [[.1, () => board.hlList(board.groups[0])]]);
+  await f.say(vo.s4, [[.18, () => board.hlList(board.groups[0])]]);
   for(let k = 0; k < need; k++){
     const c = board.groups[0][0], slot = board.frame.length;
     await handCarry(f, c, () => { board.toFrame(c); sfx("sfx_seat", .6); board.labels(a + k + 1, [need - k - 1 || "", rest]); }, () => board.cellEl(slot));
@@ -2245,7 +2307,7 @@ R.demoAdd = async (ctx, s, f) => {
   sfx("sfx_correct", .45);
   await f.wait(T.beat * 2);
   // "अब 10 बन गया। 3 ब्लॉक अभी बाकी हैं।" — the 10 and then the remaining 3 light up
-  await f.say(vo.s5, [[0, () => board.hlFrame()], [.45, () => board.hlList(board.groups[1])]]);
+  await f.say(vo.s5, [[0, () => board.hlFrame(1500)], [.52, () => board.hlList(board.groups[1])]]);
   // "अब इन 3 ब्लॉकों को 10 में जोड़ते हैं" — the 3 slide up to the 10, then 10 + 3 = 13
   await f.say(vo.s6);
   { const c = board.groups[1][0];
@@ -2255,12 +2317,11 @@ R.demoAdd = async (ctx, s, f) => {
   { const three = board.groups[1], mid = three[Math.floor(three.length / 2)];
     await sumUp(f, sub.el, board.lblFrame, board.lblGroups[1], 10, a + b, eq.box,
       { lit:() => board.hlList(board.undimmed(board.frame)) },
-      { el:mid.el, lit:() => board.hlList(three) }); }
+      { el:mid.el, lit:() => board.hlList(three) }, () => board.allGood()); }
   eq.set(a + b, "done"); sfx("sfx_correct", .6);
   await f.wait(T.beat * 2);
   // "तो यहाँ 8 जोड़ 5 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।" — each part of the equation lights with the voice
-  eq.sayParts(f, (VO_DUR[vo.s7.id] || 6) * 1000 * .5);
-  await f.say(vo.s7, [[.6, () => board.hlFrame()], [.82, () => board.hlList(board.groups[1])]]);
+  await f.say(vo.s7, [...eq.partCues([[0, 1500, 1950], [1, 1950, 2450], [2, 2450, 3150], [3, 3150, 4000], [4, 4050, 4800]]), [.62, () => board.hlFrame(1500)], [.87, () => board.hlList(board.groups[1])]]);
   complete();
 };
 
@@ -2268,13 +2329,13 @@ R.demoAdd = async (ctx, s, f) => {
 R.demoSub = async (ctx, s, f) => {
   const { n, m, vo } = s, loose = n - 10, rest = m - loose;
   const eq = Equation(ctx.prompt, n, "-", m);
-  const board = new Board(ctx.content, { frame:10, loose:[loose], maxLoose: 5 * STEP });
+  const board = new Board(ctx.content, { frame:10, loose:[loose], maxLoose: 5 * STEP, near:true });
   const sub = SubEq(ctx.content);
   f.replay = vo.s1;
   board.labels(10, [loose]);
   await f.wait(900);
   await f.say(vo.s1);
-  await f.say(vo.s2, [[0, () => board.hlFrame()], [.5, () => board.hlList(board.groups[0])]]);
+  await f.say(vo.s2, hereCues(board, vo.s2));
   await f.say(vo.s3);
   await f.say(vo.s4);
   for(const c of board.groups[0]){ handAt(c.el, { still:true }); await f.wait(T.tap); tapHand(); board.dim(c); sfx("sfx_tap", .6); await f.wait(T.beat); }
@@ -2286,8 +2347,7 @@ R.demoSub = async (ctx, s, f) => {
   await f.say(vo.s6, [[0, () => board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120))]]);
   await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); sfx("sfx_correct", .6);
-  eq.sayParts(f, (VO_DUR[vo.s7.id] || 4) * 1000 * .8);
-  await f.say(vo.s7);
+  await f.say(vo.s7, eq.partCues([[0, 800, 1600], [2, 1600, 1950], [1, 1950, 2700], [4, 2850, 3800]]));
   complete();
 };
 
@@ -2303,7 +2363,7 @@ R.guidedAdd = async (ctx, s, f) => {
   voLock(true);
   await f.wait(900);
   await f.say(vo.s1);
-  await f.say(vo.s2, [[0, () => board.hlFrame()], [.5, () => board.hlList(board.groups[0])]]);
+  await f.say(vo.s2, hereCues(board, vo.s2));
   await f.say(vo.s3);
   board.split([need, rest]); board.labels(a, [need, rest]);
   await f.wait(T.split + T.beat);
@@ -2323,7 +2383,7 @@ R.guidedAdd = async (ctx, s, f) => {
   board.labels(10, ["", rest]);
   await f.wait(T.beat * 2);
   voLock(true);
-  await f.say(vo.s5, [[.55, () => board.hlList(board.groups[1])]]);
+  await f.say(vo.s5, [[.65, () => board.hlList(board.groups[1])]]);
   f.replay = vo.s6;
   await f.say(vo.s6);
   voLock(false);
@@ -2339,12 +2399,11 @@ R.guidedAdd = async (ctx, s, f) => {
   voLock(true);
   { const three = board.groups[1], mid = three[Math.floor(three.length / 2)];
     await sumUp(f, sub.el, board.lblFrame, board.lblGroups[1], 10, a + b, eq.box,
-      { lit:() => board.hlList(board.undimmed(board.frame)) }, { el:mid.el, lit:() => board.hlList(three) }); }
+      { lit:() => board.hlList(board.undimmed(board.frame)) }, { el:mid.el, lit:() => board.hlList(three) }, () => board.allGood()); }
   eq.set(a + b, "done"); sfx("sfx_correct", .6); confettiCannon(); setMood("happy");
   voLock(true);
   await f.wait(T.beat);
-  eq.sayParts(f, (VO_DUR[vo.s7.id] || 5) * 1000 * .55);
-  await f.say(vo.s7);
+  await f.say(vo.s7, eq.partCues([[0, 1050, 1550], [1, 1550, 1950], [2, 1950, 2400], [3, 2400, 2950], [4, 2950, 3800]]));
   voLock(false);
   complete();
 };
@@ -2354,14 +2413,14 @@ R.guidedSub = async (ctx, s, f) => {
   const { n, m, vo } = s, loose = n - 10, rest = m - loose;
   const top = el("div", "q-wrap"); ctx.content.appendChild(top);
   const eq = Equation(top, n, "-", m);
-  const board = new Board(top, { frame:10, loose:[loose], maxLoose: 5 * STEP });
+  const board = new Board(top, { frame:10, loose:[loose], maxLoose: 5 * STEP, near:true });
   const sub = SubEq(top);
   f.replay = vo.s4;
   board.labels(10, [loose]);
   voLock(true);
   await f.wait(900);
   await f.say(vo.s1);
-  await f.say(vo.s2, [[0, () => board.hlFrame()], [.5, () => board.hlList(board.groups[0])]]);
+  await f.say(vo.s2, hereCues(board, vo.s2));
   await f.say(vo.s3);
   await f.say(vo.s4);
   voLock(false);
@@ -2391,8 +2450,7 @@ R.guidedSub = async (ctx, s, f) => {
   await f.say(vo.s6, [[0, () => { board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120)); sfx("sfx_correct", .6); }]]);
   await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); confettiCannon(); setMood("happy");
-  eq.sayParts(f, (VO_DUR[vo.s7.id] || 4) * 1000 * .8);
-  await f.say(vo.s7);
+  await f.say(vo.s7, eq.partCues([[0, 950, 1800], [2, 1800, 2100], [1, 2100, 2900], [4, 3000, 3900]]));
   voLock(false);
   complete();
 };
@@ -2408,21 +2466,38 @@ function Pad(host){
     b.setAttribute("aria-label", k === "back" ? "मिटाएँ" : k === "ok" ? "उत्तर जमा करें" : k);
     wrap.appendChild(b); return b;
   });
-  let val = "", target = null, resolve = null;
+  let val = "", target = null, resolve = null, only = null, onKey = null;
   const show = () => { if(target){ target.textContent = val || "?"; target.classList.toggle("typing", !!val); } };
   keys.forEach(b => b.onclick = () => {
     if(wrap.classList.contains("off") || !resolve) return;
     const k = b.dataset.k;
+    if(only && k !== only) return;                       // guided hint: only the key the hand points at works
+    const step = onKey; onKey = null;
     if(k === "back") val = val.slice(0, -1);
-    else if(k === "ok"){ if(!val) return; const r = resolve; resolve = null; const n = parseInt(val, 10); val = ""; r(n); return; }
+    else if(k === "ok"){ if(!val) return; const r = resolve; resolve = null; const n = parseInt(val, 10); val = ""; if(step) step(); r(n); return; }
     else if(val.length < 2) val += k;
     sfx("sfx_tap", .5); show();
+    if(step) step();
   });
   return {
     el:wrap,
     on(v){ wrap.classList.toggle("off", !v); },
     open(){ if(!wrap.classList.contains("closed")) return; wrap.classList.remove("closed"); wrap.classList.add("opening"); sfx("sfx_tap", .5); },
-    read(box){ target = box; val = ""; show(); return new Promise(r => { resolve = r; }); }
+    read(box){ target = box; val = ""; show(); return new Promise(r => { resolve = r; }); },
+    /* last hint: the hand shows each key of the answer in turn (e.g. 14 → "1", then "4", then ✓);
+       every other key is locked until it is pressed */
+    guide(seq){
+      return new Promise(done => {
+        const next = i => {
+          if(i >= seq.length){ only = null; keys.forEach(b => b.classList.remove("locked")); hideHand(); done(); return; }
+          only = seq[i]; const kb = keys.find(b => b.dataset.k === only);
+          keys.forEach(b => b.classList.toggle("locked", b !== kb));
+          handAt(kb);
+          onKey = () => { hideHand(); next(i + 1); };
+        };
+        next(0);
+      });
+    }
   };
 }
 /* answer box + keypad + hint ladder (PDF p8, p9) */
@@ -2459,6 +2534,18 @@ async function answerLadder(f, eq, label, ans, vo, hint2){
     await f.wait(500);
     if(wrong === 1){ await f.say(VO_RETRY); }
     else if(wrong === 2){ setMood("hint"); eq.set("?", ""); await hint2(); }
+    else if(f.pad){
+      // last hint: say the answer, then the hand walks the child through typing it — no answer filled in for them
+      eq.box.onclick = null; await f.wait(400);
+      await f.say(vo.h3); voLock(false);
+      eq.set("?", "ready"); f.pad.on(true);
+      const typed = f.gate(f.pad.read(eq.box));
+      await f.gate(f.pad.guide([...String(ans), "ok"]));
+      await typed; f.pad.on(false);
+      eq.set(ans, "done"); sfx("sfx_correct"); confettiCannon(); setMood("happy");
+      voLock(true); await f.wait(400); await f.say(vo.ok); voLock(false);
+      return;
+    }
     else {
       eq.box.onclick = null; await f.wait(400);
       eq.set(ans, "done"); sfx("sfx_correct", .5);
@@ -2483,8 +2570,8 @@ R.practiceAdd = async (ctx, s, f) => {
   f.replay = vo.q;
   board.labels(a, [b]);
   voLock(true); await f.wait(900);
-  await f.say(vo.q, [[0, () => board.hlFrame()], [.15, () => board.hlList(board.groups[0])], [.62, () => eq.box.classList.add("ready")]]);
-  eq.box.classList.remove("ready");
+  await f.say(vo.q, [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("ready", "call")]]);   // "…इस डिब्बे पर टैप करके लिखिए" — the box pulses
+  eq.box.classList.remove("ready", "call");
   voLock(false);
   await f.until(done => {
     let moved = 0;
@@ -2506,6 +2593,7 @@ R.practiceAdd = async (ctx, s, f) => {
     await f.say(vo.h2);
     await f.wait(T.beat);
   });
+  board.allGood();
   complete();
 };
 
@@ -2516,12 +2604,12 @@ R.practiceSub = async (ctx, s, f) => {
   const eq = Equation(top, n, "-", m);
   const pvRow = el("div", "pv-row"); top.appendChild(pvRow); const pvLeft = el("div", "pv-left"); pvRow.appendChild(pvLeft);
   f.pad = Pad(pvRow);
-  const board = new Board(pvLeft, { frame:10, loose:[loose], maxLoose: 5 * STEP });
+  const board = new Board(pvLeft, { frame:10, loose:[loose], maxLoose: 5 * STEP, near:true });
   const sub = SubEq(pvLeft);
   f.replay = vo.q;
   board.labels(10, [loose]);
   voLock(true); await f.wait(900);
-  await f.say(vo.q, [[0, () => board.hlFrame()], [.5, () => board.hlList(board.groups[0])]]);
+  await f.say(vo.q, [[.12, () => { board.hlFrame(1200); board.hlList(board.groups[0], 1200); }]]);   // "16": the whole 16 lights together
   voLock(false);
   await f.until(done => {
     let k = 0;
@@ -2561,8 +2649,9 @@ R.mcq = async (ctx, s, f) => {
   const cells = s.options.map(v => { const c = el("div", "opt-cell", `<span class="num-glyph">${v}</span>`); c.dataset.v = v; grid.appendChild(c); return c; });
   f.replay = vo.q;
   voLock(true); await f.wait(700);
-  await f.say(vo.q, [[.5, () => eq.box.classList.add("ready")]]);
-  eq.box.classList.remove("ready");
+  // P4 says "…इस डिब्बे में आने वाली…": the box pulses on those words; P3 has no "डिब्बे", it just lights on "सही … संख्या"
+  await f.say(vo.q, [[s.op === "-" ? .56 : .58, () => { eq.box.classList.add("ready"); if(s.op === "-") eq.box.classList.add("call"); }]]);
+  eq.box.classList.remove("ready", "call");
   voLock(false);
   let wrong = 0;
   while(true){
@@ -2588,8 +2677,9 @@ R.mcq = async (ctx, s, f) => {
       grid.classList.add("away");                                   // counters appear temporarily
       const h = el("div", "mcq-hint"); stageEl.appendChild(h);
       if(op === "+") await animAdd(f, h, a, b, vo.h2); else await animSub(f, h, a, b, vo.h2);
-      await f.wait(1200);
-      h.remove(); grid.classList.remove("away");                    // back to the question
+      await f.wait(800);
+      // the hint stays where it is, just a bit smaller, and the options come back underneath it
+      stageEl.classList.add("with-hint"); h.classList.add("mini"); grid.classList.remove("away");
       await f.wait(500);
     } else {
       cell.classList.remove("wrong-flash");
@@ -2637,6 +2727,7 @@ function victoryTurnSprite(colorIndex){
 
 R.race = async (ctx, s, f) => {
   const { vo } = s;
+  const QUICK = QS.has("win");   // dev: jump straight to the win screen (no VO, no countdown, no questions)
   $("stage").classList.add("race-mode"); document.body.classList.add("race-page");
   const world = el("div", "jr-world"); ctx.content.appendChild(world);
 
@@ -2659,30 +2750,31 @@ R.race = async (ctx, s, f) => {
   });
   const swifty = el("img", "jp-swifty"); swifty.src = "assets/UI/sw_explain_still.webp"; swifty.alt = "Swifty"; pick.appendChild(swifty);
   const go = el("button", "jp-go");
-  go.type = "button"; go.setAttribute("aria-label", "दौड़ शुरू करें"); pick.appendChild(go);
+  go.type = "button"; go.setAttribute("aria-label", "दौड़ शुरू करें"); go.classList.add("jp-wait"); pick.appendChild(go);
   let me = -1;
   boats.forEach(b => b.setAttribute("aria-pressed", "false"));
 
   /* step 1 — race title: title + jet skis standing still, no Swifty, only the Play button */
   pick.classList.add("jp-titlemode");
   f.replay = vo.intro;
-  voLock(true); await f.wait(500); await f.say(vo.intro); voLock(false);
+  if(!QUICK){ voLock(true); await f.wait(500); await f.say(vo.intro); voLock(false); }
+  go.classList.remove("jp-wait");   // Play pops in only after the intro VO has finished
   armNudge(go, NUDGE_MS.game);
-  await f.until(done => { go.onclick = () => done(); if(QS.has("pick")) done(); });
+  await f.until(done => { go.onclick = () => done(); if(QS.has("pick") || QUICK) done(); });
   disarmNudge(); sfx("sfx_play", .7);
 
   /* step 2 — title and Play leave, Swifty walks in and asks the child to choose; the jet skis come alive */
   pick.classList.remove("jp-titlemode"); pick.classList.add("jp-choosemode");
   await f.wait(700);
   f.replay = vo.pick;
-  voLock(true); await f.say(vo.pick); voLock(false);
+  if(!QUICK){ voLock(true); await f.say(vo.pick); voLock(false); }
   const picked = await f.until(done => {
     boats.forEach((b, i) => {
       b.onclick = () => { if(me >= 0) return; done(i); };
       b.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); b.click(); } };
     });
     armNudge(boats[0], NUDGE_MS.game);
-    if(QS.has("pick")) done(0);
+    if(QS.has("pick") || QUICK) done(+QS.get("pick") || 0);
   });
   disarmNudge();
 
@@ -2739,20 +2831,23 @@ R.race = async (ctx, s, f) => {
   });
   bar.appendChild(el("span", "flag", "🏁"));
   const icon = el("img", "me"); icon.src = `assets/jet/top_${JR[me].c}.png`; icon.style.bottom = "0%"; bar.appendChild(icon);
-  const turbo = el("div", "jr-turbo", "टर्बो!"); world.appendChild(turbo);
   const pop = el("div", "jt-pop"); world.appendChild(pop);
   const LANES = [333, 555, 777, 999], Y0 = 286, Y1 = 112;
   const riderTypes = ["swifty", "cat", "panda", "rabbit"];
   const rivalNames = ["बिल्ली", "पांडा", "खरगोश"];
   let rivalIndex = 0;
+  // The player's jet always races in the 2nd or 3rd lane (nearest to where it was picked); rivals fill the rest in order.
+  const meLane = me <= 1 ? 1 : 2, otherLanes = [0, 1, 2, 3].filter(l => l !== meLane);
+  let otherLaneIdx = 0;
   const jets = JR.map((j, i) => {
+    const lane = i === me ? meLane : otherLanes[otherLaneIdx++];
     const riderIndex = i === me ? 0 : ++rivalIndex;
     const rider = riderTypes[riderIndex];
     const name = i === me ? "आप" : rivalNames[riderIndex - 1];
     const e = el("div", "jt-jet" + (i === me ? " me" : ""), `<div class="jt-wake"></div><div class="jt-craft" role="img" aria-label="${i === me ? "Swifty" : name} की नाव"><img src="assets/jet/top_${j.c}.png" alt=""><span class="jt-rider" data-rider="${rider}" aria-hidden="true"></span></div><span class="jr-tag">${name}</span>`);
     e.querySelector(".jt-rider").style.backgroundPosition = `${riderIndex % 2 * 100}% ${Math.floor(riderIndex / 2) * 100}%`;
     world.appendChild(e);
-    return { el:e, img:e.querySelector(".jt-craft"), i, p:0, target:0, v:0, x:LANES[i], ph:Math.random() * 6, lean:0,
+    return { el:e, img:e.querySelector(".jt-craft"), i, p:0, target:0, v:0, x:LANES[lane], ph:Math.random() * 6, lean:0,
       cruise:4.2, raceOffset:0, kick:0, cruiseBase:3.9 + Math.random() * .4, racePhase:Math.random() * 6 };
   });
   const meJ = jets[me], rivals = jets.filter(j => j.i !== me);
@@ -2861,7 +2956,7 @@ R.race = async (ctx, s, f) => {
 
   /* 3-2-1-GO! */
   const cd = el("div", "jt-count"); world.appendChild(cd);
-  for(const t of ["3", "2", "1"]){
+  if(!QUICK) for(const t of ["3", "2", "1"]){
     cd.textContent = t; cd.classList.remove("go", "show"); void cd.offsetWidth; cd.classList.add("show");
     beep(520); await f.wait(800);
   }
@@ -2872,8 +2967,8 @@ R.race = async (ctx, s, f) => {
   panel.style.visibility = "";
   world.dataset.raceState = "racing";
 
-  const qs = RACE_QS.slice().sort(() => Math.random() - .5), total = qs.length;
-  voLock(true); await f.say(vo.go); voLock(false);
+  const qs = QUICK ? [] : RACE_QS.slice().sort(() => Math.random() - .5), total = qs.length;   // ?win = QA: skip straight to the finish
+  if(!QUICK){ voLock(true); await f.say(vo.go); voLock(false); }
   let streak = 0;
   for(let qi = 0; qi < total; qi++){
     const q = qs[qi];
@@ -2903,12 +2998,11 @@ R.race = async (ctx, s, f) => {
         meJ.target = (qi + 1) / total;
         // Rivals keep their own pace; a right answer boosts Swifty rather than braking everyone else.
         setProg(meJ.target);
-        turbo.classList.toggle("show", lvl >= 3);
         // All boost effects stay on the player's jet ski.
-        popText(["", "शाबाश!", "तेज़!", "सुपर तेज़!"][lvl]);
-        voLock(true); await f.say(VO_RACE_OK[lvl - 1]); voLock(false);
+        popText("शाबाश!");
+        voLock(true); await f.say(VO_RACE_OK[Math.min(lvl - 1, VO_RACE_OK.length - 1)]); voLock(false);
         await f.wait(900);
-        meJ.el.classList.remove("boost", "turbo"); turbo.classList.remove("show");
+        meJ.el.classList.remove("boost", "turbo");
         break;
       }
       // wrong: the streak breaks, the engine sputters, our jet ski drops back and the others edge past
@@ -2965,8 +3059,8 @@ R.race = async (ctx, s, f) => {
   victory.appendChild(el("div", "victory-title", 'आप जीत गए!'));
   world.appendChild(victory); world.classList.add("victory-mode");
   world.dataset.raceState = "victory-camera";
-  // Matched directional artwork shows the side and back as the boat itself turns.
-  world.dataset.finishRenderer = "directional-artwork";
+  // Use the original illustrated Swifty and selected jet-ski artwork.
+  world.dataset.finishRenderer = finishSprites.canvas.dataset.renderer;
   victory.appendChild(meJ.el);
   meJ.el.querySelector(".jr-tag").remove();
   meJ.img.style.transform = "";
@@ -2980,10 +3074,10 @@ R.race = async (ctx, s, f) => {
   const killRace = f.kill.bind(f);
   f.kill = () => { victoryAlive = false; killRace(); };
   const smooth = v => { v = Math.max(0, Math.min(1, v)); return v * v * (3 - 2 * v); };
-  const lowerDuration=1.5,turnDuration=3.2,turnEnd=lowerDuration+turnDuration;
+  const lowerDuration=1.5,turnDuration=4.4,turnEnd=lowerDuration+turnDuration;
   // Short, smooth acceleration/deceleration with a steady speed through the turn.
   const turnProgress = elapsed => {
-    const duration=turnDuration, ramp=.32, speed=1/(duration-ramp);
+    const duration=turnDuration, ramp=.9, speed=1/(duration-ramp);
     const easeIn = t => speed*(t/2-ramp/(2*Math.PI)*Math.sin(Math.PI*t/ramp));
     if(elapsed<=0) return 0;
     if(elapsed>=duration) return 1;
@@ -2991,15 +3085,16 @@ R.race = async (ctx, s, f) => {
     if(elapsed>duration-ramp) return 1-easeIn(duration-elapsed);
     return speed*(elapsed-ramp/2);
   };
-  function victoryFrame(now){
+  let turnSfx = false;
+  function victoryFrame(now, forceT){
     if(!victoryAlive || f.dead) return;
-    const t = calm ? turnEnd+1 : (now - victoryStart) / 1000;
+    const t = forceT != null ? forceT : calm ? turnEnd+1 : (performance.now() - victoryStart) / 1000;
     const lower = smooth(t / lowerDuration);
     const circle = turnProgress(t - lowerDuration);
     const front = smooth((t - turnEnd) / .7);
     // First lower the camera. Its angle stays fixed throughout the single boat turn.
     camera.style.transform = `translate(${(666-anchor.x)*lower}px,${(360-anchor.y)*lower}px) rotateX(${lower*34}deg) scale(${1+lower*.55})`;
-    camera.style.setProperty("--victory-flow", ((flow+t*24)%1024)+"px");
+    camera.style.setProperty("--victory-flow", ((flow+Math.min(t,lowerDuration)*24)%1024)+"px"); // water rests while the jet ski turns (lighter, smoother frames)
     if(lower<1){
       sea.style.backgroundPositionY = (flow + t*24) + "px";
       waterSurface.style.backgroundPositionY = (flow + t*24 + 24) + "px";
@@ -3046,22 +3141,30 @@ R.race = async (ctx, s, f) => {
         previousTail=tail;
       }
     }
-    if(t>=turnEnd+.55 && world.dataset.raceState!=="complete"){
+    if(!calm && !turnSfx && t >= lowerDuration - .1){ turnSfx = true; sfx("sfx_win_turn", .8); }   // engine rev + water churn + swirl, timed to the 4.4 s turn
+    if(t>=turnEnd+.55 && world.dataset.raceState!=="complete" && !victory.classList.contains("portrait")){
       victory.classList.add("portrait"); world.dataset.raceState="victory-portrait";
+      if(!calm){ sfx("sfx_win_trophy", .75); setTimeout(() => sfx("sfx_win_applause", .55), 250); setTimeout(() => sfx("sfx_win_yay", .6), 450); }
     }
-    // The turn ends exactly once; only the water remains animated afterwards.
-    if(!calm) requestAnimationFrame(victoryFrame);
+    // The turn ends exactly once; then the scene is still (the loop runs only until the wake trail has faded).
+    if(!calm && forceT == null && t < 9) requestAnimationFrame(victoryFrame);
   }
   requestAnimationFrame(victoryFrame);
   sfx("sfx_celebrate", .7);
   voLock(true); f.replay = vo.win;
   const winVoice = f.say(vo.win);
   await f.wait(calm ? 100 : Math.round(turnEnd*1000)+650);
+  if(!victory.classList.contains("portrait")) victoryFrame(0, turnEnd + .6);   // safety: always end on the final pose + banner
   sfx("sfx_burst", .5); confettiCannon();
-  await Promise.all([winVoice, f.wait(calm ? 700 : 650)]);
+  if(!calm) f.later(1300, () => confettiCannon());   // a second burst keeps the party going
+  // The Next button must always come: wait for the win line, but never longer than 3 s after the title.
+  await Promise.race([Promise.all([winVoice, f.wait(calm ? 700 : 650)]), f.wait(3000)]);
   if(calm) victoryAlive = false;
   voLock(false); world.dataset.raceState = "complete";
-  complete();
+  // No Next button on the win screen: enjoy the celebration, then move on to the last screen by itself.
+  await f.wait(calm ? 1500 : 3000);
+  if(f.dead) return;
+  window.go(cur + 1);   // (the race has its own local "go" Play button)
 };
 
 /* short countdown beep */
@@ -3079,9 +3182,9 @@ function beep(freq, len){
 let cur = -1, curPhase = null;
 function setPrompt(t){ $("promptText").textContent = t || ""; }
 function complete(){
-  const nb = $("navBtn"); nb.disabled = false; nb.classList.add("active");
+  // no Next button on any screen: once the screen is done, it moves on by itself
   disarmNudge();
-  FLOW && FLOW.later(1500, () => nb.classList.add("nav-call"));
+  FLOW && FLOW.later(1500, () => go(cur + 1));
 }
 $("navBtn").addEventListener("click", () => {
   const nb = $("navBtn"); if(nb.disabled) return;
@@ -3107,7 +3210,7 @@ async function go(i){
   if(FLOW) FLOW.kill();
   stopVO(); disarmNudge(); closeKeypad(); hideHint(); voLock(false);
   $("stage").classList.remove("race-mode", "no-next"); document.body.classList.remove("race-page");
-  $("slideHost").innerHTML = "";
+  $("slideHost").innerHTML = ""; document.querySelectorAll(".sum-mid,.fly-num").forEach(e => e.remove());
   const nb = $("navBtn"); nb.disabled = true; nb.classList.remove("active", "nav-call");
   if(i >= SLIDES.length){ return showEnd(); }
   document.body.classList.remove("is-end"); $("endScreen").classList.remove("show"); $("endBtn").classList.remove("show"); nb.classList.remove("hide");
@@ -3138,6 +3241,7 @@ async function go(i){
 
 function showEnd(){
   if(FLOW) FLOW.kill();
+  disarmNudge();   // no hand on the last screen (a pending nudge from the previous slide must not appear here)
   const f = FLOW = new Flow();
   document.body.classList.remove("tut-page"); $("stage").classList.remove("tut");
   document.body.classList.add("is-end");
@@ -3145,19 +3249,38 @@ function showEnd(){
   $("endTitle").textContent = ""; $("endSubtitle").innerHTML = "";      // no text — Swifty says it
   $("endScreen").classList.add("show");
   const m = $("endScreen").querySelector(".end-mascot");
+  // Swifty moves only while the VO plays. Before it she holds the first frame of "shabaash" (the clip that starts the line);
+  // after it the last "talk" clip simply plays out and stays on its final frame (the webp plays once), so no pose jumps.
+  let talking = false, talkLoop = null;
   const sw = name => { if(f.dead || !m) return; m.removeAttribute("src"); void m.offsetWidth; m.src = "assets/Images/last_swifty_" + name + ".webp?n=" + Date.now(); };
-  sw("happy"); confettiCannon();
+  const still = name => {
+    if(f.dead || !m) return;
+    const img = new Image();
+    img.onload = () => {
+      if(f.dead || talking) return;
+      try{ const c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
+        c.getContext("2d").drawImage(img, 0, 0); m.src = c.toDataURL("image/png"); }catch(e){ m.src = img.src; }
+    };
+    img.src = "assets/Images/last_swifty_" + name + ".webp?still=" + Date.now();
+  };
+  still("shabaash"); confettiCannon();
   let spoke = false;
   const speak = () => {
-    if(spoke || f.dead) return; spoke = true;
-    sw("shabaash"); f.later(1450, () => sw("talk"));
-    say(VO_END).then(() => { if(f.dead) return; sw("happy"); $("endBtn").classList.add("show"); });
+    if(spoke || f.dead) return; spoke = true; talking = true;
+    sw("shabaash");
+    f.later(1440, () => { if(!talking) return; sw("talk"); talkLoop = setInterval(() => { if(talking && !f.dead) sw("talk"); else clearInterval(talkLoop); }, 2160); });
+    say(VO_END).then(() => { talking = false; clearInterval(talkLoop); if(f.dead) return; $("endBtn").classList.add("show"); });
   };
   try{ const j = new Audio("assets/SFX/sfx_celebrate.wav"); j.volume = .7; j.onended = speak; j.onerror = speak; j.play().catch(speak); }catch(e){ speak(); }
   f.later(1800, speak);
-  f.later(14000, () => $("endBtn").classList.add("show"));
+  f.later(8000, () => $("endBtn").classList.add("show"));
 }
-$("endBtn").onclick = () => { sfx("sfx_next", .7); location.href = location.pathname; };
+// Same as the reference: the finish button hands control back to the SwiftPAL host app (no reload, no hand nudge).
+$("endBtn").onclick = () => {
+  const b = $("endBtn"); if(b.disabled) return; b.disabled = true; sfx("sfx_next", .7);
+  try{ window.parent && window.parent.postMessage({ type:"swiftpal:proceed", skill_code:"MTG2A01_L06_S01", part:"S01" }, "*"); }catch(e){}
+  setTimeout(() => { b.disabled = false; }, 1200);
+};
 
 /* ============================================================================================
    LANDING + BOOT
@@ -3244,19 +3367,23 @@ function buildDevNav(){
   if($("devNav")) return;
   const bar = el("div", "dev-nav"); bar.id = "devNav";
   const mk = (t, title) => { const b = el("button", "dev-nav-btn", t); b.title = title; return b; };
-  const land = mk("⌂", "landing"), first = mk("⏮", "first"), prev = mk("◀", "prev"), next = mk("▶", "next"), end = mk("🎉", "celebration");
+  const land = mk("⌂", "landing"), first = mk("⏮", "first"), prev = mk("◀", "prev"), next = mk("▶", "next"), win = mk("🏆", "win screen (आप जीत गए!)"), end = mk("🎉", "last screen");
   const sel = el("select", "dev-nav-sel"); sel.title = "jump to slide";
   SLIDES.forEach((s, i) => { const o = el("option"); o.value = i; o.textContent = (i + 1) + ". " + s.id + " · " + s.type; sel.appendChild(o); });
+  [["win", "🏆 WIN · आप जीत गए!"], ["end", "🎉 LAST · end screen"]].forEach(([v, t]) => { const o = el("option"); o.value = v; o.textContent = t; sel.appendChild(o); });
+  const raceIdx = Math.max(0, SLIDES.findIndex(s => s.type === "race"));
+  const openWin = () => location.href = location.pathname + "?dev&slide=" + raceIdx + "&win";
+  const openEnd = () => { leaveStart(); stopVO(); showEnd(); sync(); };
   const lbl = el("span", "dev-nav-lbl");
   const leaveStart = () => { $("startGate").classList.add("hidden"); document.body.classList.remove("is-start"); document.body.classList.add("loaded"); const bl = $("bootLoader"); if(bl) bl.remove(); };
-  const jump = i => { i = Math.max(0, Math.min(i, SLIDES.length - 1)); leaveStart(); curPhase = SLIDES[i].phase; go(i); sync(); };
-  const sync = () => { const i = Math.max(0, cur); if(document.activeElement !== sel) sel.value = i;
-    lbl.textContent = document.body.classList.contains("is-end") ? "end" : document.body.classList.contains("is-start") ? "landing" : (i + 1) + "/" + SLIDES.length + " · " + SLIDES[i].id; };
+  const jump = i => { i = Math.max(0, Math.min(i, SLIDES.length - 1)); if(QS.has("win")){ location.href = location.pathname + "?dev&slide=" + i; return; } leaveStart(); curPhase = SLIDES[i].phase; go(i); sync(); };
+  const sync = () => { const i = Math.max(0, cur); if(document.activeElement !== sel) sel.value = document.body.classList.contains("is-end") ? "end" : QS.has("win") && document.body.classList.contains("race-page") ? "win" : i;
+    lbl.textContent = document.body.classList.contains("is-end") ? "last screen" : QS.has("win") && document.body.classList.contains("race-page") ? "win screen" : document.body.classList.contains("is-start") ? "landing" : (i + 1) + "/" + SLIDES.length + " · " + SLIDES[i].id; };
   land.onclick = () => location.href = location.pathname + "?dev";
   first.onclick = () => jump(0); prev.onclick = () => jump(cur - 1); next.onclick = () => jump(cur + 1);
-  end.onclick = () => { leaveStart(); stopVO(); showEnd(); sync(); };
-  sel.onchange = () => jump(parseInt(sel.value, 10));
-  bar.append(land, first, prev, sel, lbl, next, end);
+  win.onclick = openWin; end.onclick = openEnd;
+  sel.onchange = () => sel.value === "win" ? openWin() : sel.value === "end" ? openEnd() : jump(parseInt(sel.value, 10));
+  bar.append(land, first, prev, sel, lbl, next, win, end);
   document.body.appendChild(bar);
   setInterval(sync, 300); sync();
 }

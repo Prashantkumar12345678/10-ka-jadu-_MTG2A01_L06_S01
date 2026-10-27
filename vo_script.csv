@@ -57,7 +57,6 @@ vo_race_hint_add,"पहले 10 बनाइए, फिर बाकी जो
 vo_race_hint_sub,"पहले 10 तक आइए, फिर बाकी घटाइए।",assets/VO/vo_race_hint_sub.m4a,3.0
 vo_race_ok1,सही!,assets/VO/vo_race_ok1.m4a,0.68
 vo_race_ok2,बहुत बढ़िया!,assets/VO/vo_race_ok2.m4a,1.04
-vo_race_ok3,टर्बो! शानदार!,assets/VO/vo_race_ok3.m4a,1.55
 vo_race_q1,7 और 5 को जोड़िए।,assets/VO/vo_race_q1.m4a,1.93
 vo_race_a1,सही उत्तर 12 है।,assets/VO/vo_race_a1.m4a,1.69
 vo_race_q2,9 और 3 को जोड़िए।,assets/VO/vo_race_q2.m4a,1.75
