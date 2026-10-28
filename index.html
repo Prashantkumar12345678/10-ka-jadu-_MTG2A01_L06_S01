@@ -245,14 +245,12 @@ body.is-end .stage-inner{visibility:hidden;}
 .tf-board{position:relative;flex-shrink:0;}
 .tf-frame{position:absolute;left:0;top:0;background:#fff;border:3px solid #4A7EBB;border-radius:6px;transition:border-color .5s,box-shadow .5s;}
 .tf-frame.hl{}
-.tf-frame.drop-ok{border-color:var(--selected);box-shadow:0 0 0 6px rgba(56,106,246,.22);}
 .tf-cell{position:absolute;width:var(--ctr);height:var(--ctr);border-radius:50%;background:#F5F8FC;}
 .tf-ctr{position:absolute;left:0;top:0;width:var(--ctr);height:var(--ctr);border-radius:50%;background:#8DB3E2;
   transition:transform 1.5s cubic-bezier(.33,0,.2,1),background .5s,opacity .5s,box-shadow .5s,filter .4s;z-index:3;touch-action:none;}
 .tf-board.no-tr,.tf-board.no-tr .tf-ctr{transition:none;}
 .tf-ctr.enter{animation:ctrIn .6s cubic-bezier(.34,1.4,.6,1) both;}
 .tf-ctr.live{cursor:pointer;box-shadow:0 0 0 4px rgba(56,106,246,.30);}
-.tf-ctr.dragging{transition:none;z-index:20;box-shadow:0 10px 18px rgba(11,61,140,.35);cursor:grabbing;}
 .tf-ctr.dim{background:#F2F2F2;box-shadow:inset 0 0 0 2.5px #CFCFCF;}
 .tf-ctr.dim::after{content:"";position:absolute;inset:0;border-radius:50%;border:2.5px dashed #C9C9C9;}
 .tf-ctr.dim{box-shadow:none;}
@@ -293,9 +291,10 @@ body .stage .tf-lbl.ans{color:#0D7A2D;border-color:#1FB54A;background:linear-gra
 .opt-cell.reveal-pulse{animation:revealPulse 1.4s ease-in-out infinite;border-color:var(--correct);}
 .mcq-hint{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:14px;animation:fadeIn .5s ease;}
 .mcq-stage{position:relative;display:flex;justify-content:center;min-height:240px;width:100%;}
-/* after the 2nd wrong try the hint board stays on screen, smaller, with the options below it */
-.mcq-stage.with-hint{flex-direction:column;align-items:center;gap:26px;}
-.mcq-hint.mini{position:relative;order:-1;zoom:.78;gap:0;animation:none;}
+/* after the 2nd wrong try the hint board stays on screen with the options below it — same sizes as before, nothing shrinks */
+.mcq-stage.with-hint{flex-direction:column;align-items:center;gap:22px;}
+.mcq-hint.mini{position:relative;order:-1;gap:0;animation:none;}
+.mcq-hint.no-lbl .tf-lbl{display:none;}   /* 3rd wrong try: the numbers under the counters go away */
 .mcq-hint.mini .sub-eq{display:none;}
 body.vo-lock .opt-cell,body.vo-lock .tf-ctr.live,body.vo-lock .eq-box.ready,body.vo-lock .rc-opt{pointer-events:none;}
 
@@ -556,9 +555,7 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .tut-prompt .eq .eq-box{width:110px;height:100px;font-size:58px;border-radius:22px;}
 /* choose-the-answer screens (P3, P4): question higher, smaller cards */
 .q-wrap:has(.mcq-stage){justify-content:flex-start;padding-top:36px;gap:44px;}
-.q-wrap:has(.mcq-stage.with-hint){padding-top:16px;gap:20px;}
-.mcq-stage.with-hint .opt-cell{height:130px;}
-.mcq-stage.with-hint .opt-cell .num-glyph{font-size:66px;}
+.q-wrap:has(.mcq-stage.with-hint){padding-top:16px;gap:30px;}
 .q-wrap:has(.mcq-stage) > .eq{font-size:70px;}
 .q-wrap:has(.mcq-stage) > .eq .eq-box{width:100px;height:92px;font-size:52px;}
 .mcq-stage .opt-grid{grid-template-columns:repeat(3,190px);gap:38px;}
@@ -588,9 +585,7 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .tf-ctr.hl{--disc-top:#FFC85B;--disc-bottom:#FF9F1A;--disc-edge:#D57B06;background:linear-gradient(165deg,var(--disc-top),var(--disc-bottom)) !important;}
 /* highlighted balls just grow a little in their own place (put() sets the origin to the ball's centre), no pulsing */
 .tf-ctr.hl{scale:1.06;}
-.tf-ctr.dragging{transform-origin:50% 50% !important;}   /* the drag sets its own translate + scale */
 .tf-ctr.live{box-shadow:0 0 0 5px rgba(255,210,30,.85),inset 0 -5px 0 var(--disc-edge),inset 0 2px 1px rgba(255,255,255,.35),0 3px 3px rgba(12,55,115,.18) !important;}
-.tf-ctr.dragging{box-shadow:0 0 0 4px rgba(255,210,30,.75),inset 0 -5px 0 var(--disc-edge),0 9px 12px rgba(12,55,115,.28) !important;}
 .tf-ctr.dim{background:#EEF1F5 !important;box-shadow:none !important;}
 .tf-ctr.dim::before{display:none;}
 .tf-cell{background:#E3EBF6 !important;box-shadow:none !important;}
@@ -1989,7 +1984,7 @@ class Board{
     this.lblGroups.forEach(L => L.style.top = (FH + this.lblGap) + "px");
     if(instant){ void this.el.offsetWidth; this.el.classList.remove("no-tr"); }
   }
-  put(c, x, y){ c.x = x; c.y = y; c.el.style.transformOrigin = `${x + C / 2}px ${y + C / 2}px`; if(!c.el.classList.contains("dragging")) c.el.style.transform = `translate(${x}px,${y}px)`; }   // origin = the ball's own centre, so a highlight grows it in place
+  put(c, x, y){ c.x = x; c.y = y; c.el.style.transformOrigin = `${x + C / 2}px ${y + C / 2}px`; c.el.style.transform = `translate(${x}px,${y}px)`; }   // origin = the ball's own centre, so a highlight grows it in place
   labels(frameTxt, groupTxts){
     this.setLbl(this.lblFrame, frameTxt);
     (groupTxts || []).forEach((t, i) => {
@@ -2023,40 +2018,17 @@ class Board{
   cellEl(i){ return this.frameEl.children[i]; }
 
   /* drag (or tap) loose counters into the frame */
-  enableDrag(list, onMove){
+  /* making 10 is tap-only everywhere (no dragging): tap a loose ball and it slides into the next empty cell */
+  enableTapMove(list, onMove){
     this.live(list, true);
     list.forEach(c => {
-      const e = c.el;
-      e.onpointerdown = ev => {
-        if(!e.classList.contains("live") || document.body.classList.contains("vo-lock")) return;
-        ev.preventDefault(); e.setPointerCapture(ev.pointerId);
-        const br = this.el.getBoundingClientRect(), s = br.width / this.el.offsetWidth;
-        const sx = ev.clientX, sy = ev.clientY; let moved = false;
-        e.onpointermove = mv => {
-          const dx = (mv.clientX - sx) / s, dy = (mv.clientY - sy) / s;
-          if(!moved && Math.hypot(dx, dy) < 8) return;
-          if(!moved){ moved = true; e.classList.add("dragging"); }
-          e.style.transform = `translate(${c.x + dx}px,${c.y + dy}px) scale(1.08)`;
-          this.frameEl.classList.toggle("drop-ok", this.overFrame(c.x + dx + C / 2, c.y + dy + C / 2) && this.frame.length < 10);
-        };
-        e.onpointerup = e.onpointercancel = up => {
-          e.onpointermove = e.onpointerup = e.onpointercancel = null;
-          this.frameEl.classList.remove("drop-ok");
-          const dx = (up.clientX - sx) / s, dy = (up.clientY - sy) / s;
-          e.classList.remove("dragging");
-          const drop = !moved || this.overFrame(c.x + dx + C / 2, c.y + dy + C / 2);   // a plain tap also moves it
-          if(drop && this.frame.length < 10){
-            e.classList.remove("live"); e.onpointerdown = null;
-            this.toFrame(c); sfx("sfx_seat", .6); onMove && onMove(c);
-          } else {
-            this.put(c, c.x, c.y);
-            if(drop){ e.classList.remove("nope"); void e.offsetWidth; e.classList.add("nope"); sfx("sfx_wrong", .4); }
-          }
-        };
+      c.el.onpointerdown = ev => {
+        if(!c.el.classList.contains("live") || document.body.classList.contains("vo-lock") || this.frame.length >= 10) return;
+        ev.preventDefault(); c.el.onpointerdown = null; c.el.classList.remove("live");
+        this.toFrame(c); sfx("sfx_seat", .6); onMove && onMove(c);
       };
     });
   }
-  overFrame(x, y){ return x > -30 && x < FW + 30 && y > -30 && y < FH + 30; }
   enableTap(list, onTap){
     this.live(list, true);
     list.forEach(c => {
@@ -2370,13 +2342,13 @@ R.guidedAdd = async (ctx, s, f) => {
   const mover = board.groups[0];
   await f.say(vo.s4, [[.3, () => board.ghost(mover[0])]]);
   await f.wait(600);
-  board.ghost(mover[0]); handAt(mover[0].el, { still:true });         // once more, with the hand
-  f.later(500, () => handAt(board.cellEl(a), { still:true }));
-  await f.wait(1900); hideHand();
+  handAt(mover[0].el, { still:true });                                  // once more: the hand TAPS the ball (tap, not drag)
+  await f.wait(T.tap); tapHand(); board.ghost(mover[0]);
+  await f.wait(1600); hideHand();
   voLock(false);
   await f.until(done => {
     let moved = 0;
-    board.enableDrag(mover.slice(), () => { moved++; board.labels(a + moved, [need - moved || "", rest]); if(board.frame.length === 10) done(); });
+    board.enableTapMove(mover.slice(), () => { moved++; board.labels(a + moved, [need - moved || "", rest]); if(board.frame.length === 10) done(); });
     armNudge(mover[0].el, NUDGE_MS.guided);
   });
   disarmNudge(); sfx("sfx_correct", .6); setMood("happy");
@@ -2575,7 +2547,7 @@ R.practiceAdd = async (ctx, s, f) => {
   voLock(false);
   await f.until(done => {
     let moved = 0;
-    board.enableDrag(board.groups[0].slice(), () => {
+    board.enableTapMove(board.groups[0].slice(), () => {
       moved++; board.labels(a + moved, [b - moved]);
       if(board.frame.length === 10){ board.freeze(); done(); }
     });
@@ -2683,6 +2655,7 @@ R.mcq = async (ctx, s, f) => {
       await f.wait(500);
     } else {
       cell.classList.remove("wrong-flash");
+      const kept = stageEl.querySelector(".mcq-hint"); if(kept) kept.classList.add("no-lbl");
       cells.forEach(c => { if(+c.dataset.v === ans) c.classList.add("reveal-pulse"); else c.classList.add("faded"); });
       await f.say(vo.h3);
     }
