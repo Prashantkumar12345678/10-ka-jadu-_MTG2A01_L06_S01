@@ -274,7 +274,7 @@ body .stage .tf-lbl.ans{color:#0D7A2D;border-color:#1FB54A;background:linear-gra
 .q-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;min-height:0;}
 .tut-content .tf-board{margin-top:0;}
 .tut-card::after{height:40px;}       /* no Next button any more, so no room kept for it */
-.tut-content{padding-top:70px;}    /* tray + loose balls sit a little lower, away from the equation */
+.tut-content{padding-top:150px;}    /* tray + loose balls sit a little lower, away from the equation */
 
 /* option cards (reference toybox cards, big numbers like the PDF) */
 .opt-grid{display:grid;grid-template-columns:repeat(3,230px);gap:34px;justify-content:center;transition:opacity .4s;}
@@ -294,7 +294,8 @@ body .stage .tf-lbl.ans{color:#0D7A2D;border-color:#1FB54A;background:linear-gra
 /* after the 2nd wrong try the hint board stays on screen with the options below it — same sizes as before, nothing shrinks */
 .mcq-stage.with-hint{flex-direction:column;align-items:center;gap:22px;}
 .mcq-hint.mini{position:relative;order:-1;gap:0;animation:none;}
-.mcq-hint.no-lbl .tf-lbl{display:none;}   /* 3rd wrong try: the numbers under the counters go away */
+.mcq-hint .tf-lbl{display:none;}   /* P3/P4: no numbers under the counters */
+.mcq-hint .tf-board{zoom:.85;margin-bottom:-64px;}
 .mcq-hint.mini .sub-eq{display:none;}
 body.vo-lock .opt-cell,body.vo-lock .tf-ctr.live,body.vo-lock .eq-box.ready,body.vo-lock .rc-opt{pointer-events:none;}
 
@@ -546,7 +547,7 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .sg-ttl .t1 .ten{color:#2F7BF5;font-size:78px;}
 .sg-ttl .t2{display:block;margin-top:2px;font-weight:800;font-size:38px;color:#1A3F99;-webkit-text-stroke:8px #fff;paint-order:stroke fill;filter:drop-shadow(0 3px 0 rgba(20,60,140,.25));}
 .sg-ttl .t2 .add{color:#E5326B;} .sg-ttl .t2 .sub{color:#16A34A;}
-.sg-title-art{background:#8FD3F5 url("assets/Images/title_10ka_jadu.jpg?v=4") center 64%/cover no-repeat !important;animation:fingerPop .6s cubic-bezier(.34,1.3,.6,1) both;}
+.sg-title-art{background:#8FD3F5 url("assets/Images/title_10ka_jadu.jpg?v=9") center calc(100% + 10px)/100% 110% no-repeat !important;animation:fingerPop .6s cubic-bezier(.34,1.3,.6,1) both;}
 .sg-hero3d{position:absolute;left:50%;top:152px;transform:translateX(-50%) scale(.5);transform-origin:50% 0;z-index:2;}
 .sg-hero3d .tf-board{margin:0;}
 /* tutorial equation: bigger and a little lower */
@@ -554,8 +555,8 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .tut-prompt .eq{font-size:76px;gap:22px;}
 .tut-prompt .eq .eq-box{width:110px;height:100px;font-size:58px;border-radius:22px;}
 /* choose-the-answer screens (P3, P4): question higher, smaller cards */
-.q-wrap:has(.mcq-stage){justify-content:flex-start;padding-top:36px;gap:44px;}
-.q-wrap:has(.mcq-stage.with-hint){padding-top:16px;gap:30px;}
+.q-wrap:has(.mcq-stage){justify-content:center;padding-top:0;padding-bottom:20px;gap:44px;}
+.q-wrap:has(.mcq-stage.with-hint){gap:26px;}
 .q-wrap:has(.mcq-stage) > .eq{font-size:70px;}
 .q-wrap:has(.mcq-stage) > .eq .eq-box{width:100px;height:92px;font-size:52px;}
 .mcq-stage .opt-grid{grid-template-columns:repeat(3,190px);gap:38px;}
@@ -610,7 +611,8 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .pv-pad.off .pv-key{pointer-events:none;}
 /* guided last hint: keys other than the one the hand points at are greyed out and do nothing */
 .pv-pad .pv-key.locked{pointer-events:none;background:rgba(231,244,255,.7) !important;}
-.pv-left .tf-board{zoom:.84;}
+.pv-left .tf-board{zoom:.84;margin-top:40px;}
+.q-wrap > .tf-board{margin-top:36px;}
 .pv-layout > .eq{width:1000px;}
 .pv-layout > .eq .eq-part:nth-child(1),.pv-layout > .eq .eq-part:nth-child(3),.pv-layout > .eq .eq-box{width:160px;height:100px;border-radius:24px;font-size:68px;}
 .pv-row{width:1080px;transform:translateX(42px);gap:30px;}
@@ -1724,7 +1726,7 @@ function engineDown(){
    spoken by the device's Hindi text-to-speech, so the game is fully voiced before recording. */
 const VO_EXT = "m4a";
 /* measured length (s) of every VO file — visual cues are timed against it */
-const VO_DUR = {"vo_race_pick":1.2,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":13.6,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.52,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.16,"vo_race_intro":3.75,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":2.7,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
+const VO_DUR = {"vo_race_pick":1.2,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":13.6,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.52,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.16,"vo_race_intro":3.75,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":4.64,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
 const VO_SCRIPT = {};             // id -> text, filled as lines are declared (exported to vo_script.csv)
 function V(id, text){ VO_SCRIPT[id] = text; return { id, text }; }
 let hiVoice = null;
@@ -1732,6 +1734,8 @@ function pickVoice(){ try{ const vs = speechSynthesis.getVoices();
   hiVoice = vs.find(v => /^hi[-_]IN/i.test(v.lang)) || vs.find(v => /^hi/i.test(v.lang)) || null; }catch(e){} }
 try{ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }catch(e){}
 let curAudio = null, voPending = null, voToken = 0;
+/* T1 plays a little faster than recorded (QA: it felt slow); cue times are scaled to match */
+const voRate = line => line && /^vo_t1_/.test(line.id || "") ? 1.15 : 1;
 function setSpeaking(on){
   document.body.classList.toggle("vo-spk", on);
   document.querySelectorAll(".audio-chip,.tut-audio,.sg-vo").forEach(c => c.classList.toggle("playing", on));
@@ -1768,14 +1772,14 @@ function say(line, onStart){
       if(!("speechSynthesis" in window)){ holdOut(); return; }
       try{
         const u = new SpeechSynthesisUtterance(text);
-        u.lang = "hi-IN"; if(hiVoice) u.voice = hiVoice; u.rate = .9; u.pitch = 1.08;
+        u.lang = "hi-IN"; if(hiVoice) u.voice = hiVoice; u.rate = .9 * voRate(line); u.pitch = 1.08;
         u.onend = () => { if(Date.now() - t0 < Math.min(600, est * .2)) holdOut(); else fin(); };
         u.onerror = e => { if(e && e.error === "interrupted") fin(); else holdOut(); };
         speechSynthesis.speak(u);
       }catch(e){ holdOut(); }
     };
     if(line.id){
-      const a = new Audio("assets/VO/" + line.id + "." + VO_EXT); curAudio = a;
+      const a = new Audio("assets/VO/" + line.id + "." + VO_EXT); curAudio = a; a.playbackRate = voRate(line);
       a.onended = fin; a.onerror = () => { if(curAudio === a) tts(); };
       a.addEventListener("playing", () => { line.heard = true; heard(); }, { once:true });
       a.play().catch(() => { if(curAudio === a) tts(); });
@@ -1795,8 +1799,8 @@ class Flow{
      time the line ends runs then (in order), so the screen is always where the line left it. */
   say(line, cues){
     /* a cue time of 0..1 is a FRACTION of the line's length (e.g. .5 = halfway through) */
-    const len = ((line && VO_DUR[line.id]) || ((line && line.text || "").length * .088)) * 1000;
-    const pending = (cues || []).map(([t, fn]) => [t > 0 && t <= 1 ? t * len : t, fn]).sort((x, y) => x[0] - y[0]).map(([ms, fn]) => ({ ms, fn, ran:false }));
+    const rate = voRate(line), len = ((line && VO_DUR[line.id]) || ((line && line.text || "").length * .088)) * 1000 / rate;
+    const pending = (cues || []).map(([t, fn]) => [t > 0 && t <= 1 ? t * len : t / rate, fn]).sort((x, y) => x[0] - y[0]).map(([ms, fn]) => ({ ms, fn, ran:false }));
     // the cue clock starts when the voice is actually heard (not when the file starts loading)
     const startCues = () => pending.forEach(c => { c.t = setTimeout(() => { if(!this.dead && !c.ran){ c.ran = true; c.fn(); } }, c.ms); this.timers.push(c.t); });
     return this.gate(say(line, startCues).then(() => {
@@ -1877,7 +1881,7 @@ async function sumUp(f, host, tagA, tagB, firstVal, total, answerBox, srcA, srcB
 async function answerUp(f, tag, answerBox, value, host){
   if(host) host.innerHTML = "";
   await f.wait(300);
-  tag.textContent = value; tag.classList.add("ans"); tag.classList.remove("pop"); void tag.offsetWidth; tag.classList.add("pop"); sfx("sfx_correct", .5);
+  tag.textContent = value; tag.classList.add("ans"); tag.classList.remove("pop"); void tag.offsetWidth; tag.classList.add("pop");
   await f.wait(1300);
   const up = flyNum(f, tag, answerBox, value, 1200);
   tag.style.visibility = "hidden";
@@ -2122,15 +2126,12 @@ async function animAdd(flow, host, a, b, line){
   board.labels(a, [b]);
   const sub = SubEq(host);
   await flow.wait(T.beat * 2);
-  board.split([need, rest]); board.labels(a, [need, rest]);
-  await flow.wait(T.split);
-  for(const c of board.groups[0].slice()){ board.toFrame(c); sfx("sfx_seat", .5); await flow.wait(T.move); }
-  board.labels(10, ["", rest]);
-  await flow.wait(T.beat * 2);
-  board.setNear(true);
-  await flow.wait(T.near);
-
-  if(line) await flow.say(line); else await flow.wait(1500);
+  // moves ride the line: split as it starts, the 1 slides in on "1 जोड़ा", the rest come up on "फिर बाकी 6 जोड़ें"
+  await flow.say(line, [
+    [0, () => { board.split([need, rest]); board.labels(a, [need, rest]); }],
+    [.43, () => board.groups[0].slice().forEach((c, i) => flow.later(i * 500, () => { board.toFrame(c); sfx("sfx_seat", .5); }))],
+    [.66, () => { board.labels(10, ["", rest]); board.setNear(true); }]
+  ]);
   return board;
 }
 async function animSub(flow, host, n, m, line){
@@ -2139,13 +2140,12 @@ async function animSub(flow, host, n, m, line){
   board.labels(10, [loose]);
   const sub = SubEq(host);
   await flow.wait(T.beat * 2);
-  for(const c of board.groups[0]){ board.dim(c); sfx("sfx_tap", .5); await flow.wait(T.move * .7); }
-  board.labels(10, [""]);
-  await flow.wait(T.beat * 2);
-  for(let i = 9; i > 9 - rest; i--){ board.dim(board.frame[i]); sfx("sfx_tap", .5); await flow.wait(T.move * .7); }
-  board.labels(10 - rest, [""]); board.frame.slice(0, 10 - rest).forEach(c => c.el.classList.add("good"));
-
-  if(line) await flow.say(line); else await flow.wait(1500);
+  // "पहले 10 तक आइए" → the loose ones go; "फिर बाकी 1 घटाइए" → the rest go from the ten; what is left turns green
+  await flow.say(line, [
+    [0, () => { board.groups[0].forEach((c, i) => flow.later(i * 150, () => { board.dim(c); sfx("sfx_tap", .35); })); board.labels(10, [""]); }],
+    [.5, () => { for(let k = 0; k < rest; k++) flow.later(k * 300, () => { board.dim(board.frame[9 - k]); sfx("sfx_tap", .5); }); }],
+    [.9, () => { board.labels(10 - rest, [""]); board.frame.slice(0, 10 - rest).forEach(c => c.el.classList.add("good")); }]
+  ]);
   return board;
 }
 
@@ -2247,7 +2247,7 @@ const VO_RACE_OK = [V("vo_race_ok1","सही!"), V("vo_race_ok2","बहुत
 /* ---------- slide renderers ---------- */
 /* "यहाँ 8 हैं और यहाँ 5 हैं" — first only the tray's balls turn yellow and grow, then switch off; then only the loose ones */
 function hereCues(board, line){
-  const len = (VO_DUR[line.id] || 3) * 1000;      // the second "यहाँ/यह" starts at ~55% in all four recordings
+  const len = (VO_DUR[line.id] || 3) * 1000 / voRate(line);      // the second "यहाँ/यह" starts at ~55% in all four recordings
   return [[0, () => board.hlFrame(len * .5)], [.55, () => board.hlList(board.groups[0], len * .45)]];
 }
 const R = {};
@@ -2419,7 +2419,7 @@ R.guidedSub = async (ctx, s, f) => {
   disarmNudge();
   await f.wait(T.beat);
   voLock(true);
-  await f.say(vo.s6, [[0, () => { board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120)); sfx("sfx_correct", .6); }]]);
+  await f.say(vo.s6, [[0, () => board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120))]]);
   await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); confettiCannon(); setMood("happy");
   await f.say(vo.s7, eq.partCues([[0, 950, 1800], [2, 1800, 2100], [1, 2100, 2900], [4, 3000, 3900]]));
@@ -2559,10 +2559,8 @@ R.practiceAdd = async (ctx, s, f) => {
   await f.wait(T.near);
   await f.wait(T.beat);
   await answerLadder(f, eq, [a, "+", b, "="], a + b, vo, async () => {
-    board.hlFrame();
-    await f.wait(1400); board.hlList(board.groups[0]);
-    await f.wait(1400);
-    await f.say(vo.h2);
+    // "8 में 2 जोड़कर 10 बना। 4 बाकी। 10 और 4 मिलकर 14 होते हैं।" — each part lights as it is said
+    await f.say(vo.h2, [[0, () => board.hlFrame(2400)], [3100, () => board.hlList(board.groups[0], 1000)], [4400, () => board.hlFrame(2300)], [4880, () => board.hlList(board.groups[0], 1850)]]);
     await f.wait(T.beat);
   });
   board.allGood();
@@ -2599,10 +2597,8 @@ R.practiceSub = async (ctx, s, f) => {
   disarmNudge();
   await f.wait(T.beat);
   await answerLadder(f, eq, [n, MINUS, m, "="], n - m, vo, async () => {
-    board.hlList(board.groups[0]);
-    await f.wait(1400); board.hlList(board.frame.filter(c => c.dim && !board.groups[0].includes(c)));
-    await f.wait(1400); board.hlList(board.undimmed(board.frame));
-    await f.say(vo.h2);
+    // "पहले 10 तक आए, फिर बाकी 2 घटाया। कितना बचा?"
+    await f.say(vo.h2, [[0, () => board.hlList(board.groups[0], 1500)], [1950, () => board.hlList(board.frame.filter(c => c.dim && !board.groups[0].includes(c)), 1300)], [3650, () => board.hlList(board.undimmed(board.frame), 900)]]);
     await f.wait(T.beat);
   });
   board.undimmed(board.frame).forEach(c => c.el.classList.add("good"));
@@ -2652,10 +2648,13 @@ R.mcq = async (ctx, s, f) => {
       await f.wait(800);
       // the hint stays where it is, just a bit smaller, and the options come back underneath it
       stageEl.classList.add("with-hint"); h.classList.add("mini"); grid.classList.remove("away");
+      // the board is laid out for frame + loose row; centre what is actually on screen under the sentence
+      const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, rs = [...h.querySelectorAll(".tf-frame,.tf-ctr")].map(e => e.getBoundingClientRect());
+      const mid = (Math.min(...rs.map(r => r.left)) + Math.max(...rs.map(r => r.right))) / 2;
+      h.style.transform = `translateX(${(st.left + st.width / 2 - mid) / k}px)`;
       await f.wait(500);
     } else {
       cell.classList.remove("wrong-flash");
-      const kept = stageEl.querySelector(".mcq-hint"); if(kept) kept.classList.add("no-lbl");
       cells.forEach(c => { if(+c.dataset.v === ans) c.classList.add("reveal-pulse"); else c.classList.add("faded"); });
       await f.say(vo.h3);
     }
