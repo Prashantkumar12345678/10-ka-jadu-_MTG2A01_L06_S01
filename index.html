@@ -298,6 +298,7 @@ body .stage .tf-lbl.ans{color:#0D7A2D;border-color:#1FB54A;background:linear-gra
 .mcq-hint .tf-lbl{display:none;}   /* P3/P4: no numbers under the counters */
 .mcq-hint .tf-board{zoom:.85;margin-bottom:-64px;}
 .mcq-hint.mini .sub-eq{display:none;}
+.mcq-stage.with-hint .opt-grid{margin-top:12px;}   /* options sit a little lower under the kept hint */
 body.vo-lock .opt-cell,body.vo-lock .tf-ctr.live,body.vo-lock .eq-box.ready,body.vo-lock .rc-opt{pointer-events:none;}
 
 .kp-overlay{position:absolute;inset:0;z-index:65;background:rgba(11,61,140,.28);display:none;align-items:center;justify-content:center;}
@@ -560,6 +561,12 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .q-wrap:has(.mcq-stage.with-hint){gap:26px;}
 .q-wrap:has(.mcq-stage) > .eq{font-size:70px;}
 .q-wrap:has(.mcq-stage) > .eq .eq-box{width:100px;height:92px;font-size:52px;}
+/* the answer box uses the same number size as the other boxes (also when the answer flies in) */
+.eq:not(.small) .eq-box{font-size:1em !important;}
+.pv-layout > .eq .eq-box{font-size:68px !important;}
+/* room above the sentence so a pulsing box is never clipped at the top */
+.slide-stage{padding-top:18px;}
+.stage.tut .slide-stage{padding-top:44px;}
 .mcq-stage .opt-grid{grid-template-columns:repeat(3,190px);gap:38px;}
 .mcq-stage .opt-cell{height:150px;border-radius:22px;}
 .mcq-stage .opt-cell .num-glyph{font-size:80px;}
@@ -2836,7 +2843,7 @@ R.race = async (ctx, s, f) => {
   const humTo = s => { if(!hum) return; const t = hum.c.currentTime; hum.o.frequency.setTargetAtTime(48 + s * 14, t, .25); hum.o2.frequency.setTargetAtTime(72 + s * 20, t, .25); hum.g.gain.setTargetAtTime(.025 + Math.min(s, 8) * .006, t, .3); };
   const humOff = () => { if(!hum) return; try{ hum.g.gain.setTargetAtTime(0, hum.c.currentTime, .15); const h0 = hum; setTimeout(() => { try{ h0.o.stop(); h0.o2.stop(); }catch(e){} }, 600); }catch(e){} hum = null; };
 
-  let speed = 4.2, speedTarget = 4.2, flow = 0, alive = true, last = performance.now(), thinking = false, finish = null, finishing = false, raceTime = 0;
+  let speed = 0, speedTarget = 4.2, flow = 0, alive = true, started = false, last = performance.now(), thinking = false, finish = null, finishing = false, raceTime = 0;
   let throttleFor = 0;
   const setSpeed = v => {
     speedTarget = Math.max(2.2, v); humTo(speedTarget);
@@ -2851,7 +2858,7 @@ R.race = async (ctx, s, f) => {
     raceTime += dt;
     if(!finishing && throttleFor > 0){ throttleFor -= dt; if(throttleFor <= 0) setSpeed(4.2); }
     // The camera keeps cruising even when Swifty briefly loses momentum.
-    const cameraPace = finishing ? 7.5 : 4.2;
+    const cameraPace = !started ? 0 : finishing ? 7.5 : 4.2;      // water and boats stay still through 3-2-1
     speed += (cameraPace - speed) * Math.min(1, dt * 2.2);
     flow = (flow + speed * 95 * dt) % 512;
     sea.style.backgroundPositionY = flow + "px"; sea.style.setProperty("--flow", (flow % 64) + "px");
@@ -2887,7 +2894,7 @@ R.race = async (ctx, s, f) => {
         if(j.p > ceiling){ j.p = ceiling; j.v = Math.min(j.v, 0); }
       }
       j.ph += dt * (1.8 + j.cruise * .3);
-      const weave = Math.sin(j.ph) * (3 + j.cruise * .8);
+      const weave = started ? Math.sin(j.ph) * (3 + j.cruise * .8) : 0;
       const dx = weave - (j._w || 0); j._w = weave;
       j.lean += ((dx / Math.max(dt, .001)) * .3 - j.lean) * Math.min(1, dt * 6);
       const y = Y0 - j.p * (Y0 - Y1);
@@ -2895,6 +2902,7 @@ R.race = async (ctx, s, f) => {
       j.img.style.transform = `rotate(${Math.max(-11, Math.min(11, j.lean))}deg)`;
       const rate = (j.cruise + Math.max(0, j.v) * 14) * (j === meJ ? 1.4 : .9);
       j._acc = (j._acc || 0) + rate * dt * 5;
+      if(!started) j._acc = 0;
       while(j._acc >= 1){ j._acc -= 1; spray(j.x + weave, y + 170, j === meJ && meJ.el.classList.contains("turbo")); }
     });
     requestAnimationFrame(step);
@@ -2934,7 +2942,7 @@ R.race = async (ctx, s, f) => {
     beep(520); await f.wait(800);
   }
   cd.textContent = "चलो!"; cd.classList.remove("show"); void cd.offsetWidth; cd.classList.add("show", "go");
-  beep(880, .35); vroom(2); setSpeed(4.5);
+  beep(880, .35); vroom(2); setSpeed(4.5); started = true;
   jets.forEach(j => { j.p = 0; j.target = 0; j.v = 0; });
   await f.wait(700); cd.remove();
   panel.style.visibility = "";
