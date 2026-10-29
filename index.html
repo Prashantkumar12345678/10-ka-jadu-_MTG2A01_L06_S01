@@ -91,6 +91,7 @@ body.vo-spk .audio-chip,body.vo-spk .tut-audio{pointer-events:none;opacity:.5;fi
 .stage.tut .nav-btn{bottom:64px;}
 .nav-btn.hide{display:none;}
 body .stage .nav-btn{display:none !important;}
+body .stage.show-next .nav-btn{display:block !important;}
 
 /* ---------- nudge hand ---------- */
 .nudge-hand{position:absolute;width:96px;height:120px;z-index:75;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));display:none;transition:left .55s cubic-bezier(.4,0,.2,1),top .55s cubic-bezier(.4,0,.2,1);}
@@ -3154,8 +3155,9 @@ function beep(freq, len){
 let cur = -1, curPhase = null;
 function setPrompt(t){ $("promptText").textContent = t || ""; }
 function complete(){
-  // no Next button on any screen: once the screen is done, it moves on by itself
+  // only T1 waits for the Next button; every other screen moves on by itself
   disarmNudge();
+  if(SLIDES[cur] && SLIDES[cur].id === "T1"){ const nb = $("navBtn"); nb.disabled = false; nb.classList.add("active"); $("stage").classList.add("show-next"); return; }
   FLOW && FLOW.later(1500, () => go(cur + 1));
 }
 $("navBtn").addEventListener("click", () => {
@@ -3181,7 +3183,7 @@ async function phaseGate(phase){
 async function go(i){
   if(FLOW) FLOW.kill();
   stopVO(); disarmNudge(); closeKeypad(); hideHint(); voLock(false);
-  $("stage").classList.remove("race-mode", "no-next"); document.body.classList.remove("race-page");
+  $("stage").classList.remove("race-mode", "no-next", "show-next"); document.body.classList.remove("race-page");
   $("slideHost").innerHTML = ""; document.querySelectorAll(".sum-mid,.fly-num").forEach(e => e.remove());
   const nb = $("navBtn"); nb.disabled = true; nb.classList.remove("active", "nav-call");
   if(i >= SLIDES.length){ return showEnd(); }
