@@ -1,0 +1,15 @@
+# Only MTG2A01_L06_S01/ is served (vercel.json outputDirectory). Everything below is dev-side and
+# never needs to reach Vercel: QA/build tooling, source masters, safety backups, docs.
+_tools/
+_masters/
+_backup/
+.vscode/
+**/__pycache__/
+*.py
+*.md
+*.xlsx
+*.csv
+*.pdf
+.DS_Store
+Thumbs.db
+~$*
