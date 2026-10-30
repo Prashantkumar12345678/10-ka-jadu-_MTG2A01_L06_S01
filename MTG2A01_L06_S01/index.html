@@ -766,11 +766,14 @@ body .stage .eq .eq-box{box-shadow:0 7px 0 #1569C9 !important;}
 body .stage .eq .eq-box.done{box-shadow:0 7px 0 #14903A !important;}
 body .stage .eq .eq-box.wrong{box-shadow:0 7px 0 #C21F2D !important;}
 body .stage .idle-call,body .stage .eq .eq-box.idle-call{animation:idlePulse .8s ease-in-out 3 !important;}   /* idle: "touch me" */
+body .stage .eq .eq-box.idle-call{filter:drop-shadow(0 0 14px rgba(255,160,0,.95));border-color:#FFB800 !important;}
 body .stage .eq .eq-box.call{animation:boxPulse .8s ease-in-out infinite !important;}   /* while the voice says "इस डिब्बे…" */
 body .stage .eq .eq-box.ready:active{translate:0 4px;box-shadow:0 3px 0 #1569C9 !important;}
 body .stage .jr-band .eq .eq-box{box-shadow:none !important;}
 /* wrong answer: no red anywhere — the item only wiggles */
 body .stage .eq .eq-box.wrong{border-color:#1E8BF0 !important;background:#fff !important;color:#012F76 !important;box-shadow:0 7px 0 #1569C9 !important;animation:wgNo .5s ease-in-out !important;}
+/* a highlighted box (idle glow, pulse on the VO, spoken) is orange all round - its bottom edge too, not blue */
+body .stage .eq .eq-box.idle-call,body .stage .eq .eq-box.call,body .stage .eq .eq-box.say{border-color:#FFB800 !important;box-shadow:0 7px 0 #E09A00 !important;}
 body .stage .opt-cell.wrong-flash{border-color:#9DBDF2 !important;background:linear-gradient(180deg,#FFFFFF,#F1F6FF) !important;animation:wgNo .5s ease-in-out !important;}
 body .stage .jr-btn.wrong-flash{background:linear-gradient(180deg,#1795FF 0%,#027AFE 50%,#0659FB 100%) !important;border-color:#62CBFF !important;animation:wgNo .5s ease-in-out !important;}
 body .stage .rc-btn.wrong-flash{animation:wgNo .5s ease-in-out !important;}
@@ -1832,7 +1835,7 @@ function engineDown(){
    spoken by the device's Hindi text-to-speech, so the game is fully voiced before recording. */
 const VO_EXT = "wav";
 /* measured length (s) of every VO file — visual cues are timed against it */
-const VO_DUR = {"vo_race_intro1":3.36,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":16.68,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.12,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.12,"vo_race_intro":3.96,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":4.64,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
+const VO_DUR = {"vo_race_intro1":3.36,"vo_p1_q1":3.52,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":16.68,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.12,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.12,"vo_race_intro":3.96,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":4.64,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
 const VO_SCRIPT = {};             // id -> text, filled as lines are declared (exported to vo_script.csv)
 function V(id, text){ VO_SCRIPT[id] = text; return { id, text }; }
 let hiVoice = null;
@@ -2022,7 +2025,7 @@ function disarmNudge(){ clearTimeout(nudge.timer); nudge.target = null; hideHand
 function idleCall(){
   const t = nudge.target; if(!t || !t.isConnected) return;
   const live = t.classList.contains("tf-ctr") ? [...document.querySelectorAll(".tf-ctr.live")] : [];
-  (live.length ? live : [t]).forEach(e => { e.classList.remove("idle-call"); void e.offsetWidth; e.classList.add("idle-call"); setTimeout(() => e.classList.remove("idle-call"), 2500); });
+  if(!(FLOW && FLOW.replayCues)) (live.length ? live : [t]).forEach(e => { e.classList.remove("idle-call"); void e.offsetWidth; e.classList.add("idle-call"); setTimeout(() => e.classList.remove("idle-call"), 2500); });
   replay();
   const line = FLOW && FLOW.replay, len = line ? (VO_DUR[line.id] || 3) * 1000 : 0;
   nudge.timer = setTimeout(idleCall, nudge.ms + len);          // still nothing? ask again after the line + another wait
@@ -2335,6 +2338,8 @@ const SLIDES = [
       go:V("vo_race_go","तैयार? दौड़ शुरू!"),
       win:V("vo_race_win","वाह! आपकी नाव सबसे पहले पहुँची!") } }
 ];
+/* P1/P2 idle once the counters are done */
+const VO_TAP_BOX = V("vo_p1_q1", "सही संख्या इस डिब्बे पर टैप करके लिखिए।");
 const VO_END = V("vo_end", "बहुत बढ़िया! आपने सीख लिया।");
 const RACE_QS = [
   { a:7,  op:"+", b:5, opts:[11,12,13] }, { a:9,  op:"+", b:3, opts:[12,13,11] }, { a:7, op:"+", b:6, opts:[11,12,13] },
@@ -2595,6 +2600,7 @@ function Pad(host){
 async function answerLadder(f, eq, label, ans, vo, hint2){
   eq.box.classList.add("ready");
   let wrong = 0;
+  if(f.pad){ f.replay = VO_TAP_BOX; f.replayCues = null; }          // counters done: idle says "सही संख्या इस डिब्बे पर टैप करके लिखिए" and the box glows
   if(!f.pad) armNudge(eq.box, NUDGE_MS.practice);
   while(true){
     let v;
@@ -2661,7 +2667,9 @@ R.practiceAdd = async (ctx, s, f) => {
   f.replay = vo.q;
   board.labels(a, [b]);
   voLock(true); await f.wait(900);
-  await f.say(vo.q, [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("ready", "call")]]);   // "…इस डिब्बे पर टैप करके लिखिए" — the box pulses
+  // "8 … 6 …" light as they are said; "…इस डिब्बे पर टैप करके लिखिए" — the box pulses. Idle repeats it with the same cues.
+  f.replayCues = () => [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("call")], [1, () => eq.box.classList.remove("call")]];
+  await f.say(vo.q, [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("ready", "call")]]);
   eq.box.classList.remove("ready", "call");
   voLock(false);
   await f.until(done => {
@@ -2698,6 +2706,7 @@ R.practiceSub = async (ctx, s, f) => {
   f.replay = vo.q;
   board.labels(10, [loose]);
   voLock(true); await f.wait(900);
+  f.replayCues = () => [[.12, () => { board.hlFrame(1200); board.hlList(board.groups[0], 1200); }]];
   await f.say(vo.q, [[.12, () => { board.hlFrame(1200); board.hlList(board.groups[0], 1200); }]]);   // "16": the whole 16 lights together
   voLock(false);
   await f.until(done => {
@@ -3288,7 +3297,11 @@ $("navBtn").addEventListener("click", () => {
   const nb = $("navBtn"); if(nb.disabled) return;
   sfx("sfx_next", .7); go(cur + 1);
 });
-function replay(){ if(FLOW && FLOW.replay && !document.body.classList.contains("vo-spk")) say(FLOW.replay); }
+/* repeat the screen's line; when the screen gave its word cues (f.replayCues), the same parts light up with the words again */
+function replay(){
+  if(!FLOW || !FLOW.replay || document.body.classList.contains("vo-spk")) return;
+  if(FLOW.replayCues) FLOW.say(FLOW.replay, FLOW.replayCues()); else say(FLOW.replay);
+}
 $("audioChip").onclick = replay;
 
 async function phaseGate(phase){
