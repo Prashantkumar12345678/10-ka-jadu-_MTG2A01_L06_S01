@@ -182,6 +182,12 @@ body.vo-spk .audio-chip,body.vo-spk .tut-audio{pointer-events:none;opacity:.5;fi
 .stage.tut .nav-btn{bottom:64px;}
 .nav-btn.hide{display:none;}
 body .stage .nav-btn{display:none !important;}
+.tf-board{transition:opacity .6s ease;}
+.tf-board.intro-off{opacity:0;pointer-events:none;}
+.eq.intro-glide{transition:transform .8s cubic-bezier(.3,1.15,.5,1);}
+/* P3/P4 3rd wrong try: the right option glows clearly (box-shadow is locked off on options, so the glow is a filter) */
+body .stage .opt-cell.reveal-pulse{animation:revealGlow 1.2s ease-in-out infinite !important;border-color:#1FB54A !important;background:#EFFFF2 !important;}
+@keyframes revealGlow{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(31,181,74,0));}50%{transform:scale(1.07);filter:drop-shadow(0 0 14px rgba(31,181,74,.9)) drop-shadow(0 0 4px rgba(31,181,74,.9));}}
 body .stage.show-next .nav-btn{display:block !important;}
 
 /* ---------- nudge hand ---------- */
@@ -366,7 +372,8 @@ body .stage .tf-lbl.ans{color:#0D7A2D;border-color:#1FB54A;background:linear-gra
 .q-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;min-height:0;}
 .tut-content .tf-board{margin-top:0;}
 .tut-card::after{height:40px;}       /* no Next button any more, so no room kept for it */
-.tut-content{padding-top:150px;}    /* tray + loose balls sit a little lower, away from the equation */
+.tut-content{padding-top:90px;}
+.tut-content .tf-board > .tf-lbl{margin-top:-12px;}   /* T1/T2: number tags a little closer under the tray */    /* tray + loose balls sit a little lower, away from the equation */
 
 /* option cards (reference toybox cards, big numbers like the PDF) */
 .opt-grid{display:grid;grid-template-columns:repeat(3,230px);gap:34px;justify-content:center;transition:opacity .4s;}
@@ -709,7 +716,7 @@ body.loaded .sg-ttl{animation-play-state:running;}
 .pv-pad.off{opacity:1;filter:none;}
 .pv-pad.off .pv-key{pointer-events:none;}
 /* guided last hint: keys other than the one the hand points at are greyed out and do nothing */
-.pv-pad .pv-key.locked{pointer-events:none;background:rgba(231,244,255,.7) !important;}
+.pv-pad .pv-key.locked{pointer-events:none;background:rgba(231,244,255,.82) !important;box-shadow:0 0 0 5px rgba(231,244,255,.82) !important;}   /* covers the key's border too: a disabled key reads flat */
 .pv-left .tf-board{zoom:.84;margin-top:40px;}
 .q-wrap > .tf-board{margin-top:36px;}
 .pv-layout > .eq{width:1000px;}
@@ -2349,6 +2356,19 @@ function hereCues(board, line){
   const len = (VO_DUR[line.id] || 3) * 1000 / voRate(line);      // the second "यहाँ/यह" starts at ~55% in all four recordings
   return [[0, () => board.hlFrame(len * .5)], [.55, () => board.hlList(board.groups[0], len * .45)]];
 }
+/* Intro (QA doc): the sentence starts alone in the middle of the screen; on "आइए, इसे…" the counters come in
+   and the sentence slides up to its place. The numbers under the counters come with "यह 8 है…" (introLabels). */
+function introSolo(eq, board){
+  board.el.classList.add("intro-off");
+  const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, r = eq.el.getBoundingClientRect();
+  eq.el.style.transform = `translateY(${(st.top + st.height / 2 - (r.top + r.height / 2)) / k}px)`;
+  return () => { eq.el.classList.add("intro-glide"); eq.el.style.transform = ""; board.el.classList.remove("intro-off"); };
+}
+const INTRO_AT = .46;      // "आइए…" starts at ~46% of all four first lines (T1, T2, G1, G2)
+function introLabels(board, frameTxt, groupTxt, line){
+  const cues = hereCues(board, line);
+  return [[0, () => { board.labels(frameTxt); cues[0][1](); }], [.55, () => { board.labels(frameTxt, [groupTxt]); cues[1][1](); }]];
+}
 const R = {};
 
 /* PDF p2 — T1 8 + 5 (auto-played) */
@@ -2358,13 +2378,13 @@ R.demoAdd = async (ctx, s, f) => {
   const board = new Board(ctx.content, { frame:a, loose:[b], maxLoose: 5 * STEP });
   const sub = SubEq(ctx.content);
   f.replay = vo.s1;
-  board.labels(a, [b]);
+  const reveal = introSolo(eq, board);
   await f.wait(900);
-  // "8 और 5 को जोड़ना है…" — the equation's 8 and 5 light up as they are said
+  // "8 और 5 को जोड़ना है…" — the equation's 8 and 5 light up as they are said; on "आइए…" the counters come in
   await f.say(vo.s1, [[.05, () => eq.parts[0].classList.add("say")], [.15, () => eq.parts[0].classList.remove("say")],
-                      [.17, () => eq.parts[2].classList.add("say")], [.32, () => eq.parts[2].classList.remove("say")]]);
-  // "यहाँ 8 हैं और यहाँ 5 हैं" — both groups highlighted in sync
-  await f.say(vo.s2, hereCues(board, vo.s2));
+                      [.17, () => eq.parts[2].classList.add("say")], [.32, () => eq.parts[2].classList.remove("say")], [INTRO_AT, reveal]]);
+  // "यहाँ 8 हैं और यहाँ 5 हैं" — each number appears under its group as it is said, both groups highlighted in sync
+  await f.say(vo.s2, introLabels(board, a, b, vo.s2));
   // "…5 को 2 और 3 में बाँटते हैं" — the 5 splits into 2 and 3 on those words
   await f.say(vo.s3, [[.61, () => board.hlList(board.groups[0])], [.78, () => { board.split([need, rest]); board.labels(a, [need, rest]); }]]);
   await f.wait(T.beat);
@@ -2403,10 +2423,10 @@ R.demoSub = async (ctx, s, f) => {
   const board = new Board(ctx.content, { frame:10, loose:[loose], maxLoose: 5 * STEP, near:true });
   const sub = SubEq(ctx.content);
   f.replay = vo.s1;
-  board.labels(10, [loose]);
+  const reveal = introSolo(eq, board);
   await f.wait(900);
-  await f.say(vo.s1);
-  await f.say(vo.s2, hereCues(board, vo.s2));
+  await f.say(vo.s1, [[INTRO_AT, reveal]]);
+  await f.say(vo.s2, introLabels(board, 10, loose, vo.s2));
   await f.say(vo.s3);
   await f.say(vo.s4);
   for(const c of board.groups[0]){ handAt(c.el, { still:true }); await f.wait(T.tap); tapHand(); board.dim(c); sfx("sfx_tap", .6); await f.wait(T.beat); }
@@ -2430,11 +2450,11 @@ R.guidedAdd = async (ctx, s, f) => {
   const board = new Board(top, { frame:a, loose:[b], maxLoose: STEP + GROUP_GAP + 3 * STEP });
   const sub = SubEq(top);
   f.replay = vo.s4;
-  board.labels(a, [b]);
+  const reveal = introSolo(eq, board);
   voLock(true);
   await f.wait(900);
-  await f.say(vo.s1);
-  await f.say(vo.s2, hereCues(board, vo.s2));
+  await f.say(vo.s1, [[INTRO_AT, reveal]]);
+  await f.say(vo.s2, introLabels(board, a, b, vo.s2));
   await f.say(vo.s3);
   board.split([need, rest]); board.labels(a, [need, rest]);
   await f.wait(T.split + T.beat);
@@ -2487,11 +2507,11 @@ R.guidedSub = async (ctx, s, f) => {
   const board = new Board(top, { frame:10, loose:[loose], maxLoose: 5 * STEP, near:true });
   const sub = SubEq(top);
   f.replay = vo.s4;
-  board.labels(10, [loose]);
+  const reveal = introSolo(eq, board);
   voLock(true);
   await f.wait(900);
-  await f.say(vo.s1);
-  await f.say(vo.s2, hereCues(board, vo.s2));
+  await f.say(vo.s1, [[INTRO_AT, reveal]]);
+  await f.say(vo.s2, introLabels(board, 10, loose, vo.s2));
   await f.say(vo.s3);
   await f.say(vo.s4);
   voLock(false);
@@ -2722,7 +2742,8 @@ R.mcq = async (ctx, s, f) => {
   voLock(false);
   let wrong = 0;
   while(true){
-    armNudge(eq.box, NUDGE_MS.practice);      // never point at an option — that would give the answer away
+    // never point at an option — that would give the answer away (after the 3rd wrong try the right one is already shown)
+    armNudge(wrong >= 3 ? cells.find(c => +c.dataset.v === ans) : eq.box, NUDGE_MS.practice);
     const cell = await f.until(done => cells.forEach(c => c.onclick = () => { if(!document.body.classList.contains("vo-lock")) done(c); }));
     disarmNudge();
     if(+cell.dataset.v === ans){
@@ -2755,6 +2776,7 @@ R.mcq = async (ctx, s, f) => {
     } else {
       cell.classList.remove("wrong-flash");
       cells.forEach(c => { if(+c.dataset.v === ans) c.classList.add("reveal-pulse"); else c.classList.add("faded"); });
+      f.replay = vo.h3;                        // idle from now on: "सही उत्तर यह है। इसे चुनिए।", not the question
       await f.say(vo.h3);
     }
     voLock(false);
@@ -3055,7 +3077,7 @@ R.race = async (ctx, s, f) => {
     let wrong = 0;
     thinking = true;
     while(true){
-      armNudge(eq.box, NUDGE_MS.game);
+      armNudge(wrong >= 2 ? btns.find(o => +o.dataset.v === q.ans) : eq.box, NUDGE_MS.game);   // after the answer is shown, the right button pulses
       const btn = await f.until(done => btns.forEach(o => o.onclick = () => { if(!document.body.classList.contains("vo-lock")) done(o); }));
       disarmNudge();
       if(+btn.dataset.v === q.ans){
@@ -3099,6 +3121,7 @@ R.race = async (ctx, s, f) => {
       } else {
         btn.classList.remove("wrong-flash");
         btns.forEach(o => { if(+o.dataset.v === q.ans) o.classList.add("reveal-pulse"); else o.classList.add("faded"); });
+        f.replay = q.voAns;                    // idle from now on repeats this answer line, not the question
         await f.say(q.voAns);
       }
       setSpeed(4.2);
@@ -3256,9 +3279,9 @@ function beep(freq, len){
 let cur = -1, curPhase = null;
 function setPrompt(t){ $("promptText").textContent = t || ""; }
 function complete(){
-  // only T1 waits for the Next button; every other screen moves on by itself
+  // only T1 and T2 wait for the Next button; every other screen moves on by itself
   disarmNudge();
-  if(SLIDES[cur] && SLIDES[cur].id === "T1"){ const nb = $("navBtn"); nb.disabled = false; nb.classList.add("active"); $("stage").classList.add("show-next"); return; }
+  if(SLIDES[cur] && (SLIDES[cur].id === "T1" || SLIDES[cur].id === "T2")){ const nb = $("navBtn"); nb.disabled = false; nb.classList.add("active"); $("stage").classList.add("show-next"); return; }
   FLOW && FLOW.later(1500, () => go(cur + 1));
 }
 $("navBtn").addEventListener("click", () => {
