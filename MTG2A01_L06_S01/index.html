@@ -347,6 +347,7 @@ body.is-end .stage-inner{visibility:hidden;}
 .tf-ctr{position:absolute;left:0;top:0;width:var(--ctr);height:var(--ctr);border-radius:50%;background:#8DB3E2;
   transition:transform 1.5s cubic-bezier(.33,0,.2,1),background .5s,opacity .5s,box-shadow .5s,filter .4s;z-index:3;touch-action:none;}
 .tf-board.no-tr,.tf-board.no-tr .tf-ctr{transition:none;}
+.tf-board .tf-ctr.quick{transition:transform .45s cubic-bezier(.3,.9,.4,1),background .5s,opacity .5s,box-shadow .5s,filter .4s;}   /* a ball the child taps answers at once */
 .tf-ctr.enter{animation:ctrIn .6s cubic-bezier(.34,1.4,.6,1) both;}
 .tf-ctr.live{cursor:pointer;box-shadow:0 0 0 4px rgba(56,106,246,.30);}
 .tf-ctr.dim{background:#F2F2F2;box-shadow:inset 0 0 0 2.5px #CFCFCF;}
@@ -1835,7 +1836,7 @@ function engineDown(){
    spoken by the device's Hindi text-to-speech, so the game is fully voiced before recording. */
 const VO_EXT = "wav";
 /* measured length (s) of every VO file — visual cues are timed against it */
-const VO_DUR = {"vo_race_intro1":3.36,"vo_p1_q1":3.52,"vo_shabash":0.95,"vo_race_ready":0.9,"vo_race_start":1.26,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":16.68,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.12,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.12,"vo_race_intro":3.96,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":4.64,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
+const VO_DUR = {"vo_race_intro1":1.88,"vo_p1_q1":3.6,"vo_shabash":1.68,"vo_race_ready":1.12,"vo_race_start":1.84,"vo_gate_tutorial":5.24,"vo_gate_guided":2.16,"vo_gate_practice":2.68,"vo_gate_game":2.36,"vo_landing":15.48,"vo_retry":1.52,"vo_t1_1":5.6,"vo_t1_2":4.64,"vo_t1_3":10.36,"vo_t1_4":3.48,"vo_t1_5":3.68,"vo_t1_6":4.04,"vo_t1_7":6.0,"vo_t2_1":5.48,"vo_t2_2":8.28,"vo_t2_3":4.44,"vo_t2_4":4.48,"vo_t2_5":7.2,"vo_t2_6":1.68,"vo_t2_7":4.0,"vo_g1_1":6.04,"vo_g1_2":3.04,"vo_g1_3":7.6,"vo_g1_4":3.64,"vo_g1_5":5.16,"vo_g1_6":3.52,"vo_g1_7":7.16,"vo_g2_1":5.24,"vo_g2_2":5.24,"vo_g2_3":4.56,"vo_g2_4":4.08,"vo_g2_5":7.44,"vo_g2_6":1.92,"vo_g2_7":3.64,"vo_p1_q":7.8,"vo_p1_ok":4.76,"vo_p1_h2":7.12,"vo_p1_h3":2.48,"vo_p2_q":2.72,"vo_p2_ok":4.12,"vo_p2_h2":4.64,"vo_p2_h3":2.44,"vo_p3_q":5.24,"vo_p3_ok":4.44,"vo_p3_h2":5.0,"vo_p3_h3":3.0,"vo_p4_q":5.48,"vo_p4_ok":4.6,"vo_p4_h2":3.76,"vo_p4_h3":3.2,"vo_race_intro":2.2,"vo_race_win":3.6,"vo_end":2.8,"vo_race_hint_add":3.52,"vo_race_hint_sub":3.48,"vo_race_ok1":1.08,"vo_race_ok2":1.52,"vo_race_q1":2.52,"vo_race_a1":2.36,"vo_race_q2":2.8,"vo_race_a2":2.4,"vo_race_q3":2.4,"vo_race_a3":2.48,"vo_race_q4":2.72,"vo_race_a4":2.16,"vo_race_q5":2.56,"vo_race_a5":2.28,"vo_race_q6":2.48,"vo_race_a6":2.24,"vo_race_q7":2.4,"vo_race_a7":2.48};
 const VO_SCRIPT = {};             // id -> text, filled as lines are declared (exported to vo_script.csv)
 function V(id, text){ VO_SCRIPT[id] = text; return { id, text }; }
 let hiVoice = null;
@@ -2138,8 +2139,9 @@ class Board{
     list.forEach(c => {
       c.el.onpointerdown = ev => {
         if(!c.el.classList.contains("live") || document.body.classList.contains("vo-lock") || this.frame.length >= 10) return;
-        ev.preventDefault(); c.el.onpointerdown = null; c.el.classList.remove("live");
+        ev.preventDefault(); c.el.onpointerdown = null; c.el.classList.remove("live", "idle-call"); c.el.classList.add("quick");
         this.toFrame(c); sfx("sfx_seat", .6); onMove && onMove(c);
+        setTimeout(() => c.el.classList.remove("quick"), 600);
       };
     });
   }
@@ -2263,51 +2265,54 @@ async function animSub(flow, host, n, m, line){
    SLIDES  (VO text exactly as the review PDF, spelling corrected)
    ============================================================================================ */
 const PHASE_GATE = {
-  tutorial: V("vo_gate_tutorial", "चलिए, शुरू करें!"),
+  tutorial: V("vo_gate_tutorial", "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!"),
   guided:   V("vo_gate_guided",   "चलिए, साथ में करें!"),
   practice: V("vo_gate_practice", "वाह! अब आपकी बारी।"),
   game:     V("vo_gate_game",     "चलिए, एक गेम खेलते हैं!")
 };
-const VO_LANDING = V("vo_landing", "नमस्ते दोस्त! आज हम जोड़ और घटाव जल्दी हल करना सीखेंगे। जोड़ते समय पहले 10 बनाएँगे और फिर बाकी जोड़ेंगे। घटाते समय पहले 10 तक आएँगे और फिर बाकी घटाएँगे।");
+/* reference HI02H04: the gate headline is blank until Swifty says it, then writes itself in.
+   at = ms into the gate's own VO (measured off the 05-Nov recording) */
+const PHASE_GATE_CAP = { tutorial:{ text:"चलिए, शुरू करें!", at:3650 }, practice:{ text:"अब आपकी बारी!", at:1420 } };   // "वाह!" is only said, not written
+const VO_LANDING = V("vo_landing", "नमस्ते दोस्त! मैं हूँ स्विफ्टी। आज हम जोड़ और घटाव जल्दी हल करना सीखेंगे। जोड़ते समय पहले 10 बनाएँगे और फिर बाकी जोड़ेंगे। घटाते समय पहले 10 तक आएँगे और फिर बाकी घटाएँगे।");
 const VO_RETRY = V("vo_retry", "फिर से करिए।");
 
 const SLIDES = [
   /* PDF page 2 — 02_STORY_SCENE */
   { id:"T1", phase:"tutorial", type:"demoAdd", a:8, b:5, vo:{
       s1:V("vo_t1_1","8 और 5 को जोड़ना है। आइए, इसे एक आसान तरीके से समझते हैं।"),
-      s2:V("vo_t1_2","यहाँ 8 हैं और यहाँ 5 हैं।"),
-      s3:V("vo_t1_3","पहले हम 10 बनाएँगे। 8 को 10 बनाने के लिए, 5 को 2 और 3 में बाँटते हैं।"),
-      s4:V("vo_t1_4","अब ये 2 ब्लॉक, 8 के साथ जोड़ते हैं।"),
-      s5:V("vo_t1_5","अब 10 बन गया। 3 ब्लॉक अभी बाकी हैं।"),
-      s6:V("vo_t1_6","अब इन 3 ब्लॉकों को 10 में जोड़ते हैं।"),
-      s7:V("vo_t1_7","तो यहाँ 8 जोड़ 5 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।") } },
+      s2:V("vo_t1_2","यहाँ 8 हैं, एक 10 के फ्रेम में, और यहाँ 5 अलग हैं।"),
+      s3:V("vo_t1_3","पहले हम 10 बनाएँगे। 8 को 10 बनाने के लिए, 5 को 2 और 3 में बाँटते हैं, ताकि 8 को 10 बना सकें।"),
+      s4:V("vo_t1_4","अब ये 2 गोले, 8 के साथ जोड़ते हैं।"),
+      s5:V("vo_t1_5","अब 10 बन गया। 3 गोले अभी बाकी हैं।"),
+      s6:V("vo_t1_6","अब इन बचे हुए 3 गोलों को 10 में जोड़ते हैं।"),
+      s7:V("vo_t1_7","तो यहाँ 8 जोड़ 5 बराबर 13। पहले 10 बनाया, फिर बाकी जोड़े।") } },
   /* PDF page 3 — 03_STORY_SCENE */
   { id:"T2", phase:"tutorial", type:"demoSub", n:13, m:5, vo:{
       s1:V("vo_t2_1","13 में से 5 घटाना है। आइए, इसे एक आसान तरीके से समझते हैं।"),
-      s2:V("vo_t2_2","यह 10 है और यह 3 है।"),
+      s2:V("vo_t2_2","ये कुल 13 गोले हैं, जिसमें ये 10 हैं, एक फ्रेम में, और ये 3 अलग हैं।"),
       s3:V("vo_t2_3","अब घटाव में पहले 10 तक आएँगे, फिर बाकी घटाएँगे।"),
-      s4:V("vo_t2_4","13 से 10 तक आने के लिए पहले 3 घटाते हैं।"),
+      s4:V("vo_t2_4","13 से 10 तक आने के लिए पहले ये 3 घटाते हैं।"),
       s5:V("vo_t2_5","5 में से 3 घटा दिए हैं। अब 2 बाकी हैं। तो बचे हुए 2, 10 में से और घटाएँगे।"),
       s6:V("vo_t2_6","अब बचे 8।"),
-      s7:V("vo_t2_7","तो 13 में से 5 घटाने पर 8 बचता है।") } },
+      s7:V("vo_t2_7","तो 13 घटा 5 बराबर 8।") } },
   /* PDF page 6 — 06_MEET_SEQUENCE */
   { id:"G1", phase:"guided", type:"guidedAdd", a:9, b:4, prompt:"पहले 10 बनाइए, फिर बाकी जोड़िए।", vo:{
       s1:V("vo_g1_1","9 और 4 को जोड़ना है। आइए, इसे एक आसान तरीके से करते हैं।"),
       s2:V("vo_g1_2","यहाँ 9 हैं और यहाँ 4 हैं।"),
       s3:V("vo_g1_3","पहले 10 बनाएँगे। 9 को 10 बनाने के लिए, 4 को 1 और 3 में बाँटते हैं।"),
-      s4:V("vo_g1_4","अब ये 1 ब्लॉक, 9 के साथ जोड़िए।"),
-      s5:V("vo_g1_5","शाबाश! यहाँ 10 बन गया। 3 ब्लॉक अभी बाकी हैं।"),
-      s6:V("vo_g1_6","अब इन 3 ब्लॉकों को 10 में जोड़ते हैं।"),
+      s4:V("vo_g1_4","अब ये 1 गोला, 9 के साथ जोड़िए।"),
+      s5:V("vo_g1_5","शाबाश! यहाँ 10 बन गया। 3 गोले अभी बाकी हैं।"),
+      s6:V("vo_g1_6","अब इन 3 गोलों को भी 10 में जोड़ते हैं।"),
       s7:V("vo_g1_7","तो यहाँ 9 जोड़ 4 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।") } },
   /* PDF page 7 — 09_SEQUENCE_COMPLETE (15 − 7) */
   { id:"G2", phase:"guided", type:"guidedSub", n:15, m:7, prompt:"पहले 10 तक आइए, फिर बाकी घटाइए।", vo:{
       s1:V("vo_g2_1","15 में से 7 घटाना है। आइए, इसे एक आसान तरीके से करते हैं।"),
-      s2:V("vo_g2_2","यह 10 है और यह 5 है।"),
+      s2:V("vo_g2_2","ये कुल 15 हैं, जिसमें ये 10 हैं, और ये 5 हैं।"),
       s3:V("vo_g2_3","अब घटाव में पहले 10 तक आएँगे, फिर बाकी घटाएँगे।"),
       s4:V("vo_g2_4","15 से 10 तक आने के लिए पहले 5 घटाइए।"),
       s5:V("vo_g2_5","7 में से 5 घटा दिए हैं। अब 2 बाकी हैं। तो बचे हुए 2, 10 में से और घटाइए।"),
       s6:V("vo_g2_6","अब बचे 8।"),
-      s7:V("vo_g2_7","तो 15 में से 7 घटाने पर 8 बचता है।") } },
+      s7:V("vo_g2_7","तो 15 घटा 7 बराबर 8।") } },
   /* PDF page 8 — 8 + 6 */
   { id:"P1", phase:"practice", type:"practiceAdd", a:8, b:6, prompt:"पहले 10 बनाइए, फिर उत्तर लिखिए।", vo:{
       q:V("vo_p1_q","अब आप 8 और 6 को जोड़िए। पहले 10 बनाइए। फिर सही संख्या इस डिब्बे पर टैप करके लिखिए।"),
@@ -2317,7 +2322,7 @@ const SLIDES = [
   /* PDF page 9 — 16 − 8 */
   { id:"P2", phase:"practice", type:"practiceSub", n:16, m:8, prompt:"पहले 10 तक आइए, फिर उत्तर लिखिए।", vo:{
       q:V("vo_p2_q","16 में से 8 घटाइए।"),
-      ok:V("vo_p2_ok","सही! 16 में से 8 घटाने पर 8 बचता है।"),
+      ok:V("vo_p2_ok","सही! 16 घटा 8 बराबर 8।"),
       h2:V("vo_p2_h2","पहले 10 तक आए, फिर बाकी 2 घटाया। कितना बचा?"),
       h3:V("vo_p2_h3","सही संख्या 8 है।") } },
   /* PDF page 10 — 9 + 7 */
@@ -2325,18 +2330,18 @@ const SLIDES = [
       q:V("vo_p3_q","9 और 7 को जोड़िए और फिर सही जोड़ वाली संख्या चुनिए।"),
       ok:V("vo_p3_ok","बहुत बढ़िया! 9 और 7 मिलकर 16 होते हैं।"),
       h2:V("vo_p3_h2","9 को 10 बनाने के लिए 1 जोड़ा। फिर बाकी 6 जोड़ें।"),
-      h3:V("vo_p3_h3","सही उत्तर यह है। इसे चुनिए।") } },
+      h3:V("vo_p3_h3","सही संख्या ये है, इसे चुनिए।") } },
   /* PDF page 11 — 18 − 9 */
   { id:"P4", phase:"practice", type:"mcq", op:"-", a:18, b:9, options:[18,9,8], prompt:"सही उत्तर चुनिए।", vo:{
       q:V("vo_p4_q","18 में से 9 घटाइए और फिर इस डिब्बे में आने वाली सही संख्या चुनिए।"),
-      ok:V("vo_p4_ok","बहुत बढ़िया! 18 में से 9 घटाने पर 9 बचता है।"),
+      ok:V("vo_p4_ok","बहुत बढ़िया! 18 घटा 9 बराबर 9।"),
       h2:V("vo_p4_h2","पहले 10 तक आइए। फिर बाकी 1 घटाइए।"),
-      h3:V("vo_p4_h3","सही उत्तर यह है। इसे चुनिए।") } },
+      h3:V("vo_p4_h3","ये सही संख्या है, इसे चुनिए।") } },
   /* PDF page 12 — गणित की तेज़ दौड़ */
   { id:"GAME", phase:"game", type:"race", prompt:"गणित की तेज़ दौड़", vo:{
-      intro:V("vo_race_intro","चलिए, एक गेम खेलते हैं — गणित की तेज़ दौड़!"),
+      intro:V("vo_race_intro","गणित की तेज़ दौड़!"),
       pick:V("vo_race_intro1","अपनी नाव चुनिए।"),   // new recording vo_race_intro1: Swifty asks the child to pick
-      ready:V("vo_race_ready","तैयार?"),        // said as 3-2-1 starts   (both cut from vo_race_go)
+      ready:V("vo_race_ready","तैयार?"),        // said as 3-2-1 starts
       go:V("vo_race_start","दौड़ शुरू!"),       // said the moment the count ends, then the race starts
       win:V("vo_race_win","वाह! आपकी नाव सबसे पहले पहुँची!") } }
 ];
@@ -2361,9 +2366,14 @@ const VO_RACE_OK = [V("vo_race_ok1","सही!"), V("vo_race_ok2","बहुत
 
 /* ---------- slide renderers ---------- */
 /* "यहाँ 8 हैं और यहाँ 5 हैं" — first only the tray's balls turn yellow and grow, then switch off; then only the loose ones */
+/* where the frame / the loose group are named in each "यहाँ…" line (05-Nov recordings); whole = "ये कुल 13 गोले हैं" lights all first */
+const HERE_AT = { vo_t1_2:{ frame:0, group:.69 }, vo_g1_2:{ frame:0, group:.53 },
+                  vo_t2_2:{ whole:true, frame:.42, group:.76 }, vo_g2_2:{ whole:true, frame:.52, group:.76 } };
 function hereCues(board, line){
-  const len = (VO_DUR[line.id] || 3) * 1000 / voRate(line);      // the second "यहाँ/यह" starts at ~55% in all four recordings
-  return [[0, () => board.hlFrame(len * .5)], [.55, () => board.hlList(board.groups[0], len * .45)]];
+  const len = (VO_DUR[line.id] || 3) * 1000 / voRate(line), at = HERE_AT[line.id] || { frame:0, group:.55 };
+  const cues = [[at.frame, () => board.hlFrame(len * (at.group - at.frame))], [at.group, () => board.hlList(board.groups[0], len * (1 - at.group))]];
+  if(at.whole) cues.unshift([0, () => { board.hlFrame(len * at.frame); board.hlList(board.groups[0], len * at.frame); }]);
+  return cues;
 }
 /* Intro (QA doc): the sentence starts alone in the middle of the screen; on "आइए, इसे…" the counters come in
    and the sentence slides up to its place. The numbers under the counters come with "यह 8 है…" (introLabels). */
@@ -2373,12 +2383,14 @@ function introSolo(eq, board){
   void board.el.offsetWidth; board.el.style.transition = "";
   const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, r = eq.el.getBoundingClientRect();
   eq.el.style.transform = `translateY(${(st.top + st.height / 2 - (r.top + r.height / 2)) / k}px)`;
-  return () => { eq.el.classList.add("intro-glide"); eq.el.style.transform = ""; board.el.classList.remove("intro-off"); };
+  // the sentence glides up first; the counters fade in only once it has left their spot (no overlap)
+  return () => { eq.el.classList.add("intro-glide"); void eq.el.offsetWidth; eq.el.style.transform = "";
+                 setTimeout(() => board.el.classList.remove("intro-off"), 450); };
 }
 const INTRO_AT = .46;      // "आइए…" starts at ~46% of all four first lines (T1, T2, G1, G2)
 function introLabels(board, frameTxt, groupTxt, line){
-  const cues = hereCues(board, line);
-  return [[0, () => { board.labels(frameTxt); cues[0][1](); }], [.55, () => { board.labels(frameTxt, [groupTxt]); cues[1][1](); }]];
+  const cues = hereCues(board, line), n = cues.length;
+  return [...cues.slice(0, n - 2), [cues[n - 2][0], () => { board.labels(frameTxt); cues[n - 2][1](); }], [cues[n - 1][0], () => { board.labels(frameTxt, [groupTxt]); cues[n - 1][1](); }]];
 }
 const R = {};
 
@@ -2393,11 +2405,11 @@ R.demoAdd = async (ctx, s, f) => {
   await f.wait(900);
   // "8 और 5 को जोड़ना है…" — the equation's 8 and 5 light up as they are said; on "आइए…" the counters come in
   await f.say(vo.s1, [[.05, () => eq.parts[0].classList.add("say")], [.15, () => eq.parts[0].classList.remove("say")],
-                      [.17, () => eq.parts[2].classList.add("say")], [.32, () => eq.parts[2].classList.remove("say")], [INTRO_AT, reveal]]);
+                      [.19, () => eq.parts[2].classList.add("say")], [.34, () => eq.parts[2].classList.remove("say")], [INTRO_AT, reveal]]);
   // "यहाँ 8 हैं और यहाँ 5 हैं" — each number appears under its group as it is said, both groups highlighted in sync
   await f.say(vo.s2, introLabels(board, a, b, vo.s2));
   // "…5 को 2 और 3 में बाँटते हैं" — the 5 splits into 2 and 3 on those words
-  await f.say(vo.s3, [[.61, () => board.hlList(board.groups[0])], [.78, () => { board.split([need, rest]); board.labels(a, [need, rest]); }]]);
+  await f.say(vo.s3, [[.45, () => board.hlList(board.groups[0])], [.61, () => { board.split([need, rest]); board.labels(a, [need, rest]); }]]);
   await f.wait(T.beat);
   // "अब ये 2 ब्लॉक, 8 के साथ जोड़ते हैं" — the 2 move into the frame by themselves, the frame glows green
   await f.say(vo.s4, [[.18, () => board.hlList(board.groups[0])]]);
@@ -2409,7 +2421,7 @@ R.demoAdd = async (ctx, s, f) => {
   sfx("sfx_correct", .45);
   await f.wait(T.beat * 2);
   // "अब 10 बन गया। 3 ब्लॉक अभी बाकी हैं।" — the 10 and then the remaining 3 light up
-  await f.say(vo.s5, [[0, () => board.hlFrame(1500)], [.52, () => board.hlList(board.groups[1])]]);
+  await f.say(vo.s5, [[0, () => board.hlFrame(1500)], [.49, () => board.hlList(board.groups[1])]]);
   // "अब इन 3 ब्लॉकों को 10 में जोड़ते हैं" — the 3 slide up to the 10, then 10 + 3 = 13
   await f.say(vo.s6);
   { const c = board.groups[1][0];
@@ -2423,7 +2435,7 @@ R.demoAdd = async (ctx, s, f) => {
   eq.set(a + b, "done"); sfx("sfx_correct", .6);
   await f.wait(T.beat * 2);
   // "तो यहाँ 8 जोड़ 5 बराबर 13। पहले 10 बनाया, फिर बाकी 3 जोड़े।" — each part of the equation lights with the voice
-  await f.say(vo.s7, [...eq.partCues([[0, 1500, 1950], [1, 1950, 2450], [2, 2450, 3150], [3, 3150, 4000], [4, 4050, 4800]]), [.62, () => board.hlFrame(1500)], [.87, () => board.hlList(board.groups[1])]]);
+  await f.say(vo.s7, [...eq.partCues([[0, 1000, 1340], [1, 1340, 1680], [2, 1680, 2100], [3, 2100, 2650], [4, 2700, 3400]]), [.64, () => board.hlFrame(1500)], [.83, () => board.hlList(board.groups[1])]]);
   complete();
 };
 
@@ -2449,7 +2461,7 @@ R.demoSub = async (ctx, s, f) => {
   await f.say(vo.s6, [[0, () => board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120))]]);
   await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); sfx("sfx_correct", .6);
-  await f.say(vo.s7, eq.partCues([[0, 800, 1600], [2, 1600, 1950], [1, 1950, 2700], [4, 2850, 3800]]));
+  await f.say(vo.s7, eq.partCues([[0, 900, 1400], [1, 1400, 1800], [2, 1800, 2400], [3, 2550, 3100], [4, 3150, 3900]]));
   complete();
 };
 
@@ -2471,22 +2483,21 @@ R.guidedAdd = async (ctx, s, f) => {
   await f.wait(T.split + T.beat);
   const mover = board.groups[0];
   // the guidance matches the interaction: the hand TAPS the ball (it pulses), nothing is dragged or slid across
-  const tapShow = () => { handAt(mover[0].el, { still:true }); f.later(T.tap, () => { tapHand(); const e = mover[0].el; e.classList.remove("idle-call"); void e.offsetWidth; e.classList.add("idle-call"); f.later(2500, () => e.classList.remove("idle-call")); }); };
+  const tapShow = () => { handAt(mover[0].el, { still:true }); f.later(T.tap, () => { if(board.frame.length >= 10){ hideHand(); return; } tapHand(); const e = mover[0].el; e.classList.remove("idle-call"); void e.offsetWidth; e.classList.add("idle-call"); f.later(2500, () => e.classList.remove("idle-call")); }); };
   await f.say(vo.s4, [[.3, tapShow]]);
-  await f.wait(600);
-  tapShow();                                                            // once more after the line
-  await f.wait(T.tap + 1400); hideHand();
-  voLock(false);
+  voLock(false);                                                        // the ball answers a tap as soon as the line ends
   await f.until(done => {
     let moved = 0;
-    board.enableTapMove(mover.slice(), () => { moved++; board.labels(a + moved, [need - moved || "", rest]); if(board.frame.length === 10) done(); });
+    board.enableTapMove(mover.slice(), () => { moved++; hideHand(); board.labels(a + moved, [need - moved || "", rest]); if(board.frame.length === 10) done(); });
     armNudge(mover[0].el, NUDGE_MS.guided);
+    f.later(600, () => { if(board.frame.length < 10) tapShow(); });       // the hand shows it once more meanwhile
+    f.later(600 + T.tap + 1400, hideHand);
   });
   disarmNudge(); sfx("sfx_correct", .6); setMood("happy");
   board.labels(10, ["", rest]);
   await f.wait(T.beat * 2);
   voLock(true);
-  await f.say(vo.s5, [[.65, () => board.hlList(board.groups[1])]]);
+  await f.say(vo.s5, [[.63, () => board.hlList(board.groups[1])]]);
   f.replay = vo.s6;
   await f.say(vo.s6);
   voLock(false);
@@ -2505,8 +2516,9 @@ R.guidedAdd = async (ctx, s, f) => {
       { lit:() => board.hlList(board.undimmed(board.frame)) }, { el:mid.el, lit:() => board.hlList(three) }, () => board.allGood()); }
   eq.set(a + b, "done"); sfx("sfx_correct", .6); confettiCannon(); setMood("happy");
   voLock(true);
-  await f.wait(T.beat);
-  await f.say(vo.s7, eq.partCues([[0, 1050, 1550], [1, 1550, 1950], [2, 1950, 2400], [3, 2400, 2950], [4, 2950, 3800]]));
+  await f.say(VO_SHABASH);                                  // same as G2: the confetti lands on "शाबाश!"
+  await f.say(vo.s7, [...eq.partCues([[0, 850, 1400], [1, 1450, 1850], [2, 1850, 2500], [3, 2550, 3100], [4, 3100, 3900]]),
+                      [.63, () => board.hlFrame(1500)], [.82, () => board.hlList(board.groups[1], 1800)]]);   // "पहले 10 बनाया" → the 10 glow orange, "फिर बाकी 3 जोड़े" → the 3 (as in T1)
   voLock(false);
   complete();
 };
@@ -2552,9 +2564,9 @@ R.guidedSub = async (ctx, s, f) => {
   voLock(true);
   await f.say(vo.s6, [[0, () => board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120))]]);
   await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
-  eq.set(n - m, "done"); confettiCannon(); setMood("happy");
+  eq.set(n - m, "done"); sfx("sfx_correct", .6); confettiCannon(); setMood("happy");   // same sound as G1
   await f.say(VO_SHABASH);                                  // the confetti lands on "शाबाश!"
-  await f.say(vo.s7, eq.partCues([[0, 950, 1800], [2, 1800, 2100], [1, 2100, 2900], [4, 3000, 3900]]));
+  await f.say(vo.s7, eq.partCues([[0, 900, 1450], [1, 1450, 1800], [2, 1800, 2250], [3, 2300, 2850], [4, 2900, 3600]]));
   voLock(false);
   complete();
 };
@@ -2675,8 +2687,8 @@ R.practiceAdd = async (ctx, s, f) => {
   f.replay = vo.q;
   voLock(true); await f.wait(900);
   // "8 … 6 …" light as they are said; "…इस डिब्बे पर टैप करके लिखिए" — the box pulses. Idle repeats it with the same cues.
-  f.replayCues = () => [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("call")], [1, () => eq.box.classList.remove("call")]];
-  await f.say(vo.q, [[.13, () => { board.labels(a); board.hlFrame(800); }], [.225, () => { board.labels(a, [b]); board.hlList(board.groups[0], 1200); }], [.76, () => eq.box.classList.add("ready", "call")]]);   // the numbers come after the counters, with their words
+  f.replayCues = () => [[.12, () => board.hlFrame(800)], [.2, () => board.hlList(board.groups[0], 1200)], [.77, () => eq.box.classList.add("call")], [1, () => eq.box.classList.remove("call")]];
+  await f.say(vo.q, [[.12, () => { board.labels(a); board.hlFrame(800); }], [.2, () => { board.labels(a, [b]); board.hlList(board.groups[0], 1200); }], [.77, () => eq.box.classList.add("ready", "call")]]);   // the numbers come after the counters, with their words
   eq.box.classList.remove("ready", "call");
   voLock(false);
   await f.until(done => {
@@ -2694,7 +2706,7 @@ R.practiceAdd = async (ctx, s, f) => {
   await f.wait(T.beat);
   await answerLadder(f, eq, [a, "+", b, "="], a + b, vo, async () => {
     // "8 में 2 जोड़कर 10 बना। 4 बाकी। 10 और 4 मिलकर 14 होते हैं।" — each part lights as it is said
-    await f.say(vo.h2, [[0, () => board.hlFrame(2400)], [3100, () => board.hlList(board.groups[0], 1000)], [4400, () => board.hlFrame(2300)], [4880, () => board.hlList(board.groups[0], 1850)]]);
+    await f.say(vo.h2, [[0, () => board.hlFrame(2400)], [2940, () => board.hlList(board.groups[0], 1000)], [4160, () => board.hlFrame(2300)], [4900, () => board.hlList(board.groups[0], 1750)]]);
     await f.wait(T.beat);
   });
   board.allGood();
@@ -2752,7 +2764,7 @@ R.mcq = async (ctx, s, f) => {
   f.replay = vo.q;
   voLock(true); await f.wait(700);
   // P4 says "…इस डिब्बे में आने वाली…": the box pulses on those words; P3 has no "डिब्बे", it just lights on "सही … संख्या"
-  await f.say(vo.q, [[s.op === "-" ? .56 : .58, () => { eq.box.classList.add("ready"); if(s.op === "-") eq.box.classList.add("call"); }]]);
+  await f.say(vo.q, [[s.op === "-" ? .55 : .63, () => { eq.box.classList.add("ready"); if(s.op === "-") eq.box.classList.add("call"); }]]);
   eq.box.classList.remove("ready", "call");
   voLock(false);
   let wrong = 0;
@@ -3317,10 +3329,15 @@ async function phaseGate(phase){
   const line = PHASE_GATE[phase]; if(!line) return;
   const g = $("phaseGate"), t = $("phaseGateTitle"), img = $("phaseGateImg");
   img.src = "assets/UI/peeking_talk_up.webp?r=" + Date.now();
-  t.textContent = line.text; t.classList.remove("pg-pop"); void t.offsetWidth; t.classList.add("pg-pop");
+  const cap = PHASE_GATE_CAP[phase] || { text:line.text, at:0 };
+  const write = () => { t.textContent = cap.text; t.classList.remove("pg-pop"); void t.offsetWidth; t.classList.add("pg-pop"); };
+  let capTimer = null;
+  t.textContent = ""; t.classList.remove("pg-pop");
+  if(!cap.at) write();
   g.classList.remove("pg-sink"); g.classList.add("show", "pg-up");
   sfx("sfx_whoosh", .5);
-  await Promise.all([say(line), new Promise(r => setTimeout(r, 1800))]);
+  await Promise.all([say(line, () => { if(cap.at) capTimer = setTimeout(write, cap.at / voRate(line)); }), new Promise(r => setTimeout(r, 1800))]);
+  clearTimeout(capTimer); if(!t.textContent) write();
   g.classList.add("pg-sink");
   await new Promise(r => setTimeout(r, 360));
   g.classList.remove("show", "pg-up", "pg-sink");
