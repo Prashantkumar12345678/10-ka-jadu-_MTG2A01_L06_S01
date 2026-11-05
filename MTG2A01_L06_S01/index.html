@@ -2368,7 +2368,9 @@ function hereCues(board, line){
 /* Intro (QA doc): the sentence starts alone in the middle of the screen; on "आइए, इसे…" the counters come in
    and the sentence slides up to its place. The numbers under the counters come with "यह 8 है…" (introLabels). */
 function introSolo(eq, board){
+  board.el.style.transition = "none";      // hide at once - no fade-out glimpse of the counters
   board.el.classList.add("intro-off");
+  void board.el.offsetWidth; board.el.style.transition = "";
   const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, r = eq.el.getBoundingClientRect();
   eq.el.style.transform = `translateY(${(st.top + st.height / 2 - (r.top + r.height / 2)) / k}px)`;
   return () => { eq.el.classList.add("intro-glide"); eq.el.style.transform = ""; board.el.classList.remove("intro-off"); };
@@ -3469,11 +3471,13 @@ function lessonAssetUrls(){
   return [...out];
 }
 (async function boot(){
+  const T0 = performance.now(), BOOT_MIN = 1600;      // reference HI02H04: the white ConveGenius splash holds at least 1.6s
   buildLanding();
   AssetLoader.start(["assets/VO/vo_landing." + VO_EXT, "assets/Images/title_10ka_jadu.webp"], lessonAssetUrls());
   await preload(["assets/UI/start_card.webp","assets/UI/startnew_bg_plain.webp","assets/UI/new_landing_swiftee_anim.webp",
                  "assets/swiftpal_buttons/btn-play-round.svg","assets/UI/peeking_talk_up.webp","assets/Images/title_10ka_jadu.webp","assets/UI/start_mascot.webp",
                  "assets/UI/sw_head_talking.webp","assets/UI/sw_head_celebrate_anim.webp","assets/UI/sw_head_tryagain_anim.webp","assets/UI/nudge_hand_new.svg","assets/Images/last_swifty_happy.webp","assets/Images/last_swifty_shabaash.webp","assets/Images/last_swifty_talk.webp"]);
+  if(QS.get("slide") == null) await new Promise(r => setTimeout(r, Math.max(0, BOOT_MIN - (performance.now() - T0))));
   const bl = $("bootLoader"); bl.classList.add("done"); setTimeout(() => bl.remove(), 450);
   document.body.classList.add("loaded");
   if(QS.get("slide") == null) setTimeout(speakLanding, 500);      // Swifty greets; Play appears when she has finished
