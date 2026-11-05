@@ -1835,7 +1835,7 @@ function engineDown(){
    spoken by the device's Hindi text-to-speech, so the game is fully voiced before recording. */
 const VO_EXT = "wav";
 /* measured length (s) of every VO file — visual cues are timed against it */
-const VO_DUR = {"vo_race_intro1":3.36,"vo_p1_q1":3.52,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":16.68,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.12,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.12,"vo_race_intro":3.96,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":4.64,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
+const VO_DUR = {"vo_race_intro1":3.36,"vo_p1_q1":3.52,"vo_shabash":0.95,"vo_race_ready":0.9,"vo_race_start":1.26,"vo_gate_tutorial":1.76,"vo_gate_guided":1.96,"vo_gate_practice":2.16,"vo_gate_game":2.56,"vo_landing":16.68,"vo_retry":1.4,"vo_t1_1":5.84,"vo_t1_2":3.16,"vo_t1_3":7.28,"vo_t1_4":3.6,"vo_t1_5":3.48,"vo_t1_6":3.24,"vo_t1_7":7.88,"vo_t2_1":5.28,"vo_t2_2":3.08,"vo_t2_3":4.32,"vo_t2_4":4.44,"vo_t2_5":7.2,"vo_t2_6":1.96,"vo_t2_7":4.12,"vo_g1_1":5.4,"vo_g1_2":3.12,"vo_g1_3":6.36,"vo_g1_4":3.64,"vo_g1_5":4.68,"vo_g1_6":3.6,"vo_g1_7":6.88,"vo_g2_1":5.52,"vo_g2_2":3.2,"vo_g2_3":4.76,"vo_g2_4":4.04,"vo_g2_5":7.16,"vo_g2_6":1.92,"vo_g2_7":4.2,"vo_p1_q":8.96,"vo_p1_ok":4.0,"vo_p1_h2":7.0,"vo_p1_h3":2.8,"vo_p2_q":2.72,"vo_p2_ok":4.64,"vo_p2_h2":4.72,"vo_p2_h3":2.28,"vo_p3_q":4.84,"vo_p3_ok":4.4,"vo_p3_h2":4.88,"vo_p3_h3":3.12,"vo_p4_q":6.24,"vo_p4_ok":5.24,"vo_p4_h2":3.72,"vo_p4_h3":3.12,"vo_race_intro":3.96,"vo_race_go":2.64,"vo_race_win":3.68,"vo_end":4.64,"vo_race_hint_add":3.36,"vo_race_hint_sub":3.32,"vo_race_ok1":1.16,"vo_race_ok2":1.64,"vo_race_q1":2.6,"vo_race_a1":2.08,"vo_race_q2":2.56,"vo_race_a2":2.56,"vo_race_q3":2.56,"vo_race_a3":2.4,"vo_race_q4":2.72,"vo_race_a4":2.32,"vo_race_q5":2.6,"vo_race_a5":2.24,"vo_race_q6":2.92,"vo_race_a6":2.36,"vo_race_q7":2.6,"vo_race_a7":2.2};
 const VO_SCRIPT = {};             // id -> text, filled as lines are declared (exported to vo_script.csv)
 function V(id, text){ VO_SCRIPT[id] = text; return { id, text }; }
 let hiVoice = null;
@@ -1843,8 +1843,9 @@ function pickVoice(){ try{ const vs = speechSynthesis.getVoices();
   hiVoice = vs.find(v => /^hi[-_]IN/i.test(v.lang)) || vs.find(v => /^hi/i.test(v.lang)) || null; }catch(e){} }
 try{ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }catch(e){}
 let curAudio = null, voPending = null, voToken = 0;
-/* T1 plays a little faster than recorded (QA: it felt slow); cue times are scaled to match */
-const voRate = line => line && /^vo_t1_/.test(line.id || "") ? 1.15 : 1;
+/* playback speed per line (1 = as recorded). T1 was tried at 1.15 and felt too fast - back to normal.
+   Cue times are scaled by it, so changing it keeps the highlights in step. */
+const voRate = line => 1;
 function setSpeaking(on){
   document.body.classList.toggle("vo-spk", on);
   document.querySelectorAll(".audio-chip,.tut-audio,.sg-vo").forEach(c => c.classList.toggle("playing", on));
@@ -2324,20 +2325,23 @@ const SLIDES = [
       q:V("vo_p3_q","9 और 7 को जोड़िए और फिर सही जोड़ वाली संख्या चुनिए।"),
       ok:V("vo_p3_ok","बहुत बढ़िया! 9 और 7 मिलकर 16 होते हैं।"),
       h2:V("vo_p3_h2","9 को 10 बनाने के लिए 1 जोड़ा। फिर बाकी 6 जोड़ें।"),
-      h3:V("vo_p3_h3","सही उत्तर 16 है। इसे चुनिए।") } },
+      h3:V("vo_p3_h3","सही उत्तर यह है। इसे चुनिए।") } },
   /* PDF page 11 — 18 − 9 */
   { id:"P4", phase:"practice", type:"mcq", op:"-", a:18, b:9, options:[18,9,8], prompt:"सही उत्तर चुनिए।", vo:{
       q:V("vo_p4_q","18 में से 9 घटाइए और फिर इस डिब्बे में आने वाली सही संख्या चुनिए।"),
       ok:V("vo_p4_ok","बहुत बढ़िया! 18 में से 9 घटाने पर 9 बचता है।"),
       h2:V("vo_p4_h2","पहले 10 तक आइए। फिर बाकी 1 घटाइए।"),
-      h3:V("vo_p4_h3","सही उत्तर 9 है। इसे चुनिए।") } },
+      h3:V("vo_p4_h3","सही उत्तर यह है। इसे चुनिए।") } },
   /* PDF page 12 — गणित की तेज़ दौड़ */
   { id:"GAME", phase:"game", type:"race", prompt:"गणित की तेज़ दौड़", vo:{
       intro:V("vo_race_intro","चलिए, एक गेम खेलते हैं — गणित की तेज़ दौड़!"),
       pick:V("vo_race_intro1","अपनी नाव चुनिए।"),   // new recording vo_race_intro1: Swifty asks the child to pick
-      go:V("vo_race_go","तैयार? दौड़ शुरू!"),
+      ready:V("vo_race_ready","तैयार?"),        // said as 3-2-1 starts   (both cut from vo_race_go)
+      go:V("vo_race_start","दौड़ शुरू!"),       // said the moment the count ends, then the race starts
       win:V("vo_race_win","वाह! आपकी नाव सबसे पहले पहुँची!") } }
 ];
+/* "शाबाश!" on its own (cut from the start of vo_g1_5) - said with the confetti */
+const VO_SHABASH = V("vo_shabash", "शाबाश!");
 /* P1/P2 idle once the counters are done */
 const VO_TAP_BOX = V("vo_p1_q1", "सही संख्या इस डिब्बे पर टैप करके लिखिए।");
 const VO_END = V("vo_end", "बहुत बढ़िया! आपने सीख लिया।");
@@ -2464,11 +2468,12 @@ R.guidedAdd = async (ctx, s, f) => {
   board.split([need, rest]); board.labels(a, [need, rest]);
   await f.wait(T.split + T.beat);
   const mover = board.groups[0];
-  await f.say(vo.s4, [[.3, () => board.ghost(mover[0])]]);
+  // the guidance matches the interaction: the hand TAPS the ball (it pulses), nothing is dragged or slid across
+  const tapShow = () => { handAt(mover[0].el, { still:true }); f.later(T.tap, () => { tapHand(); const e = mover[0].el; e.classList.remove("idle-call"); void e.offsetWidth; e.classList.add("idle-call"); f.later(2500, () => e.classList.remove("idle-call")); }); };
+  await f.say(vo.s4, [[.3, tapShow]]);
   await f.wait(600);
-  handAt(mover[0].el, { still:true });                                  // once more: the hand TAPS the ball (tap, not drag)
-  await f.wait(T.tap); tapHand(); board.ghost(mover[0]);
-  await f.wait(1600); hideHand();
+  tapShow();                                                            // once more after the line
+  await f.wait(T.tap + 1400); hideHand();
   voLock(false);
   await f.until(done => {
     let moved = 0;
@@ -2546,6 +2551,7 @@ R.guidedSub = async (ctx, s, f) => {
   await f.say(vo.s6, [[0, () => board.undimmed(board.frame).forEach((c, i) => setTimeout(() => c.el.classList.add("good"), i * 120))]]);
   await answerUp(f, board.lblFrame, eq.box, n - m, sub.el);
   eq.set(n - m, "done"); confettiCannon(); setMood("happy");
+  await f.say(VO_SHABASH);                                  // the confetti lands on "शाबाश!"
   await f.say(vo.s7, eq.partCues([[0, 950, 1800], [2, 1800, 2100], [1, 2100, 2900], [4, 3000, 3900]]));
   voLock(false);
   complete();
@@ -2665,11 +2671,10 @@ R.practiceAdd = async (ctx, s, f) => {
   const board = new Board(pvLeft, { frame:a, loose:[b], maxLoose: 5 * STEP });
   const sub = SubEq(pvLeft);
   f.replay = vo.q;
-  board.labels(a, [b]);
   voLock(true); await f.wait(900);
   // "8 … 6 …" light as they are said; "…इस डिब्बे पर टैप करके लिखिए" — the box pulses. Idle repeats it with the same cues.
   f.replayCues = () => [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("call")], [1, () => eq.box.classList.remove("call")]];
-  await f.say(vo.q, [[.13, () => board.hlFrame(800)], [.225, () => board.hlList(board.groups[0], 1200)], [.76, () => eq.box.classList.add("ready", "call")]]);
+  await f.say(vo.q, [[.13, () => { board.labels(a); board.hlFrame(800); }], [.225, () => { board.labels(a, [b]); board.hlList(board.groups[0], 1200); }], [.76, () => eq.box.classList.add("ready", "call")]]);   // the numbers come after the counters, with their words
   eq.box.classList.remove("ready", "call");
   voLock(false);
   await f.until(done => {
@@ -2704,10 +2709,9 @@ R.practiceSub = async (ctx, s, f) => {
   const board = new Board(pvLeft, { frame:10, loose:[loose], maxLoose: 5 * STEP, near:true });
   const sub = SubEq(pvLeft);
   f.replay = vo.q;
-  board.labels(10, [loose]);
   voLock(true); await f.wait(900);
   f.replayCues = () => [[.12, () => { board.hlFrame(1200); board.hlList(board.groups[0], 1200); }]];
-  await f.say(vo.q, [[.12, () => { board.hlFrame(1200); board.hlList(board.groups[0], 1200); }]]);   // "16": the whole 16 lights together
+  await f.say(vo.q, [[.12, () => { board.labels(10, [loose]); board.hlFrame(1200); board.hlList(board.groups[0], 1200); }]]);   // "16": the whole 16 lights together, its numbers come with it
   voLock(false);
   await f.until(done => {
     let k = 0;
@@ -3059,20 +3063,23 @@ R.race = async (ctx, s, f) => {
 
   /* 3-2-1-GO! */
   const cd = el("div", "jt-count"); world.appendChild(cd);
+  voLock(true);
+  if(!QUICK) f.say(vo.ready);                               // "तैयार?" together with the count
   if(!QUICK) for(const t of ["3", "2", "1"]){
     cd.textContent = t; cd.classList.remove("go", "show"); void cd.offsetWidth; cd.classList.add("show");
     beep(520); await f.wait(800);
   }
-  cd.textContent = "चलो!"; cd.classList.remove("show"); void cd.offsetWidth; cd.classList.add("show", "go");
+  cd.textContent = "दौड़ शुरू!"; cd.classList.remove("show"); void cd.offsetWidth; cd.classList.add("show", "go");
   beep(880, .35); vroom(2); setSpeed(4.5); started = true;
   jets.forEach(j => { j.p = 0; j.target = 0; j.v = 0; });
-  await f.wait(700); cd.remove();
+  if(!QUICK) await f.say(vo.go);                            // count over → "दौड़ शुरू!" → only then the numbers come up
+  else await f.wait(700);
+  cd.remove(); voLock(false);
   panel.style.visibility = "";
   world.dataset.raceState = "racing";
 
   const qs = QUICK ? [] : RACE_QS.slice().sort(() => Math.random() - .5), total = qs.length;   // ?win = QA: skip straight to the finish
   f.replay = null;
-  if(!QUICK){ voLock(true); await f.say(vo.go); voLock(false); }
   let streak = 0;
   for(let qi = 0; qi < total; qi++){
     const q = qs[qi];
